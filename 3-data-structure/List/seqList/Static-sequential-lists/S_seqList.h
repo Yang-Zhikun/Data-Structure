@@ -1,0 +1,35 @@
+//静态顺序表, Static sequential list
+//不能自动扩容，定义后表长固定
+
+#pragma once
+
+const int MAXLEN = 100;    //静态顺序表的最大表长
+
+template<typename T>
+class S_seqList{
+private:
+    T data[MAXLEN];//存放数据的首地址
+    unsigned int length;//当前顺序表中数据个数
+
+public:
+    S_seqList();//构造函数
+    S_seqList(const S_seqList& obj);//拷贝构造函数
+    S_seqList<T>& operator=(const S_seqList& obj);//赋值运算符
+
+    unsigned int getLength()const{ return length; }//获取表长length
+    void clear(){ length = 0; };//清空顺序表
+    bool isEmpty()const{ return length==0; }//判断顺序表是否为空
+    void traverse()const;//遍历顺序表
+    T operator[] (const unsigned int i)const;//运算符[]：获取顺序表位序i的数据(0<=i<length)
+    T& operator[] (const unsigned int i);//运算符[]：返回顺序表位序i的数据的引用(0<=i<length)
+    void set(const unsigned int i, const T elem){ this->operator[](i) = elem; }//将顺序表位序为i的元素的值改为elem(0<=i<length)
+    T get(const unsigned int i)const{ return operator[](i); }//获取顺序表位序i的数据(0<=i<length)
+    void insert(const unsigned int i, const T elem);//在顺序表位序i处插入一个数据(0<=i<=length)
+    void push_back(const T elem){ insert(length, elem); }//在顺序表末尾插入一个数据
+    void remove(const unsigned int i);//删除顺序表位序i上数据(0<=i<length)
+    void pop_back(){ remove(length-1); }//删除顺序表末尾的一个数据
+    void reserve();//逆置顺序表
+};
+
+
+#include "S_seqList.cpp"
