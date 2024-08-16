@@ -1,26 +1,26 @@
 #pragma once
-//å“ˆå¤«æ›¼æ ‘ Huffman Tree
+//¹ş·òÂüÊ÷ Huffman Tree
 
 /**
- * å“ˆå¤«æ›¼æ ‘
+ * ¹ş·òÂüÊ÷
  */
 template <typename T>
 class HuffmanTree {
 protected:
-    struct HuffmanTreeNode {  // å“ˆå¤«æ›¼æ ‘èŠ‚ç‚¹
-        T data;                      // èŠ‚ç‚¹æ•°æ®
-        unsigned int weight;         // èŠ‚ç‚¹æƒå€¼
-        unsigned int leftChild;      // å·¦å­©å­èŠ‚ç‚¹çš„ä½åº
-        unsigned int rightChild;     // å³å­©å­èŠ‚ç‚¹çš„ä½åº
-        unsigned int parent;         // çˆ¶èŠ‚ç‚¹çš„ä½åº
+    struct HuffmanTreeNode {  // ¹ş·òÂüÊ÷½Úµã
+        T data;                      // ½ÚµãÊı¾İ
+        unsigned int weight;         // ½ÚµãÈ¨Öµ
+        unsigned int leftChild;      // ×óº¢×Ó½ÚµãµÄÎ»Ğò
+        unsigned int rightChild;     // ÓÒº¢×Ó½ÚµãµÄÎ»Ğò
+        unsigned int parent;         // ¸¸½ÚµãµÄÎ»Ğò
     };
 
-    struct HuffmanCode { // å“ˆå¤«æ›¼ç¼–ç 
+    struct HuffmanCode { // ¹ş·òÂü±àÂë
         T data;
         unsigned int code;
     };
-    
-    unsigned int size;//å­—ç¬¦ä¸ªæ•°
+        
+            unsigned int size;//×Ö·û¸öÊı
 
 public:
 };
