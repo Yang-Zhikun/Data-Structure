@@ -3,31 +3,31 @@
 using namespace std;
 
 /**
- * æœ€å°å †
+ * ×îĞ¡¶Ñ
  */
 template<typename T>
 class MinHeap {
 protected:
-    vector<T> HeapArray; //å­˜æ”¾æœ€å°å †çš„æ•°ç»„(ä¸‹æ ‡ä»0å¼€å§‹)
+    vector<T> HeapArray; //´æ·Å×îĞ¡¶ÑµÄÊı×é(ÏÂ±ê´Ó0¿ªÊ¼)
     
-    unsigned int getLeftChild(unsigned int i) const; //è·å–ä½åºä¸ºiçš„èŠ‚ç‚¹çš„å·¦å­©å­çš„ä¸‹æ ‡
-    unsigned int getRightChild(unsigned int i) const; //è·å–ä½åºä¸ºiçš„èŠ‚ç‚¹çš„å³å­©å­çš„ä¸‹æ ‡
-    unsigned int getParent(unsigned int i) const; //è·å–ä½åºä¸ºiçš„èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
+    unsigned int getLeftChild(unsigned int i) const; //»ñÈ¡Î»ĞòÎªiµÄ½ÚµãµÄ×óº¢×ÓµÄÏÂ±ê
+    unsigned int getRightChild(unsigned int i) const; //»ñÈ¡Î»ĞòÎªiµÄ½ÚµãµÄÓÒº¢×ÓµÄÏÂ±ê
+    unsigned int getParent(unsigned int i) const; //»ñÈ¡Î»ĞòÎªiµÄ½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
     
-    void shiftUp();   //æœ€å°å †çš„ä¸Šæµ®è°ƒæ•´
-    void shiftDown(); //æœ€å°å †çš„ä¸‹æ²‰è°ƒæ•´
+    void shiftUp();   //×îĞ¡¶ÑµÄÉÏ¸¡µ÷Õû
+    void shiftDown(); //×îĞ¡¶ÑµÄÏÂ³Áµ÷Õû
     
-    void buildHeap(); //æ„å»ºæœ€å°å †
+    void buildHeap(); //¹¹½¨×îĞ¡¶Ñ
     
 public:
-    MinHeap(T array[] = nullptr, unsigned int n = 0);  //æ„é€ å‡½æ•°
-    MinHeap(const MinHeap& obj); //æ‹·è´æ„é€ å‡½æ•°
-    MinHeap<T>& operator=(const MinHeap& obj); //èµ‹å€¼è¿ç®—ç¬¦
+    MinHeap(T array[] = nullptr, unsigned int n = 0);  //¹¹Ôìº¯Êı
+    MinHeap(const MinHeap& obj); //¿½±´¹¹Ôìº¯Êı
+    MinHeap<T>& operator=(const MinHeap& obj); //¸³ÖµÔËËã·û
     
-    bool isEmpty() const; //åˆ¤ç©º
-    void insert(const T elem); //æ’å…¥æ–°å…ƒç´ 
-    void getMin() const; //è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
-    void remove(); //åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ 
+    bool isEmpty() const; //ÅĞ¿Õ
+    void insert(const T elem); //²åÈëĞÂÔªËØ
+    void getMin() const; //»ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
+    void remove(); //É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ
 };
 
 
