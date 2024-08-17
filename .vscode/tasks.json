@@ -1,0 +1,44 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+
+		{//生成可执行文件.a.exe
+			"type": "cppbuild",
+			"label": "g++ build and debug active file",
+			"command": "D:\\Devlanguages\\MinGW64\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-std=c++11", //c++11标准
+				"-g",
+				"${file}",
+				"-o",
+				"${workspaceFolder}\\.exe\\.a.exe", //将可执行文件命名为.a.exe
+				"-leasyx", //加入easyx.h
+				"-lwinmm", //加入winmm多媒体函数库
+			],
+			"options": {
+				"cwd": "D:\\Devlanguages\\MinGW64\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: D:\\Devlanguages\\MinGW64\\bin\\g++.exe"
+		},
+
+
+
+		//自定义的任务：一起重命名cpp和exe文件
+		{
+			"type": "shell",
+			"label": "rename cpp and exe file",
+			"command": "C:\\Users\\77656\\Desktop\\C++Files\\rename-file.exe",
+			"args": []
+		},
+		
+		
+	]
+}

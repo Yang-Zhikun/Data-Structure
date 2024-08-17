@@ -8,7 +8,7 @@ using namespace std;
 template<typename T>
 class MinHeap {
 protected:
-    vector<T> HeapArray; //存放最小堆的数组(下标从0开始)
+    vector<T> *HeapArray; //存放最小堆的数组(下标从0开始)
     
     unsigned int getLeftChild(unsigned int i) const; //获取位序为i的节点的左孩子的下标
     unsigned int getRightChild(unsigned int i) const; //获取位序为i的节点的右孩子的下标
@@ -33,5 +33,5 @@ public:
 
 
 int main(){
-    
+    system("pause");
 }
