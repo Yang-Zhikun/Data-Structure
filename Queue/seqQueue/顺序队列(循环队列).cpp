@@ -1,65 +1,65 @@
 #include<stdio.h>
 #include<iostream>
 #include<stdexcept>
-//é¡ºåºé˜Ÿåˆ—(å¾ªç¯é˜Ÿåˆ—) 
+//Ë³Ğò¶ÓÁĞ(Ñ­»·¶ÓÁĞ) 
 
 
 template<typename T>
 class seqQueue{
 private:
     T *data;
-    unsigned int maxLen;//æ•°æ®çš„æœ€å¤§é•¿åº¦
-    unsigned int front; //é˜Ÿé¦–ä¸‹æ ‡
-    unsigned int rear;  //é˜Ÿå°¾ä¸‹æ ‡
+    unsigned int maxLen;//Êı¾İµÄ×î´ó³¤¶È
+    unsigned int front; //¶ÓÊ×ÏÂ±ê
+    unsigned int rear;  //¶ÓÎ²ÏÂ±ê
     
-    void resize();//æ‰©å®¹
+    void resize();//À©Èİ
     
 public:
-    seqQueue(unsigned int maxLen = 1); // æ„é€ å‡½æ•° maxLenæ˜¯é˜Ÿåˆ—çš„æœ€å¤§é•¿åº¦
-    ~seqQueue() { delete[] data; } // ææ„å‡½æ•°
-    seqQueue(const seqQueue<T> &obj); //æ‹·è´æ„é€ å‡½æ•°
-    seqQueue<T>& operator=(const seqQueue &obj); // èµ‹å€¼è¿ç®—ç¬¦
+    seqQueue(unsigned int maxLen = 1); // ¹¹Ôìº¯Êı maxLenÊÇ¶ÓÁĞµÄ×î´ó³¤¶È
+    ~seqQueue() { delete[] data; } // Îö¹¹º¯Êı
+    seqQueue(const seqQueue<T> &obj); //¿½±´¹¹Ôìº¯Êı
+    seqQueue<T>& operator=(const seqQueue &obj); // ¸³ÖµÔËËã·û
     
-    void clear(); // æ¸…ç©ºé˜Ÿåˆ—
-    bool isEmpty()const { return front==rear; } // åˆ¤ç©º
-    bool isFull()const { return (rear+1)%maxLen==front; } //åˆ¤æ»¡
-    unsigned int getLength()const { return (rear-front+maxLen)%maxLen; } // è·å–é˜Ÿåˆ—é•¿åº¦
-    void enQueue(T elem); // å…¥é˜Ÿ
-    T deQueue(); //å‡ºé˜Ÿï¼Œå¹¶è¿”å›é˜Ÿå¤´å…ƒç´ 
-    T get_front()const; // è·å–é˜Ÿå¤´å…ƒç´ 
+    void clear(); // Çå¿Õ¶ÓÁĞ
+    bool isEmpty()const { return front==rear; } // ÅĞ¿Õ
+    bool isFull()const { return (rear+1)%maxLen==front; } //ÅĞÂú
+    unsigned int getLength()const { return (rear-front+maxLen)%maxLen; } // »ñÈ¡¶ÓÁĞ³¤¶È
+    void enQueue(T elem); // Èë¶Ó
+    T deQueue(); //³ö¶Ó£¬²¢·µ»Ø¶ÓÍ·ÔªËØ
+    T get_front()const; // »ñÈ¡¶ÓÍ·ÔªËØ
     
-    void print() const; //æ‰“å°é˜Ÿåˆ—(ä»é˜Ÿå¤´åˆ°é˜Ÿå°¾)ï¼Œç”¨äºè°ƒè¯•
-    unsigned int getMaxLen() const { return maxLen; }//è¿”å›é˜Ÿåˆ—æœ€å¤§é•¿åº¦
+    void print() const; //´òÓ¡¶ÓÁĞ(´Ó¶ÓÍ·µ½¶ÓÎ²)£¬ÓÃÓÚµ÷ÊÔ
+    unsigned int getMaxLen() const { return maxLen; }//·µ»Ø¶ÓÁĞ×î´ó³¤¶È
 };
 
-//é‡‡ç”¨ç‰ºç‰²ä¸€ä¸ªå‚¨å­˜ç©ºé—´ä»¥åˆ¤æ–­é˜Ÿæ»¡
-//çº¦å®šfrontæŒ‡å‘é˜Ÿé¦–å…ƒç´ ï¼ŒrearæŒ‡å‘é˜Ÿå°¾å…ƒç´ çš„åä¸€ä¸ªä½ç½®
-/*åˆ¤æ–­é˜Ÿç©ºçš„æ¡ä»¶front==rear
-/*åˆ¤æ–­é˜Ÿæ»¡çš„æ¡ä»¶(rear+1)%maxLen==front
-    *åŸå› å½“rearçš„ä¸‹ä¸€ä¸ªæ˜¯frontæ—¶å³æ˜¯é˜Ÿæ»¡
-    *å¦‚æœrear+1å°äºmaxLenæ—¶ï¼Œ(rear+1)%maxLenç­‰äºrear+1
-    *å¦‚æœrear+1å¤§äºmaxLenæ—¶ï¼Œ(rear+1)%maxLenç­‰äºrear+1-maxLen
-/*æ±‚é˜Ÿåˆ—é•¿åº¦ï¼š(rear-front+maxLen)%maxLen
-    *åŸå› rear-frontå³æ˜¯é˜Ÿåˆ—é•¿åº¦
-    *å½“rear-frontå°äº0æ—¶ï¼ŒåŠ ä¸ŠmaxLenå°±æ˜¯é˜Ÿåˆ—é•¿åº¦(å°äºç­‰äºmaxLen)ï¼Œæ¨¡maxLenåæ˜¯åŸæ•°
-    *å½“rear-frontå¤§äº0æ—¶ï¼Œå°±æ˜¯é˜Ÿåˆ—é•¿åº¦ï¼ŒåŠ ä¸ŠmaxLenååˆæ¨¡å»å°±æ˜¯åŸæ•°
-/*å…¥é˜Ÿï¼šrear = (rear+1)%maxLen
-    *åŸå› ï¼šä»é˜Ÿå°¾æ’å…¥ä¸€ä¸ªå…ƒç´ ï¼Œrearå‘åç§»ä¸€ä½ï¼Œ%maxLené˜²æ­¢è¶…è¿‡æœ€å¤§ä¸‹æ ‡
-/*å‡ºé˜Ÿï¼šfront = (front+1)%maxLen
-    *åŸå› ï¼šåˆ é™¤é˜Ÿå¤´å…ƒç´ ï¼Œfrontå‘åç§»ä¸€ä½ï¼Œ%maxLené˜²æ­¢è¶…è¿‡æœ€å¤§ä¸‹æ ‡
+//²ÉÓÃÎşÉüÒ»¸ö´¢´æ¿Õ¼äÒÔÅĞ¶Ï¶ÓÂú
+//Ô¼¶¨frontÖ¸Ïò¶ÓÊ×ÔªËØ£¬rearÖ¸Ïò¶ÓÎ²ÔªËØµÄºóÒ»¸öÎ»ÖÃ
+/*ÅĞ¶Ï¶Ó¿ÕµÄÌõ¼şfront==rear
+/*ÅĞ¶Ï¶ÓÂúµÄÌõ¼ş(rear+1)%maxLen==front
+    *Ô­Òòµ±rearµÄÏÂÒ»¸öÊÇfrontÊ±¼´ÊÇ¶ÓÂú
+    *Èç¹ûrear+1Ğ¡ÓÚmaxLenÊ±£¬(rear+1)%maxLenµÈÓÚrear+1
+    *Èç¹ûrear+1´óÓÚmaxLenÊ±£¬(rear+1)%maxLenµÈÓÚrear+1-maxLen
+/*Çó¶ÓÁĞ³¤¶È£º(rear-front+maxLen)%maxLen
+    *Ô­Òòrear-front¼´ÊÇ¶ÓÁĞ³¤¶È
+    *µ±rear-frontĞ¡ÓÚ0Ê±£¬¼ÓÉÏmaxLen¾ÍÊÇ¶ÓÁĞ³¤¶È(Ğ¡ÓÚµÈÓÚmaxLen)£¬Ä£maxLenºóÊÇÔ­Êı
+    *µ±rear-front´óÓÚ0Ê±£¬¾ÍÊÇ¶ÓÁĞ³¤¶È£¬¼ÓÉÏmaxLenºóÓÖÄ£È¥¾ÍÊÇÔ­Êı
+/*Èë¶Ó£ºrear = (rear+1)%maxLen
+    *Ô­Òò£º´Ó¶ÓÎ²²åÈëÒ»¸öÔªËØ£¬rearÏòºóÒÆÒ»Î»£¬%maxLen·ÀÖ¹³¬¹ı×î´óÏÂ±ê
+/*³ö¶Ó£ºfront = (front+1)%maxLen
+    *Ô­Òò£ºÉ¾³ı¶ÓÍ·ÔªËØ£¬frontÏòºóÒÆÒ»Î»£¬%maxLen·ÀÖ¹³¬¹ı×î´óÏÂ±ê
 */
 
 
 
 
-template<typename T>//æ„é€ å‡½æ•° maxLenæ˜¯é˜Ÿåˆ—çš„æœ€å¤§é•¿åº¦
+template<typename T>//¹¹Ôìº¯Êı maxLenÊÇ¶ÓÁĞµÄ×î´ó³¤¶È
 seqQueue<T>::seqQueue(unsigned int maxLen){
     this->maxLen = maxLen;
     data = new T[maxLen];
-    front = rear = 0; // é˜Ÿå¤´çš„é˜Ÿå°¾ä¸‹æ ‡ç›¸ç­‰
+    front = rear = 0; // ¶ÓÍ·µÄ¶ÓÎ²ÏÂ±êÏàµÈ
 }
 
-template<typename T>//æ‹·è´æ„é€ å‡½æ•°
+template<typename T>//¿½±´¹¹Ôìº¯Êı
 seqQueue<T>::seqQueue(const seqQueue<T> &obj){
     data = new T[obj.maxLen];
     for(int i = 0; i<obj.maxLen; i++){
@@ -70,9 +70,9 @@ seqQueue<T>::seqQueue(const seqQueue<T> &obj){
     rear = obj.rear;
 }
 
-template<typename T>//èµ‹å€¼è¿ç®—ç¬¦
+template<typename T>//¸³ÖµÔËËã·û
 seqQueue<T>& seqQueue<T>::operator=(const seqQueue& obj){
-    if(*this!=obj){ // é˜²æ­¢è‡ªèµ‹å€¼
+    if(*this!=obj){ // ·ÀÖ¹×Ô¸³Öµ
         data = new T[obj.maxLen];
         for(int i = 0; i<maxLen; i++){
             data[i] = obj.data[i];
@@ -85,33 +85,33 @@ seqQueue<T>& seqQueue<T>::operator=(const seqQueue& obj){
 }
 
 
-template<typename T>//æ¸…ç©ºé˜Ÿåˆ—
+template<typename T>//Çå¿Õ¶ÓÁĞ
 void seqQueue<T>::clear(){
     front = rear = 0;
 }
 
-template<typename T>//å…¥é˜Ÿ
+template<typename T>//Èë¶Ó
 void seqQueue<T>::enQueue(T elem){
     if(isFull()){
         resize();
     }
-    data[rear] = elem; // å°†elemæ’å…¥é˜Ÿåˆ—æœ«å°¾
+    data[rear] = elem; // ½«elem²åÈë¶ÓÁĞÄ©Î²
     rear = (rear+1)%maxLen;
 }
 
-template<typename T> // å‡ºé˜Ÿï¼Œå¹¶è¿”å›é˜Ÿå¤´å…ƒç´ 
+template<typename T> // ³ö¶Ó£¬²¢·µ»Ø¶ÓÍ·ÔªËØ
 T seqQueue<T>::deQueue(){
     if(isEmpty())
-        throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
+        throw std::out_of_range("¶ÓÁĞÎª¿Õ");
     T tmp = data[front];
     front = (front+1)%maxLen;
     return tmp;
 }
 
-template<typename T> // è¿”å›é˜Ÿå¤´å…ƒç´ 
+template<typename T> // ·µ»Ø¶ÓÍ·ÔªËØ
 T seqQueue<T>::get_front()const{
     if(isEmpty())
-        throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
+        throw std::out_of_range("¶ÓÁĞÎª¿Õ");
     return data[front];
 }
 
@@ -124,15 +124,15 @@ void seqQueue<T>::print()const {
 }
 
 
-template<typename T>//æ‰©å®¹
+template<typename T>//À©Èİ
 void seqQueue<T>::resize() {
     unsigned int length = getLength();
-    T *data2 = new T[length * 2]; //åˆ†é…ä¸¤å€çš„ç©ºé—´
-    //å°†åŸæ¥dataçš„æ•°æ®å¤åˆ¶åˆ°data2
+    T *data2 = new T[length * 2]; //·ÖÅäÁ½±¶µÄ¿Õ¼ä
+    //½«Ô­À´dataµÄÊı¾İ¸´ÖÆµ½data2
     for(unsigned int i = 0; i < length; i++){
-        data2[i] = data[(front + i) % maxLen]; //(front+1)%maxLené˜²æ­¢è¶Šç•Œ
+        data2[i] = data[(front + i) % maxLen]; //(front+1)%maxLen·ÀÖ¹Ô½½ç
     }
-    //æ›´æ–°æˆå‘˜å˜é‡
+    //¸üĞÂ³ÉÔ±±äÁ¿
     front = 0;
     rear = length;
     delete[] data;
