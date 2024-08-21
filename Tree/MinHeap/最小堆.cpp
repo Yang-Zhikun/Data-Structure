@@ -5,38 +5,38 @@
 using namespace std;
 
 /**
- * æœ€å°å †
+ * ×îĞ¡¶Ñ
  */
 template<typename T>
 class MinHeap {
 protected:
-    T* HeapArray; // æŒ‡å‘å­˜æ”¾æœ€å°å †çš„æ•°ç»„çš„æŒ‡é’ˆ
-    unsigned int size; // æ•°ç»„æ•°æ®ä¸ªæ•°
+    T* HeapArray; // Ö¸Ïò´æ·Å×îĞ¡¶ÑµÄÊı×éµÄÖ¸Õë
+    unsigned int size; // Êı×éÊı¾İ¸öÊı
 
-    unsigned int getLeftChild(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å·¦å­©å­çš„ä¸‹æ ‡
-    unsigned int getRightChild(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å³å­©å­çš„ä¸‹æ ‡
-    unsigned int getParent(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
+    unsigned int getLeftChild(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ×óº¢×ÓµÄÏÂ±ê
+    unsigned int getRightChild(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄÓÒº¢×ÓµÄÏÂ±ê
+    unsigned int getParent(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
 
-    void shiftUp(unsigned int i);   //æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
-    void shiftDown(unsigned int i); //æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
+    void shiftUp(unsigned int i);   //×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
+    void shiftDown(unsigned int i); //×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
 
 public:
-    MinHeap(T array[] = nullptr, unsigned int n = 0);  //æ„é€ æœ€å°å †
+    MinHeap(T array[] = nullptr, unsigned int n = 0);  //¹¹Ôì×îĞ¡¶Ñ
 
-    bool isEmpty() const; //åˆ¤ç©º
-    void push(T elem); //æ’å…¥æ–°å…ƒç´ 
-    T getMin() const; //è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
-    T pop(); //åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
+    bool isEmpty() const; //ÅĞ¿Õ
+    void push(T elem); //²åÈëĞÂÔªËØ
+    T getMin() const; //»ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
+    T pop(); //É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
 
-    void print()const; //æ‰“å°æœ€å°å †
+    void print()const; //´òÓ¡×îĞ¡¶Ñ
 };
 
 
 /**
- * å¯¹äºä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹ï¼š
- * å·¦å­©å­ä¸‹æ ‡ 2 * i + 1           //å·¦å­©å­åœ¨içš„ä¸‹ä¸€å±‚+1
- * å³å­©å­ä¸‹æ ‡ 2 * i + 2           //å³å­©å­æ˜¯å·¦å­©å­+1
- * çˆ¶èŠ‚ç‚¹ä¸‹æ ‡ (i - 1) / 2 (å–æ•´)   //é€†è¿ç®—
+ * ¶ÔÓÚÏÂ±êÎªiµÄ½Úµã£º
+ * ×óº¢×ÓÏÂ±ê 2 * i + 1           //×óº¢×ÓÔÚiµÄÏÂÒ»²ã+1
+ * ÓÒº¢×ÓÏÂ±ê 2 * i + 2           //ÓÒº¢×ÓÊÇ×óº¢×Ó+1
+ * ¸¸½ÚµãÏÂ±ê (i - 1) / 2 (È¡Õû)   //ÄæÔËËã
  *            0
  *           /  \
  *          1    2
@@ -47,8 +47,8 @@ public:
 
 
 /**
- * è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å·¦å­©å­çš„ä¸‹æ ‡
- * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
+ * »ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ×óº¢×ÓµÄÏÂ±ê
+ * @param i µ±Ç°½ÚµãµÄÏÂ±ê
  */
 template<typename T>
 unsigned int MinHeap<T>::getLeftChild(unsigned int i)const {
@@ -56,8 +56,8 @@ unsigned int MinHeap<T>::getLeftChild(unsigned int i)const {
 }
 
 /**
- * è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å³å­©å­çš„ä¸‹æ ‡
- * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
+ * »ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄÓÒº¢×ÓµÄÏÂ±ê
+ * @param i µ±Ç°½ÚµãµÄÏÂ±ê
  */
 template<typename T>
 unsigned int MinHeap<T>::getRightChild(unsigned int i)const {
@@ -65,8 +65,8 @@ unsigned int MinHeap<T>::getRightChild(unsigned int i)const {
 }
 
 /**
- * è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
- * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
+ * »ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
+ * @param i µ±Ç°½ÚµãµÄÏÂ±ê
  */
 template<typename T>
 unsigned int MinHeap<T>::getParent(unsigned int i)const {
@@ -75,82 +75,82 @@ unsigned int MinHeap<T>::getParent(unsigned int i)const {
 
 
 /**
- * æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
- * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
+ * ×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
+ * @param i µ±Ç°½ÚµãµÄÏÂ±ê
  */
 template<typename T>
 void MinHeap<T>::shiftUp(unsigned int i) {
-    unsigned int parent = getParent(i); // è·å–å½“å‰èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
-    T tmp = HeapArray[i]; // ä¿å­˜å½“å‰èŠ‚ç‚¹ï¼Œç”¨äºæœ€åèµ‹å€¼
+    unsigned int parent = getParent(i); // »ñÈ¡µ±Ç°½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
+    T tmp = HeapArray[i]; // ±£´æµ±Ç°½Úµã£¬ÓÃÓÚ×îºó¸³Öµ
 
-    //å¦‚æœå½“å‰èŠ‚ç‚¹æœ‰çˆ¶èŠ‚ç‚¹ä¸”æ¯”çˆ¶èŠ‚ç‚¹å°ï¼Œåˆ™è¿›è¡Œä¸Šæµ®è°ƒæ•´(çˆ¶èŠ‚ç‚¹ä¸‹ç§»åˆ°å½“å‰èŠ‚ç‚¹çš„ä½ç½®)
+    //Èç¹ûµ±Ç°½ÚµãÓĞ¸¸½ÚµãÇÒ±È¸¸½ÚµãĞ¡£¬Ôò½øĞĞÉÏ¸¡µ÷Õû(¸¸½ÚµãÏÂÒÆµ½µ±Ç°½ÚµãµÄÎ»ÖÃ)
     while(i > 0 && tmp < HeapArray[parent]) {
-        HeapArray[i] = HeapArray[parent]; // çˆ¶èŠ‚ç‚¹ä¸‹ç§»åˆ°å½“å‰èŠ‚ç‚¹(å­èŠ‚ç‚¹)çš„ä½ç½®
-        // ä¸¤ä¸ªä¸‹æ ‡éƒ½ä¸Šç§»ï¼Œç»§ç»­å¾ªç¯
+        HeapArray[i] = HeapArray[parent]; // ¸¸½ÚµãÏÂÒÆµ½µ±Ç°½Úµã(×Ó½Úµã)µÄÎ»ÖÃ
+        // Á½¸öÏÂ±ê¶¼ÉÏÒÆ£¬¼ÌĞøÑ­»·
         i = parent;
         parent = getParent(parent);
     }
-    //æœ€åèµ‹å€¼
+    //×îºó¸³Öµ
     HeapArray[i] = tmp;
 }
 
 /**
- * æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
- * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
+ * ×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
+ * @param i µ±Ç°½ÚµãµÄÏÂ±ê
  */
 template<typename T>
 void MinHeap<T>::shiftDown(unsigned int i) {
     unsigned int leftChild, rightChild, smallest;
     T tmp = HeapArray[i];
-    //å¦‚æœå½“å‰èŠ‚ç‚¹æœ‰å­èŠ‚ç‚¹ä¸”æ¯”å­èŠ‚ç‚¹å¤§ï¼Œåˆ™è¿›è¡Œä¸‹æ²‰è°ƒæ•´(å­èŠ‚ç‚¹ä¸Šç§»åˆ°å½“å‰èŠ‚ç‚¹)
+    //Èç¹ûµ±Ç°½ÚµãÓĞ×Ó½ÚµãÇÒ±È×Ó½Úµã´ó£¬Ôò½øĞĞÏÂ³Áµ÷Õû(×Ó½ÚµãÉÏÒÆµ½µ±Ç°½Úµã)
     while(true) {
         leftChild = getLeftChild(i);
         rightChild = getRightChild(i);
-        smallest = i; // å½“å‰èŠ‚ç‚¹çš„æœ€å°çš„å­©å­çš„ä¸‹æ ‡
+        smallest = i; // µ±Ç°½ÚµãµÄ×îĞ¡µÄº¢×ÓµÄÏÂ±ê
 
-        //æŸ¥æ‰¾å½“å‰èŠ‚ç‚¹çš„æœ€å°çš„å­©å­ï¼Œç¡®ä¿æœ€å°çš„å…ƒç´ åœ¨ä¸Šé¢
-        // å¦‚æœå·¦å­©å­æ¯”å½“å‰èŠ‚ç‚¹å°ï¼Œå°±æ›´æ–°smallest
+        //²éÕÒµ±Ç°½ÚµãµÄ×îĞ¡µÄº¢×Ó£¬È·±£×îĞ¡µÄÔªËØÔÚÉÏÃæ
+        // Èç¹û×óº¢×Ó±Èµ±Ç°½ÚµãĞ¡£¬¾Í¸üĞÂsmallest
         if(leftChild < size && HeapArray[leftChild] < tmp) {
             smallest = leftChild;
             
-            // å¦‚æœå³å­©å­æ¯”å·¦å­©å­æ›´å°(å·²æ»¡è¶³æ¯”å½“å‰èŠ‚ç‚¹å°)ï¼Œå°±æ›´æ–°smallest
+            // Èç¹ûÓÒº¢×Ó±È×óº¢×Ó¸üĞ¡(ÒÑÂú×ã±Èµ±Ç°½ÚµãĞ¡)£¬¾Í¸üĞÂsmallest
             if(rightChild < size && HeapArray[rightChild] < HeapArray[leftChild]) {
                 smallest = rightChild;
             }
         }
 
-        // å¦‚æœä¸Šé¢çš„ifæ²¡æ‰§è¡Œ(smallestæœªæ›´æ”¹)ï¼Œè¯´æ˜å½“å‰æ¯”ä»»ä½•ä¸€ä¸ªèŠ‚ç‚¹éƒ½å°ï¼Œå°±ç›´æ¥è·³å‡º
+        // Èç¹ûÉÏÃæµÄifÃ»Ö´ĞĞ(smallestÎ´¸ü¸Ä)£¬ËµÃ÷µ±Ç°±ÈÈÎºÎÒ»¸ö½Úµã¶¼Ğ¡£¬¾ÍÖ±½ÓÌø³ö
         if(i == smallest) {
             break;
         }
-        //å¦åˆ™è¿›è¡Œä¸‹æ²‰è°ƒæ•´(æœ€å°çš„å­©å­ä¸Šç§»åˆ°å½“å‰èŠ‚ç‚¹çš„ä½ç½®)
+        //·ñÔò½øĞĞÏÂ³Áµ÷Õû(×îĞ¡µÄº¢×ÓÉÏÒÆµ½µ±Ç°½ÚµãµÄÎ»ÖÃ)
         HeapArray[i] = HeapArray[smallest];
-        //ä¸‹æ ‡ä¸‹ç§»ï¼Œç»§ç»­å¾ªç¯
+        //ÏÂ±êÏÂÒÆ£¬¼ÌĞøÑ­»·
         i = smallest;
     }
-    // æœ€åèµ‹å€¼
+    // ×îºó¸³Öµ
     HeapArray[i] = tmp;
 }
 
 
 /**
- * æ„é€ æœ€å°å †
- * @param array å¾…å †åŒ–çš„æ•°ç»„
- * @param n æ•°ç»„ä¸­æ•°æ®ä¸ªæ•°(ä¸æ˜¯æ•°ç»„çš„æœ€å¤§é•¿åº¦)
+ * ¹¹Ôì×îĞ¡¶Ñ
+ * @param array ´ı¶Ñ»¯µÄÊı×é
+ * @param n Êı×éÖĞÊı¾İ¸öÊı(²»ÊÇÊı×éµÄ×î´ó³¤¶È)
  */
 template<typename T>
 MinHeap<T>::MinHeap(T array[], unsigned int n) {
     this->HeapArray = array;
     this->size = n;
-    // ä»æœ€åä¸€ä¸ªåˆ†æ”¯èŠ‚ç‚¹(æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹)å¼€å§‹ï¼Œä»ä¸‹åˆ°ä¸Šè¿›è¡Œå †åŒ–(ä¸‹æ²‰è°ƒæ•´)
+    // ´Ó×îºóÒ»¸ö·ÖÖ§½Úµã(×îºóÒ»¸ö½ÚµãµÄ¸¸½Úµã)¿ªÊ¼£¬´ÓÏÂµ½ÉÏ½øĞĞ¶Ñ»¯(ÏÂ³Áµ÷Õû)
     for(unsigned int i = getParent(size - 1); i >= 0; i--) {
         shiftDown(i);
-        if(i == 0) break; // iç­‰äº0æ—¶è¦è·³å‡ºï¼Œå¦åˆ™æ‰§è¡Œi--ï¼Œä¼šå‡ºé”™
+        if(i == 0) break; // iµÈÓÚ0Ê±ÒªÌø³ö£¬·ñÔòÖ´ĞĞi--£¬»á³ö´í
     }
 }
 
 /**
- * æœ€å°å †æ˜¯å¦ä¸ºç©º
+ * ×îĞ¡¶ÑÊÇ·ñÎª¿Õ
  */
 template<typename T>
 bool MinHeap<T>::isEmpty()const {
@@ -158,42 +158,42 @@ bool MinHeap<T>::isEmpty()const {
 }
 
 /**
- * æ’å…¥æ–°å…ƒç´ ã€‚æ’å…¥æ–°å…ƒç´ å‰è¯·ç¡®ä¿ä¸ä¼šè¶…è¿‡æ•°ç»„çš„æœ€å¤§é•¿åº¦
- * @param elem å¾…æ’å…¥çš„æ–°å…ƒç´ 
+ * ²åÈëĞÂÔªËØ¡£²åÈëĞÂÔªËØÇ°ÇëÈ·±£²»»á³¬¹ıÊı×éµÄ×î´ó³¤¶È
+ * @param elem ´ı²åÈëµÄĞÂÔªËØ
  */
 template<typename T>
 void MinHeap<T>::push(T elem) {
-    HeapArray[size] = elem; // åœ¨æ•°ç»„æœ«å°¾æ’å…¥æ–°å…ƒç´ 
+    HeapArray[size] = elem; // ÔÚÊı×éÄ©Î²²åÈëĞÂÔªËØ
     size++;
-    shiftUp(size - 1); // å¯¹æ–°æ’å…¥çš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
+    shiftUp(size - 1); // ¶ÔĞÂ²åÈëµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
 }
 
 /**
- * è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
+ * »ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
  */
 template<typename T>
 T MinHeap<T>::getMin()const {
     if(size == 0)
-        throw std::out_of_range("æœ€å°å †ä¸ºç©º");
+        throw std::out_of_range("×îĞ¡¶ÑÎª¿Õ");
     return HeapArray[0];
 }
 
 /**
- * åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
+ * É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
  */
 template<typename T>
 T MinHeap<T>::pop() {
     if(size == 0)
-        throw std::out_of_range("æœ€å°å †ä¸ºç©º");
-    T tmp = HeapArray[0]; // ä¿å­˜å †é¡¶å…ƒç´ 
-    HeapArray[0] = HeapArray[size - 1]; // å°†æ•°ç»„çš„æœ€åä¸€ä¸ªå…ƒç´ è¡¥åˆ°å †é¡¶
+        throw std::out_of_range("×îĞ¡¶ÑÎª¿Õ");
+    T tmp = HeapArray[0]; // ±£´æ¶Ñ¶¥ÔªËØ
+    HeapArray[0] = HeapArray[size - 1]; // ½«Êı×éµÄ×îºóÒ»¸öÔªËØ²¹µ½¶Ñ¶¥
     size--;
-    shiftDown(0); // å°†æ–°è¡¥åˆ°å †é¡¶çš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
+    shiftDown(0); // ½«ĞÂ²¹µ½¶Ñ¶¥µÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
     return tmp;
 }
 
 /**
- * æ‰“å°æœ€å°å †
+ * ´òÓ¡×îĞ¡¶Ñ
  */
 template<typename T>
 void MinHeap<T>::print()const {
