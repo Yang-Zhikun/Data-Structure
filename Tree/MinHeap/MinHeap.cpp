@@ -74,6 +74,7 @@ void MinHeap<T>::shiftDown(unsigned int i) {
         if(rightChild < size && HeapArray[rightChild] < tmp && HeapArray[rightChild] < HeapArray[leftChild]) {
             smallest = rightChild;
         }
+        
         // 如果上面的两个if没执行(smallest未更改)，说明当前比任何一个节点都小，就直接跳出
         if(i == smallest) {
             break;
