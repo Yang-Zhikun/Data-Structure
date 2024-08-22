@@ -1,38 +1,38 @@
 #pragma once
 
 /**
- * æœ€å°å †
+ * ×îĞ¡¶Ñ
  */
 template<typename T>
 class MinHeap {
 protected:
-    T* HeapArray; // æŒ‡å‘å­˜æ”¾æœ€å°å †çš„æ•°ç»„çš„æŒ‡é’ˆ
-    unsigned int size; // æ•°ç»„æ•°æ®ä¸ªæ•°
+    T* HeapArray; // Ö¸Ïò´æ·Å×îĞ¡¶ÑµÄÊı×éµÄÖ¸Õë
+    unsigned int size; // Êı×éÊı¾İ¸öÊı
 
-    unsigned int getLeftChild(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å·¦å­©å­çš„ä¸‹æ ‡
-    unsigned int getRightChild(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å³å­©å­çš„ä¸‹æ ‡
-    unsigned int getParent(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
+    unsigned int getLeftChild(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ×óº¢×ÓµÄÏÂ±ê
+    unsigned int getRightChild(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄÓÒº¢×ÓµÄÏÂ±ê
+    unsigned int getParent(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
 
-    void shiftUp(unsigned int i);   //æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
-    void shiftDown(unsigned int i); //æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
+    void shiftUp(unsigned int i);   //×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
+    void shiftDown(unsigned int i); //×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
 
 public:
-    MinHeap(T array[] = nullptr, unsigned int n = 0);  //æ„é€ æœ€å°å †
+    MinHeap(T array[] = nullptr, unsigned int n = 0);  //¹¹Ôì×îĞ¡¶Ñ
 
-    bool isEmpty() const; //åˆ¤ç©º
-    void push(T elem); //æ’å…¥æ–°å…ƒç´ 
-    T getMin() const; //è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
-    T pop(); //åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
+    bool isEmpty() const; //ÅĞ¿Õ
+    void push(T elem); //²åÈëĞÂÔªËØ
+    T getMin() const; //»ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
+    T pop(); //É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
 
-    void print()const; //æ‰“å°æœ€å°å †
+    void print()const; //´òÓ¡×îĞ¡¶Ñ
 };
 
 
 /**
- * å¯¹äºä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹ï¼š
- * å·¦å­©å­ä¸‹æ ‡ 2 * i + 1           //å·¦å­©å­åœ¨içš„ä¸‹ä¸€å±‚+1
- * å³å­©å­ä¸‹æ ‡ 2 * i + 2           //å³å­©å­æ˜¯å·¦å­©å­+1
- * çˆ¶èŠ‚ç‚¹ä¸‹æ ‡ (i - 1) / 2 (å–æ•´)   //é€†è¿ç®—
+ * ¶ÔÓÚÏÂ±êÎªiµÄ½Úµã£º
+ * ×óº¢×ÓÏÂ±ê 2 * i + 1           //×óº¢×ÓÔÚiµÄÏÂÒ»²ã+1
+ * ÓÒº¢×ÓÏÂ±ê 2 * i + 2           //ÓÒº¢×ÓÊÇ×óº¢×Ó+1
+ * ¸¸½ÚµãÏÂ±ê (i - 1) / 2 (È¡Õû)   //ÄæÔËËã
  *            0
  *           /  \
  *          1    2
