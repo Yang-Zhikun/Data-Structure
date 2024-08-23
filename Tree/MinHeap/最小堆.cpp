@@ -142,6 +142,7 @@ template<typename T>
 MinHeap<T>::MinHeap(T array[], unsigned int n) {
     this->HeapArray = array;
     this->size = n;
+    if(size == 0) return; //如果数据个数为0，则结束，否则执行getParent(size-1)，会出问题
     // 从最后一个分支节点(最后一个节点的父节点)开始，从下到上进行堆化(下沉调整)
     for(unsigned int i = getParent(size - 1); i >= 0; i--) {
         shiftDown(i);
