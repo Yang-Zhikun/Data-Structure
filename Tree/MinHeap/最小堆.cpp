@@ -23,6 +23,7 @@ protected:
 public:
     MinHeap(T array[] = nullptr, unsigned int n = 0);  //构造最小堆
 
+    unsigned int Size() const; // 获取最小堆的数据个数
     bool isEmpty() const; //判空
     void push(T elem); //插入新元素
     T getMin() const; //获取最小堆的最小元素(堆顶元素)
@@ -117,6 +118,7 @@ void MinHeap<T>::shiftDown(unsigned int i) {
         if(rightChild < size && HeapArray[rightChild] < tmp && HeapArray[rightChild] < HeapArray[leftChild]) {
             smallest = rightChild;
         }
+
         // 如果上面的两个if没执行(smallest未更改)，说明当前比任何一个节点都小，就直接跳出
         if(i == smallest) {
             break;
@@ -146,6 +148,15 @@ MinHeap<T>::MinHeap(T array[], unsigned int n) {
         if(i == 0) break; // i等于0时要跳出，否则执行i--，会出错
     }
 }
+
+/**
+ * 获取最小堆的数据个数
+ */
+template<typename T>
+unsigned int MinHeap<T>::Size() const {
+    return size;
+}
+
 
 /**
  * 最小堆是否为空
