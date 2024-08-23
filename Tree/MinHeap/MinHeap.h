@@ -17,8 +17,9 @@ protected:
     void shiftDown(unsigned int i); //最小堆的下标为i的元素进行下沉调整
 
 public:
-    MinHeap(T array[] = nullptr, unsigned int n = 0);  //构造最小堆
+    MinHeap(T array[], unsigned int n = 0);  //构造最小堆
 
+    unsigned int Size() const; //获取数据个数
     bool isEmpty() const; //判空
     void push(T elem); //插入新元素
     T getMin() const; //获取最小堆的最小元素(堆顶元素)

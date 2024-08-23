@@ -81,11 +81,14 @@ unsigned int MinHeap<T>::getParent(unsigned int i)const {
  */
 template<typename T>
 void MinHeap<T>::shiftUp(unsigned int i) {
+    if (i == 0) {
+        return; // 根节点不用调整
+    }
     unsigned int parent = getParent(i); // 获取当前节点的父节点的下标
     T tmp = HeapArray[i]; // 保存当前节点，用于最后赋值
 
     //如果当前节点有父节点且比父节点小，则进行上浮调整(父节点下移到当前节点的位置)
-    while(i > 0 && tmp < HeapArray[parent]) {
+    while (i > 0 && tmp < HeapArray[parent]) {
         HeapArray[i] = HeapArray[parent]; // 父节点下移到当前节点(子节点)的位置
         // 两个下标都上移，继续循环
         i = parent;
@@ -101,25 +104,28 @@ void MinHeap<T>::shiftUp(unsigned int i) {
  */
 template<typename T>
 void MinHeap<T>::shiftDown(unsigned int i) {
+    if (i >= size) {
+        return; // 越界不用调整(没有子节点)
+    }
     unsigned int leftChild, rightChild, smallest;
     T tmp = HeapArray[i];
     //如果当前节点有子节点且比子节点大，则进行下沉调整(子节点上移到当前节点)
-    while(true) {
+    while (true) {
         leftChild = getLeftChild(i);
         rightChild = getRightChild(i);
         smallest = i; // 当前节点的最小的孩子的下标
 
         //查找当前节点的最小的孩子，确保最小的元素在上面
         // 如果左孩子比当前节点小，就更新smallest
-        if(leftChild < size && HeapArray[leftChild] < tmp) {
+        if (leftChild < size && HeapArray[leftChild] < tmp) {
             smallest = leftChild;
         }
         // 如果右孩子比当前节点小，且比左孩子更小，就更新smallest
-        if(rightChild < size && HeapArray[rightChild] < tmp && HeapArray[rightChild] < HeapArray[leftChild]) {
+        if (rightChild < size && HeapArray[rightChild] < tmp && HeapArray[rightChild] < HeapArray[leftChild]) {
             smallest = rightChild;
         }
         // 如果上面的两个if没执行(smallest未更改)，说明当前比任何一个节点都小，就直接跳出
-        if(i == smallest) {
+        if (i == smallest) {
             break;
         }
         //否则进行下沉调整(最小的孩子上移到当前节点的位置)
@@ -141,11 +147,12 @@ template<typename T>
 MinHeap<T>::MinHeap(T array[], unsigned int n) {
     this->HeapArray = array;
     this->size = n;
-    if(size == 0) return;
+    if (size <= 1) return; // 只有一个元素或没有元素，不需要堆化
+
     // 从最后一个分支节点(最后一个节点的父节点)开始，从下到上进行堆化(下沉调整)
-    for(unsigned int i = getParent(size - 1); i >= 0; i--) {
+    for (unsigned int i = getParent(size - 1); i >= 0; i--) {
         shiftDown(i);
-        if(i == 0) break; // i等于0时要跳出，否则执行i--，会出错
+        if (i == 0) break; // i等于0时要跳出，否则执行i--，会出错
     }
 }
 
@@ -181,7 +188,7 @@ void MinHeap<T>::push(T elem) {
  */
 template<typename T>
 T MinHeap<T>::getMin()const {
-    if(size == 0)
+    if (size == 0)
         throw std::out_of_range("最小堆为空");
     return HeapArray[0];
 }
@@ -191,7 +198,7 @@ T MinHeap<T>::getMin()const {
  */
 template<typename T>
 T MinHeap<T>::pop() {
-    if(size == 0)
+    if (size == 0)
         throw std::out_of_range("最小堆为空");
     T tmp = HeapArray[0]; // 保存堆顶元素
     HeapArray[0] = HeapArray[size - 1]; // 将数组的最后一个元素补到堆顶
@@ -205,10 +212,10 @@ T MinHeap<T>::pop() {
  */
 template<typename T>
 void MinHeap<T>::print()const {
-    for(unsigned int i = 0; i < size; i++) {
+    for (unsigned int i = 0; i < size; i++) {
         cout << HeapArray[i] << ' ';
     }
-    cout<<'\n';
+    cout << '\n';
 }
 
 
@@ -224,7 +231,7 @@ protected:
     T* data;              // 存放数据的数组
     unsigned int maxLen;  // 数组的最大长度
 
-    MinHeap<T> *heap;      //最小堆
+    MinHeap<T>* heap;      //最小堆
 
     void resize(); // 扩容
 
@@ -251,8 +258,8 @@ public:
  * 构造函数
 */
 template<typename T>
-Min_priority_queue<T>::Min_priority_queue(unsigned int maxLen):maxLen(maxLen) {
-    if(maxLen == 0) maxLen = 1;
+Min_priority_queue<T>::Min_priority_queue(unsigned int maxLen) :maxLen(maxLen) {
+    if (maxLen == 0) maxLen = 1;
     data = new T[maxLen];
     heap = new MinHeap<T>(data, 0); // 新建堆
 }
@@ -279,7 +286,7 @@ bool Min_priority_queue<T>::isEmpty() const {
  */
 template<typename T>
 void Min_priority_queue<T>::push(T elem) {
-    if(heap->Size() == maxLen - 1) {
+    if (heap->Size() == maxLen - 1) {
         resize();
     }
     heap->push(elem);
@@ -309,19 +316,12 @@ void Min_priority_queue<T>::resize() {
     maxLen = maxLen * 2;
     T* data2 = new T[maxLen];
     unsigned int size = heap->Size();
-    printf("maxlen %d, size %d\n", maxLen, size);
-    for(unsigned int i = 0; i < size; i++) {
+    for (unsigned int i = 0; i < size; i++) {
         data2[i] = data[i];
     }
     delete[] data;
     data = data2;
-    if(heap == nullptr) {
-        cout<<"null";
-    }
-    else {
-        cout<<"not null";
-        delete heap; // 释放原来的堆
-    }
+    delete heap;
     heap = new MinHeap<T>(data, size);
 }
 
@@ -333,16 +333,17 @@ void Min_priority_queue<T>::resize() {
 
 int main() {
     srand(time(0));
-    Min_priority_queue<int> q(1);
-    for(int i=0; i<=1; i++) {
-        int e = rand()%10;
-        //cout<<e<<' ';
+    Min_priority_queue<int> q;
+    for (int i = 0; i <= 100; i++) {
+        int e = rand() % 100;
+        cout << e << ' ';
         q.push(e);
     }
-    q.print();/*
-    cout<<'\n';
-    while(!q.isEmpty()) {
-        cout<<q.pop()<<endl;
-    }*/
+    cout << '\n';
+    q.print();
+    cout << '\n';
+    while (!q.isEmpty()) {
+        cout << q.pop() << endl;
+    }
     system("pause");
 }
