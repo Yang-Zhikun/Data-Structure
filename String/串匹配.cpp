@@ -180,6 +180,7 @@ int main() {
         printf("   KMP: %lf\n", timer.duration());
 
         delete[]S;
+        system("pause");
     }
 
 }
