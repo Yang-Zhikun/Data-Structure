@@ -6,7 +6,7 @@
                 "${workspaceFolder}\\**"
             ],
             "defines": [
-                "_DEBUG",
+                "_DEBUG"
                 //#undef UNICODE
                 //#undef _UNICODE
                 /*"UNICODE",
@@ -15,7 +15,7 @@
             "cStandard": "c11",
             "cppStandard": "c++11",
             "intelliSenseMode": "windows-gcc-x64",
-            "compilerPath": "D:\\Devlanguages\\MinGW64\\bin\\g++.exe"
+            "compilerPath": "D:\\Dev\\MinGW64\\bin\\g++.exe"
         }
     ],
     "version": 4
