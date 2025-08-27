@@ -2,15 +2,15 @@
 #include<stdexcept>
 
 /**
- * ¿½±´¹¹Ôìº¯Êı
+ * æ‹·è´æ„é€ å‡½æ•°
  */
 template<typename T>
 LinkQueue<T>::LinkQueue(const LinkQueue &obj){
-    node *newnode = new node;//ĞÂ½¨Ò»¸ö½Úµã×÷ÎªÊ×Ôª½Úµã
+    node *newnode = new node;//æ–°å»ºä¸€ä¸ªèŠ‚ç‚¹ä½œä¸ºé¦–å…ƒèŠ‚ç‚¹
     newnode->data = obj.front->data;
     newnode->next = nullptr;
-    front = newnode;//¶ÓÍ·Ö¸ÕëÖ¸ÏòĞÂ½Úµã
-    rear = front;//¶ÓÎ²Ö¸ÕëÖ¸ÏòĞÂ½Úµã
+    front = newnode;//é˜Ÿå¤´æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
+    rear = front;//é˜Ÿå°¾æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
     for(node *p = obj.front->next; p!=nullptr; p = p->next){
         node *newnode;
         newnode->data = p->data;
@@ -22,16 +22,16 @@ LinkQueue<T>::LinkQueue(const LinkQueue &obj){
 }
 
 /**
- * ¸³ÖµÔËËã·û
+ * èµ‹å€¼è¿ç®—ç¬¦
  */
 template<typename T>
 LinkQueue<T>& LinkQueue<T>::operator=(const LinkQueue &obj){
     if(*this!=obj){
-        node *newnode = new node;//ĞÂ½¨Ò»¸ö½Úµã×÷ÎªÊ×Ôª½Úµã
+        node *newnode = new node;//æ–°å»ºä¸€ä¸ªèŠ‚ç‚¹ä½œä¸ºé¦–å…ƒèŠ‚ç‚¹
         newnode->data = obj.front->data;
         newnode->next = nullptr;
-        front = newnode;//¶ÓÍ·Ö¸ÕëÖ¸ÏòĞÂ½Úµã
-        rear = front;//¶ÓÎ²Ö¸ÕëÖ¸ÏòĞÂ½Úµã
+        front = newnode;//é˜Ÿå¤´æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
+        rear = front;//é˜Ÿå°¾æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
         for(node *p = obj.front->next; p!=nullptr; p = p->next){
             node *newnode;
             newnode->data = p->data;
@@ -45,7 +45,7 @@ LinkQueue<T>& LinkQueue<T>::operator=(const LinkQueue &obj){
 }
 
 /**
- * Çå¿ÕÁ´¶ÓÁĞ
+ * æ¸…ç©ºé“¾é˜Ÿåˆ—
 */
 template<typename T>
 void LinkQueue<T>::clear(){
@@ -61,19 +61,19 @@ void LinkQueue<T>::clear(){
 }
 
 /**
- * Èë¶Ó£¬ÔÚ¶ÓÎ²²åÈëÒ»¸öÔªËØ
+ * å…¥é˜Ÿï¼Œåœ¨é˜Ÿå°¾æ’å…¥ä¸€ä¸ªå…ƒç´ 
  */
 template<typename T>
 void LinkQueue<T>::enQueue(const T elem){
     node *newnode = new node;
     newnode->data = elem;
     newnode->next = nullptr;
-    //Èç¹ûÁ´¶ÓÁĞÎª¿Õ£¬Èë¶ÓÔªËØ¼ÈÊÇ¶ÓÍ·Ò²ÊÇ¶ÓÎ²
+    //å¦‚æœé“¾é˜Ÿåˆ—ä¸ºç©ºï¼Œå…¥é˜Ÿå…ƒç´ æ—¢æ˜¯é˜Ÿå¤´ä¹Ÿæ˜¯é˜Ÿå°¾
     if(isEmpty()){
         front = rear = newnode;
         length++;
     }
-    //Á´¶ÓÁĞ²»Îª¿Õ
+    //é“¾é˜Ÿåˆ—ä¸ä¸ºç©º
     else{
         rear->next = newnode;
         rear = newnode;
@@ -82,27 +82,27 @@ void LinkQueue<T>::enQueue(const T elem){
 }
 
 /**
- * ³ö¶Ó£¬²¢·µ»Ø¶ÓÍ·ÔªËØ
+ * å‡ºé˜Ÿï¼Œå¹¶è¿”å›é˜Ÿå¤´å…ƒç´ 
  */
 template<typename T>
 T LinkQueue<T>::deQueue(){
-    if(isEmpty()) throw std::out_of_range("¶ÓÁĞÎª¿Õ");
-    //É¾³ı¶ÓÍ·ÔªËØ
+    if(isEmpty()) throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
+    //åˆ é™¤é˜Ÿå¤´å…ƒç´ 
     node *p = front;
     T data = front->data;
     front = front->next;
     delete p;
-    //Èç¹û³ö¶Óºó¶ÓÁĞÎª¿Õ£¬¾ÍĞŞ¸ÄrearÎªnullptr
+    //å¦‚æœå‡ºé˜Ÿåé˜Ÿåˆ—ä¸ºç©ºï¼Œå°±ä¿®æ”¹rearä¸ºnullptr
     if(front == nullptr) rear = nullptr;
     length--;
     return data;
 }
 
 /**
- * »ñÈ¡¶ÓÍ·ÔªËØ
+ * è·å–é˜Ÿå¤´å…ƒç´ 
  */
 template<typename T>
 T LinkQueue<T>::get_front()const{
-    if(isEmpty()) throw std::out_of_range("¶ÓÁĞÎª¿Õ");
+    if(isEmpty()) throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
     return front->data;
 }

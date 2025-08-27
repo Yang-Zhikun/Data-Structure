@@ -3,38 +3,38 @@
 using namespace std;
 
 
-const int MAXLEN = 100;    //¾²Ì¬Ë³Ğò±íµÄ×î´ó±í³¤
+const int MAXLEN = 100;    //é™æ€é¡ºåºè¡¨çš„æœ€å¤§è¡¨é•¿
 
 template<typename T>
 class S_seqList{
 private:
-    T data[MAXLEN];//´æ·ÅÊı¾İµÄÊ×µØÖ·
-    unsigned int length;//µ±Ç°Ë³Ğò±íÖĞÊı¾İ¸öÊı
+    T data[MAXLEN];//å­˜æ”¾æ•°æ®çš„é¦–åœ°å€
+    unsigned int length;//å½“å‰é¡ºåºè¡¨ä¸­æ•°æ®ä¸ªæ•°
 
 public:
-    S_seqList(){ length = 0; } //¹¹Ôìº¯Êı
-    S_seqList(const S_seqList& obj);//¿½±´¹¹Ôìº¯Êı
-    S_seqList<T>& operator=(const S_seqList& obj);//¸³ÖµÔËËã·û
+    S_seqList(){ length = 0; } //æ„é€ å‡½æ•°
+    S_seqList(const S_seqList& obj);//æ‹·è´æ„é€ å‡½æ•°
+    S_seqList<T>& operator=(const S_seqList& obj);//èµ‹å€¼è¿ç®—ç¬¦
 
-    unsigned int getLength()const{ return length; }//»ñÈ¡±í³¤length
-    void clear(){ length = 0; };//Çå¿ÕË³Ğò±í
-    bool isEmpty()const{ return length==0; }//ÅĞ¶ÏË³Ğò±íÊÇ·ñÎª¿Õ
-    void traverse()const;//±éÀúË³Ğò±í
-    T operator[] (const unsigned int i)const;//ÔËËã·û[]£º»ñÈ¡Ë³Ğò±íÎ»ĞòiµÄÊı¾İ(0<=i<length)
-    T& operator[] (const unsigned int i);//ÔËËã·û[]£º·µ»ØË³Ğò±íÎ»ĞòiµÄÊı¾İµÄÒıÓÃ(0<=i<length)
-    void set(const unsigned int i, const T elem){ this->operator[](i) = elem; }//½«Ë³Ğò±íÎ»ĞòÎªiµÄÔªËØµÄÖµ¸ÄÎªelem(0<=i<length)
-    T get(const unsigned int i)const{ return operator[](i); }//»ñÈ¡Ë³Ğò±íÎ»ĞòiµÄÊı¾İ(0<=i<length)
-    void insert(const unsigned int i, const T elem);//ÔÚË³Ğò±íÎ»Ğòi´¦²åÈëÒ»¸öÊı¾İ(0<=i<=length)
-    void push_back(const T elem){ insert(length, elem); }//ÔÚË³Ğò±íÄ©Î²²åÈëÒ»¸öÊı¾İ
-    void remove(const unsigned int i);//É¾³ıË³Ğò±íÎ»ĞòiÉÏÊı¾İ(0<=i<length)
-    void pop_back(){ remove(length-1); }//É¾³ıË³Ğò±íÄ©Î²µÄÒ»¸öÊı¾İ
-    void reserve();//ÄæÖÃË³Ğò±í
+    unsigned int getLength()const{ return length; }//è·å–è¡¨é•¿length
+    void clear(){ length = 0; };//æ¸…ç©ºé¡ºåºè¡¨
+    bool isEmpty()const{ return length==0; }//åˆ¤æ–­é¡ºåºè¡¨æ˜¯å¦ä¸ºç©º
+    void traverse()const;//éå†é¡ºåºè¡¨
+    T operator[] (const unsigned int i)const;//è¿ç®—ç¬¦[]ï¼šè·å–é¡ºåºè¡¨ä½åºiçš„æ•°æ®(0<=i<length)
+    T& operator[] (const unsigned int i);//è¿ç®—ç¬¦[]ï¼šè¿”å›é¡ºåºè¡¨ä½åºiçš„æ•°æ®çš„å¼•ç”¨(0<=i<length)
+    void set(const unsigned int i, const T elem){ this->operator[](i) = elem; }//å°†é¡ºåºè¡¨ä½åºä¸ºiçš„å…ƒç´ çš„å€¼æ”¹ä¸ºelem(0<=i<length)
+    T get(const unsigned int i)const{ return operator[](i); }//è·å–é¡ºåºè¡¨ä½åºiçš„æ•°æ®(0<=i<length)
+    void insert(const unsigned int i, const T elem);//åœ¨é¡ºåºè¡¨ä½åºiå¤„æ’å…¥ä¸€ä¸ªæ•°æ®(0<=i<=length)
+    void push_back(const T elem){ insert(length, elem); }//åœ¨é¡ºåºè¡¨æœ«å°¾æ’å…¥ä¸€ä¸ªæ•°æ®
+    void remove(const unsigned int i);//åˆ é™¤é¡ºåºè¡¨ä½åºiä¸Šæ•°æ®(0<=i<length)
+    void pop_back(){ remove(length-1); }//åˆ é™¤é¡ºåºè¡¨æœ«å°¾çš„ä¸€ä¸ªæ•°æ®
+    void reserve();//é€†ç½®é¡ºåºè¡¨
 };
 
 
 
 
-template<typename T>////¿½±´¹¹Ôìº¯Êı
+template<typename T>////æ‹·è´æ„é€ å‡½æ•°
 S_seqList<T>::S_seqList(const S_seqList& obj){
     for(int i=0; i < obj.length; i++){
         data[i] = obj.data[i];
@@ -44,7 +44,7 @@ S_seqList<T>::S_seqList(const S_seqList& obj){
 
 template<typename T>
 S_seqList<T>& S_seqList<T>::operator=(const S_seqList & obj){
-    if(*this!=obj){//·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){//é˜²æ­¢è‡ªèµ‹å€¼
         for(int i=0; i < obj.length; i++){
             data[i] = obj.data[i];
         }
@@ -53,7 +53,7 @@ S_seqList<T>& S_seqList<T>::operator=(const S_seqList & obj){
     return *this;
 }
 
-template<typename T>//±éÀúË³Ğò±í
+template<typename T>//éå†é¡ºåºè¡¨
 void S_seqList<T>::traverse() const{
     for(int i=0; i<length; i++){
         cout<<data[i]<<' ';
@@ -61,65 +61,65 @@ void S_seqList<T>::traverse() const{
     cout<<'\n';
 }
 
-template<typename T>//ÔËËã·û[]£º»ñÈ¡Ë³Ğò±íÎ»ĞòiµÄÊı¾İ(0<=i<length)
+template<typename T>//è¿ç®—ç¬¦[]ï¼šè·å–é¡ºåºè¡¨ä½åºiçš„æ•°æ®(0<=i<length)
 T S_seqList<T>::operator[](const unsigned int i) const{
     if(i>=length || i<0){
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
     }
     else{
         return data[i];
     }
 }
 
-template<typename T>//ÔËËã·û[]£º·µ»ØË³Ğò±íÎ»ĞòiµÄÊı¾İµÄÒıÓÃ(0<=i<length)
+template<typename T>//è¿ç®—ç¬¦[]ï¼šè¿”å›é¡ºåºè¡¨ä½åºiçš„æ•°æ®çš„å¼•ç”¨(0<=i<length)
 T& S_seqList<T>::operator[](const unsigned int i){
     if(i>=length || i<0){
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
     }
     else{
         return data[i];
     }
 }
 
-template<typename T>//ÔÚË³Ğò±íÎ»Ğòi´¦²åÈëÒ»¸öÊı¾İ(0<=i<=length)
+template<typename T>//åœ¨é¡ºåºè¡¨ä½åºiå¤„æ’å…¥ä¸€ä¸ªæ•°æ®(0<=i<=length)
 void S_seqList<T>::insert(const unsigned int i, const T elem){
     if(length == MAXLEN)
-        throw std::out_of_range("Ë³Ğò±íÒÑÂú");
+        throw std::out_of_range("é¡ºåºè¡¨å·²æ»¡");
     else if(i<0 || i>length)
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ºÏ·¨");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸åˆæ³•");
     else{}
-    //½«Î»ĞòiºóµÄÊı¾İ¶¼ºóÒÆÒ»¸öÎ»ÖÃ
+    //å°†ä½åºiåçš„æ•°æ®éƒ½åç§»ä¸€ä¸ªä½ç½®
     for(int j = length; j>i; j--){
         data[j] = data[j-1];
     }
-    data[i] = elem;//²åÈëÊı¾İ
-    length++;//Ë³Ğò±í³¤¶È¼Ó1
+    data[i] = elem;//æ’å…¥æ•°æ®
+    length++;//é¡ºåºè¡¨é•¿åº¦åŠ 1
 }
 
-template<typename T>//É¾³ıË³Ğò±íÎ»ĞòiÉÏÊı¾İ(0<=i<length)
+template<typename T>//åˆ é™¤é¡ºåºè¡¨ä½åºiä¸Šæ•°æ®(0<=i<length)
 void S_seqList<T>::remove(const unsigned int i){
     if(i>=length || i<0)
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
-    //½«ÒªÉ¾³ıµÄÊı¾İºóÃæµÄÊı¾İÈ«²¿Ç°ÒÆÒ»¸öÎ»ÖÃ£¬¸²¸ÇÒªÉ¾³ıµÄÊı¾İ
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
+    //å°†è¦åˆ é™¤çš„æ•°æ®åé¢çš„æ•°æ®å…¨éƒ¨å‰ç§»ä¸€ä¸ªä½ç½®ï¼Œè¦†ç›–è¦åˆ é™¤çš„æ•°æ®
     for(int j=i; j<length-1; j++){
         data[j] = data[j+1];
     }
-    length--;//Ë³Ğò±í³¤¶È¼õ1
+    length--;//é¡ºåºè¡¨é•¿åº¦å‡1
 }
 
-template<typename T>//ÄæÖÃË³Ğò±í
+template<typename T>//é€†ç½®é¡ºåºè¡¨
 void S_seqList<T>::reserve(){
     if(length == 0)
         return;
-    //´ÓÁ½¶ËÏòÖĞ¼ä½øĞĞÈı½Ç½»»»
+    //ä»ä¸¤ç«¯å‘ä¸­é—´è¿›è¡Œä¸‰è§’äº¤æ¢
     T tmp;
-    int i=0, j=length-1;//Í·¡¢Î²Á½¸ö¹¤×÷Ö¸Õë
+    int i=0, j=length-1;//å¤´ã€å°¾ä¸¤ä¸ªå·¥ä½œæŒ‡é’ˆ
     while(i<j){
-        //½»»»i,jËùÖ¸µÄÊı
+        //äº¤æ¢i,jæ‰€æŒ‡çš„æ•°
         tmp = data[i];
         data[i] = data[j];
         data[j] = tmp;
-        //Á½¸ö¹¤×÷Ö¸ÕëÏòÖĞ¼äÒÆ¶¯
+        //ä¸¤ä¸ªå·¥ä½œæŒ‡é’ˆå‘ä¸­é—´ç§»åŠ¨
         i++;
         j--;
     }

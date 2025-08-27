@@ -1,4 +1,4 @@
-//Ë«ÏòÁ´±í(´øÍ·½Úµã)£¬²ÎÕÕµ¥Á´±í
+//åŒå‘é“¾è¡¨(å¸¦å¤´èŠ‚ç‚¹)ï¼Œå‚ç…§å•é“¾è¡¨
 //Doubly linked lists
 
 #pragma once
@@ -6,42 +6,42 @@
 template<typename T>
 class D_LinkList{
 private:
-    struct node{//Ë«ÏòÁ´±íµÄÒ»¸ö½Úµã
-        T data;//Êı¾İÓò£¬´æ·ÅÊı¾İ
-        node *prev;//Ö¸ÕëÓò£¬´æ·ÅÇ°ÇıµÄµØÖ·
-        node *next;//Ö¸ÕëÓò£¬´æ·Åºó¼ÌµÄµØÖ·
+    struct node{//åŒå‘é“¾è¡¨çš„ä¸€ä¸ªèŠ‚ç‚¹
+        T data;//æ•°æ®åŸŸï¼Œå­˜æ”¾æ•°æ®
+        node *prev;//æŒ‡é’ˆåŸŸï¼Œå­˜æ”¾å‰é©±çš„åœ°å€
+        node *next;//æŒ‡é’ˆåŸŸï¼Œå­˜æ”¾åç»§çš„åœ°å€
     };
 
-    node *head;//Í·Ö¸Õë
-    node *tail;//Î²Ö¸Õë
-    unsigned int length;//Ë«ÏòÁ´±íµÄ³¤¶È
+    node *head;//å¤´æŒ‡é’ˆ
+    node *tail;//å°¾æŒ‡é’ˆ
+    unsigned int length;//åŒå‘é“¾è¡¨çš„é•¿åº¦
     
-    node* getNode(unsigned int i)const;//»ñÈ¡Ë«ÏòÁ´±íµÚi¸ö½ÚµãµÄÖ¸Õë(i´Ó1¿ªÊ¼£¬i=0Ê±·µ»ØÍ·Ö¸Õë)
+    node* getNode(unsigned int i)const;//è·å–åŒå‘é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ(iä»1å¼€å§‹ï¼Œi=0æ—¶è¿”å›å¤´æŒ‡é’ˆ)
 
 public:
-    D_LinkList();//¹¹Ôìº¯Êı
-    ~D_LinkList();//Îö¹¹º¯Êı
-    D_LinkList(const D_LinkList& obj);//¿½±´¹¹Ôìº¯Êı
-    D_LinkList<T>& operator=(const D_LinkList& obj);//¸³ÖµÔËËã·û
+    D_LinkList();//æ„é€ å‡½æ•°
+    ~D_LinkList();//ææ„å‡½æ•°
+    D_LinkList(const D_LinkList& obj);//æ‹·è´æ„é€ å‡½æ•°
+    D_LinkList<T>& operator=(const D_LinkList& obj);//èµ‹å€¼è¿ç®—ç¬¦
 
-    void clear();//Çå¿ÕË«ÏòÁ´±í
-    bool isEmpty()const{ return length==0; } //ÅĞ¶ÏË«ÏòÁ´±íÊÇ·ñÎª¿Õ
-    unsigned int getLength()const{ return length; }//»ñÈ¡Ë«ÏòÁ´±íµÄ³¤¶È
-    void traverse()const;//±éÀúË«ÏòÁ´±í
-    T get(unsigned int i)const;//»ñÈ¡Ë«ÏòÁ´±íµÚi¸ö½ÚµãµÄÊı¾İ(i´Ó1¿ªÊ¼)
-    void set(unsigned int i, T elem);//½«µÚi¸ö½ÚµãµÄÊı¾İÉèÖÃÎªelem(1<=i<=length)
-    unsigned int find(T elem)const;//ÔÚÁ´±íÖĞ²éÕÒelem, ·µ»ØµÚÒ»¸öelem³öÏÖµÄÎ»ÖÃ(·µ»Ø-1±íÊ¾elem²»´æÔÚ)
-    void insert(unsigned int i, T elem);//ÔÚµÚi¸ö½Úµã´¦²åÈëÊı¾İelem(1 <= i <= length+1)
-    void push_back(T elem){ insert(length+1, elem); }//ÔÚË«ÏòÁ´±íÄ©Î²²åÈëÊı¾İelem
-    T remove(unsigned int i);//É¾³ıË«ÏòÁ´±íµÚi¸ö½Úµã(i´Ó1¿ªÊ¼)£¬²¢·µ»Ø¸Ã½ÚµãµÄÊı¾İ
-    T pop_back();//É¾³ıË«ÏòÁ´±íÄ©Î²µÄ½Úµã£¬²¢·µ»Ø¸Ã½ÚµãµÄÊı¾İ
+    void clear();//æ¸…ç©ºåŒå‘é“¾è¡¨
+    bool isEmpty()const{ return length==0; } //åˆ¤æ–­åŒå‘é“¾è¡¨æ˜¯å¦ä¸ºç©º
+    unsigned int getLength()const{ return length; }//è·å–åŒå‘é“¾è¡¨çš„é•¿åº¦
+    void traverse()const;//éå†åŒå‘é“¾è¡¨
+    T get(unsigned int i)const;//è·å–åŒå‘é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®(iä»1å¼€å§‹)
+    void set(unsigned int i, T elem);//å°†ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®è®¾ç½®ä¸ºelem(1<=i<=length)
+    unsigned int find(T elem)const;//åœ¨é“¾è¡¨ä¸­æŸ¥æ‰¾elem, è¿”å›ç¬¬ä¸€ä¸ªelemå‡ºç°çš„ä½ç½®(è¿”å›-1è¡¨ç¤ºelemä¸å­˜åœ¨)
+    void insert(unsigned int i, T elem);//åœ¨ç¬¬iä¸ªèŠ‚ç‚¹å¤„æ’å…¥æ•°æ®elem(1 <= i <= length+1)
+    void push_back(T elem){ insert(length+1, elem); }//åœ¨åŒå‘é“¾è¡¨æœ«å°¾æ’å…¥æ•°æ®elem
+    T remove(unsigned int i);//åˆ é™¤åŒå‘é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹(iä»1å¼€å§‹)ï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æ•°æ®
+    T pop_back();//åˆ é™¤åŒå‘é“¾è¡¨æœ«å°¾çš„èŠ‚ç‚¹ï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æ•°æ®
 
-    void push_arr_head(T arr[], unsigned int n);//Í·²å·¨´´½¨Ë«ÏòÁ´±í(nÎªÊı×é³¤¶È)
-    void push_arr_tail(T arr[], unsigned int n);//Î²²å·¨´´½¨Ë«ÏòÁ´±í(nÎªÊı×é³¤¶È)
+    void push_arr_head(T arr[], unsigned int n);//å¤´æ’æ³•åˆ›å»ºåŒå‘é“¾è¡¨(nä¸ºæ•°ç»„é•¿åº¦)
+    void push_arr_tail(T arr[], unsigned int n);//å°¾æ’æ³•åˆ›å»ºåŒå‘é“¾è¡¨(nä¸ºæ•°ç»„é•¿åº¦)
 
     T getTailData();
 
-    void reserve();//ÓÃÍ·²å·¨ÄæÖÃË«ÏòÁ´±í
+    void reserve();//ç”¨å¤´æ’æ³•é€†ç½®åŒå‘é“¾è¡¨
 };
 
 

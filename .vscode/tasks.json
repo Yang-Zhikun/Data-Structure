@@ -11,7 +11,9 @@
                 "-o",
                 "${workspaceFolder}\\.exe\\a.exe",
                 //"-leasyx",
-                "-std=c++14"
+                "-std=c++14",
+                "-Finput-charset=UTF-8",
+                "-fexec-charset=GBK"
             ],
             "options": {
                 "cwd": "D:\\Program Files(D)\\Dev-Cpp\\MinGW64\\bin"

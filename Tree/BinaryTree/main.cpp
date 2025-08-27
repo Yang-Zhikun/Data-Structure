@@ -15,36 +15,36 @@ int main(){
        7   8 9  10  11 12
     */
     BinaryTree<int> tree(inputList, 0);
-    cout << "Ç°Ðò±éÀú£º";
+    cout << "å‰åºéåŽ†ï¼š";
     tree.preOrderTraverse();
-    cout << "·ÇµÝ¹éÇ°£º";
+    cout << "éžé€’å½’å‰ï¼š";
     tree.preOrderTraverseWithStack();
-    cout << "ºóÐò±éÀú£º";
+    cout << "åŽåºéåŽ†ï¼š";
     tree.postOrderTraverse();
-    cout << "ÖÐÐò±éÀú£º";
+    cout << "ä¸­åºéåŽ†ï¼š";
     tree.inOrderTraverse();
-    cout << "²ãÐò±éÀú£º";
+    cout << "å±‚åºéåŽ†ï¼š";
     tree.levelOrderTraverse();
     printf("isEmpty: %d\n", tree.isEmpty());
-    printf("¸ß¶È£º%d\n", tree.height());
-    printf("½Úµã×ÜÊý£º%d\n", tree.nodeNum());
-    printf("Ò¶×ÓÊý£º%d\n\n", tree.leafNum());
+    printf("é«˜åº¦ï¼š%d\n", tree.height());
+    printf("èŠ‚ç‚¹æ€»æ•°ï¼š%d\n", tree.nodeNum());
+    printf("å¶å­æ•°ï¼š%d\n\n", tree.leafNum());
 
     tree.clear();
-    cout << "Ç°Ðò±éÀú£º";
+    cout << "å‰åºéåŽ†ï¼š";
     tree.preOrderTraverse();
-    cout << "·ÇµÝ¹éÇ°£º";
+    cout << "éžé€’å½’å‰ï¼š";
     tree.preOrderTraverseWithStack();
-    cout << "ºóÐò±éÀú£º";
+    cout << "åŽåºéåŽ†ï¼š";
     tree.postOrderTraverse();
-    cout << "ÖÐÐò±éÀú£º";
+    cout << "ä¸­åºéåŽ†ï¼š";
     tree.inOrderTraverse();
-    cout << "²ãÐò±éÀú£º";
+    cout << "å±‚åºéåŽ†ï¼š";
     tree.levelOrderTraverse();
     printf("isEmpty: %d\n", tree.isEmpty());
-    printf("¸ß¶È£º%d\n", tree.height());
-    printf("½Úµã×ÜÊý£º%d\n", tree.nodeNum());
-    printf("Ò¶×ÓÊý£º%d\n\n", tree.leafNum());
+    printf("é«˜åº¦ï¼š%d\n", tree.height());
+    printf("èŠ‚ç‚¹æ€»æ•°ï¼š%d\n", tree.nodeNum());
+    printf("å¶å­æ•°ï¼š%d\n\n", tree.leafNum());
 
 
     system("pause");

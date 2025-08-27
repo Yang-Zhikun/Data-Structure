@@ -4,33 +4,33 @@
 //#include<stdio.h>
 
 
-template<typename T>//¹¹Ôìº¯Êı
+template<typename T>//æ„é€ å‡½æ•°
 S_LinkList<T>::S_LinkList(){
-    head = new node;//¸øÍ·Ö¸Õë·ÖÅäÄÚ´æ
+    head = new node;//ç»™å¤´æŒ‡é’ˆåˆ†é…å†…å­˜
     head->data = 0;
-    head->next = nullptr;//µ¥Á´±íµÄÍ·Ö¸ÕëµÄÖ¸ÕëÓòÎª¿Õ
-    tail = head;//Î²Ö¸ÕëÖ¸ÏòÍ·½Úµã
-    length = 0;//µ¥Á´±íµÄ³¤¶ÈÎª¿Õ
+    head->next = nullptr;//å•é“¾è¡¨çš„å¤´æŒ‡é’ˆçš„æŒ‡é’ˆåŸŸä¸ºç©º
+    tail = head;//å°¾æŒ‡é’ˆæŒ‡å‘å¤´èŠ‚ç‚¹
+    length = 0;//å•é“¾è¡¨çš„é•¿åº¦ä¸ºç©º
 }
 
-template<typename T>//Îö¹¹º¯Êı
+template<typename T>//ææ„å‡½æ•°
 S_LinkList<T>::~S_LinkList(){
-    clear();//Çå¿Õµ¥Á´±í
-    delete head;//ÊÍ·ÅÍ·½Úµã
-    //delete tail;ÊÍ·ÅÎ²½ÚµãÊÇ´íµÄ£¬ÒòÎªclear()ºótailÖ¸Ïòhead£¬²»ÄÜÖØ¸´ÊÍ·ÅÍ¬Ò»ÄÚ´æ
+    clear();//æ¸…ç©ºå•é“¾è¡¨
+    delete head;//é‡Šæ”¾å¤´èŠ‚ç‚¹
+    //delete tail;é‡Šæ”¾å°¾èŠ‚ç‚¹æ˜¯é”™çš„ï¼Œå› ä¸ºclear()åtailæŒ‡å‘headï¼Œä¸èƒ½é‡å¤é‡Šæ”¾åŒä¸€å†…å­˜
 }
 
-template<typename T>//¿½±´¹¹Ôìº¯Êı
+template<typename T>//æ‹·è´æ„é€ å‡½æ•°
 S_LinkList<T>::S_LinkList(const S_LinkList & obj){
-    head = new node;//¸øÍ·½áµãÉêÇëÄÚ´æ
+    head = new node;//ç»™å¤´ç»“ç‚¹ç”³è¯·å†…å­˜
     head->data = 0;
     head->next = nullptr;
-    tail = head;//Î²Ö¸ÕëÖ¸ÏòÍ·½Úµã
-    //ÓÃÎ²²å·¨¸´ÖÆobjµÄÊı¾İ
+    tail = head;//å°¾æŒ‡é’ˆæŒ‡å‘å¤´èŠ‚ç‚¹
+    //ç”¨å°¾æ’æ³•å¤åˆ¶objçš„æ•°æ®
     
     for(node* p = obj.head->next; p != nullptr; p = p->next){
         node* newnode = new node;
-        //½«newnode²åÈëµ½µ¥Á´±íÄ©Î²
+        //å°†newnodeæ’å…¥åˆ°å•é“¾è¡¨æœ«å°¾
         newnode->data = p->data;
         newnode->next = nullptr;
         tail->next = newnode;
@@ -39,18 +39,18 @@ S_LinkList<T>::S_LinkList(const S_LinkList & obj){
     length = obj.length;
 }
 
-template<typename T>//¸³ÖµÔËËã·û
+template<typename T>//èµ‹å€¼è¿ç®—ç¬¦
 S_LinkList<T>& S_LinkList<T>::operator=(const S_LinkList & obj){
-    if(*this != obj){//·ÀÖ¹×Ô¸³Öµ
-        head = new node;//¸øÍ·½áµãÉêÇëÄÚ´æ
+    if(*this != obj){//é˜²æ­¢è‡ªèµ‹å€¼
+        head = new node;//ç»™å¤´ç»“ç‚¹ç”³è¯·å†…å­˜
         head->data = 0;
         head->next = nullptr;
-        tail = head;//Î²Ö¸ÕëÖ¸ÏòÍ·½Úµã
-        //ÓÃÎ²²å·¨¸´ÖÆobjµÄÊı¾İ
+        tail = head;//å°¾æŒ‡é’ˆæŒ‡å‘å¤´èŠ‚ç‚¹
+        //ç”¨å°¾æ’æ³•å¤åˆ¶objçš„æ•°æ®
         
         for(node* p = obj.head->next; p != nullptr; p = p->next){
             node* newnode = new node;
-            //½«newnode²åÈëµ½µ¥Á´±íÄ©Î²
+            //å°†newnodeæ’å…¥åˆ°å•é“¾è¡¨æœ«å°¾
             newnode->data = p->data;
             newnode->next = nullptr;
             tail->next = newnode;
@@ -62,11 +62,11 @@ S_LinkList<T>& S_LinkList<T>::operator=(const S_LinkList & obj){
 }
 
 
-template<typename T>//»ñÈ¡µ¥Á´±íµÚi¸ö½ÚµãµÄÖ¸Õë(i´Ó1¿ªÊ¼£¬i=0Ê±·µ»ØÍ·Ö¸Õë)
+template<typename T>//è·å–å•é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ(iä»1å¼€å§‹ï¼Œi=0æ—¶è¿”å›å¤´æŒ‡é’ˆ)
 typename S_LinkList<T>::node* S_LinkList<T>::getNode(unsigned int i)const{
     if(i==0)
         return head;
-    //µ±²»Âú×ã 0 <= i <= length Ê±·µ»Ø¿ÕÖ¸Õë
+    //å½“ä¸æ»¡è¶³ 0 <= i <= length æ—¶è¿”å›ç©ºæŒ‡é’ˆ
     else if(i<0 || i>length){
         return nullptr;
     }
@@ -83,22 +83,22 @@ typename S_LinkList<T>::node* S_LinkList<T>::getNode(unsigned int i)const{
 
 
 
-template<typename T>//Çå¿Õµ¥Á´±í
+template<typename T>//æ¸…ç©ºå•é“¾è¡¨
 void S_LinkList<T>::clear(){
-    node *p;//pÊÇ¹¤×÷Ö¸Õë£¬·ÀÖ¹ÒÆ¶¯Í·Ö¸Õë£¬¶ªÊ§Á´±í
-    node *tmp;//tmpÊÇÁÙÊ±Ö¸Õë£¬Ö¸ÏòÒªÊÍ·ÅµÄ½Úµã
-    p = head->next;//pÖ¸ÏòÊ×Ôª½Úµã
+    node *p;//pæ˜¯å·¥ä½œæŒ‡é’ˆï¼Œé˜²æ­¢ç§»åŠ¨å¤´æŒ‡é’ˆï¼Œä¸¢å¤±é“¾è¡¨
+    node *tmp;//tmpæ˜¯ä¸´æ—¶æŒ‡é’ˆï¼ŒæŒ‡å‘è¦é‡Šæ”¾çš„èŠ‚ç‚¹
+    p = head->next;//pæŒ‡å‘é¦–å…ƒèŠ‚ç‚¹
     while(p!=nullptr){
-        tmp = p;//tmpÖ¸ÏòpÏÖÔÚµÄ½Úµã
-        p = p->next;//pÏòºóÒÆÒ»¸ö½Úµã
+        tmp = p;//tmpæŒ‡å‘pç°åœ¨çš„èŠ‚ç‚¹
+        p = p->next;//på‘åç§»ä¸€ä¸ªèŠ‚ç‚¹
         delete tmp;
     }
-    head->next = nullptr;//Í·Ö¸ÕëµÄÖ¸ÕëÓòÖÃÎª¿Õ
-    tail = head;//µ¥Á´±íµÄÎ²Ö¸ÕëÖ¸ÏòÍ·½Úµã
-    length = 0;//µ¥Á´±íµÄ³¤¶ÈÎª0
+    head->next = nullptr;//å¤´æŒ‡é’ˆçš„æŒ‡é’ˆåŸŸç½®ä¸ºç©º
+    tail = head;//å•é“¾è¡¨çš„å°¾æŒ‡é’ˆæŒ‡å‘å¤´èŠ‚ç‚¹
+    length = 0;//å•é“¾è¡¨çš„é•¿åº¦ä¸º0
 }
 
-template<typename T>//±éÀúµ¥Á´±í
+template<typename T>//éå†å•é“¾è¡¨
 void S_LinkList<T>::traverse()const{
     node *p;
     for(p = head->next; p!=nullptr; p = p->next){
@@ -107,25 +107,25 @@ void S_LinkList<T>::traverse()const{
     cout<<'\n';
 }
 
-template<typename T>//»ñÈ¡µ¥Á´±íµÚi¸ö½ÚµãµÄÊı¾İ(i´Ó1¿ªÊ¼)
+template<typename T>//è·å–å•é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®(iä»1å¼€å§‹)
 T S_LinkList<T>::get(unsigned int i)const{
     node *p = getNode(i);
     if(p==nullptr)
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ºÏ·¨");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸åˆæ³•");
     else
         return p->data;
 }
 
-template<typename T>//½«µÚi¸ö½ÚµãµÄÊı¾İÉèÖÃÎªelem(1<=i<=length)
+template<typename T>//å°†ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®è®¾ç½®ä¸ºelem(1<=i<=length)
 void S_LinkList<T>::set(unsigned int i, T elem){
     if(i<1 || i > length)
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ºÏ·¨");
-    //ÕÒµ½µÚi¸ö½Úµã
-    node *p = getNode(i);//Ç°ÃæÒÑ¾­¼ì²é¹ıi£¬p²»¿ÉÄÜÊÇnullptr
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸åˆæ³•");
+    //æ‰¾åˆ°ç¬¬iä¸ªèŠ‚ç‚¹
+    node *p = getNode(i);//å‰é¢å·²ç»æ£€æŸ¥è¿‡iï¼Œpä¸å¯èƒ½æ˜¯nullptr
     p->data = elem;
 }
 
-template<typename T>//ÔÚÁ´±íÖĞ²éÕÒelem, ·µ»ØµÚÒ»¸öelem³öÏÖµÄÎ»ÖÃ(·µ»Ø-1±íÊ¾²»´æÔÚelem)
+template<typename T>//åœ¨é“¾è¡¨ä¸­æŸ¥æ‰¾elem, è¿”å›ç¬¬ä¸€ä¸ªelemå‡ºç°çš„ä½ç½®(è¿”å›-1è¡¨ç¤ºä¸å­˜åœ¨elem)
 unsigned int S_LinkList<T>::find(T elem)const{
     if(length==0) return -1;
     const node *p;
@@ -139,83 +139,83 @@ unsigned int S_LinkList<T>::find(T elem)const{
     return -1;
 }
 
-template<typename T>//ÔÚµÚi¸ö½Úµã´¦²åÈëÊı¾İelem(1 <= i <= length+1)
+template<typename T>//åœ¨ç¬¬iä¸ªèŠ‚ç‚¹å¤„æ’å…¥æ•°æ®elem(1 <= i <= length+1)
 void S_LinkList<T>::insert(unsigned int i, T elem){
-    //¼ì²éiÊÇ·ñºÏ·¨(i<=i<=length+1)
+    //æ£€æŸ¥iæ˜¯å¦åˆæ³•(i<=i<=length+1)
     if(i<1 || i>length+1)
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ºÏ·¨");
-    node *p = new node;//´´½¨Ò»¸öĞÂ½Úµã
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸åˆæ³•");
+    node *p = new node;//åˆ›å»ºä¸€ä¸ªæ–°èŠ‚ç‚¹
     p->data = elem;
-    //ÕÒµ½µÚi-1¸ö½Úµã
+    //æ‰¾åˆ°ç¬¬i-1ä¸ªèŠ‚ç‚¹
     node *i1 = getNode(i-1);
-    //½«½Úµãp²åÈëµ½µÚi-1¸ö½Úµãºó
+    //å°†èŠ‚ç‚¹pæ’å…¥åˆ°ç¬¬i-1ä¸ªèŠ‚ç‚¹å
     p->next = i1->next;
     i1->next = p;
-    if(i == length+1){//²åÈëµ½µ¥Á´±íÄ©Î²£¬Òª½«Î²Ö¸ÕëtailÖ¸Ïòp
+    if(i == length+1){//æ’å…¥åˆ°å•é“¾è¡¨æœ«å°¾ï¼Œè¦å°†å°¾æŒ‡é’ˆtailæŒ‡å‘p
         tail = p;
     }
-    length++;//µ¥Á´±í³¤¶È¼Ó1
+    length++;//å•é“¾è¡¨é•¿åº¦åŠ 1
 }
 
-template<typename T>//É¾³ıµ¥Á´±íµÚi¸ö½Úµã(1<=i<=length)£¬²¢·µ»Ø¸Ã½ÚµãµÄÊı¾İ
+template<typename T>//åˆ é™¤å•é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹(1<=i<=length)ï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æ•°æ®
 T S_LinkList<T>::remove(unsigned int i){
     if(i<1 || i>length)
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ºÏ·¨£¡");
-    node* p = getNode(i-1);//ÏÈÕÒµ½µÚi-1¸ö½Úµã
-    node* pi = p->next;//µÚi¸ö½Úµã
-    T tmp = pi->data; // ±£´æµÚi¸ö½ÚµãµÄÊı¾İ
-    //É¾³ıµÚi¸ö½Úµã
-    p->next = pi->next; // ½«µÚi+1¸ö½Úµã(¼´pi->next)µÄµØÖ·¸³Öµ¸øµÚi-1¸ö½ÚµãµÄÖ¸ÕëÓò
-    if(i == length){//É¾³ıµ¥Á´±íÄ©Î²µÄ½Úµã
-        tail = p;//Î²Ö¸ÕëÖ¸ÏòÇ°Ò»¸ö½Úµã
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸åˆæ³•ï¼");
+    node* p = getNode(i-1);//å…ˆæ‰¾åˆ°ç¬¬i-1ä¸ªèŠ‚ç‚¹
+    node* pi = p->next;//ç¬¬iä¸ªèŠ‚ç‚¹
+    T tmp = pi->data; // ä¿å­˜ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®
+    //åˆ é™¤ç¬¬iä¸ªèŠ‚ç‚¹
+    p->next = pi->next; // å°†ç¬¬i+1ä¸ªèŠ‚ç‚¹(å³pi->next)çš„åœ°å€èµ‹å€¼ç»™ç¬¬i-1ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆåŸŸ
+    if(i == length){//åˆ é™¤å•é“¾è¡¨æœ«å°¾çš„èŠ‚ç‚¹
+        tail = p;//å°¾æŒ‡é’ˆæŒ‡å‘å‰ä¸€ä¸ªèŠ‚ç‚¹
     }
-    delete pi;//ÊÍ·ÅµÚi¸ö½ÚµãµÄÄÚ´æ
-    length--;//µ¥Á´±í³¤¶È¼õ1
+    delete pi;//é‡Šæ”¾ç¬¬iä¸ªèŠ‚ç‚¹çš„å†…å­˜
+    length--;//å•é“¾è¡¨é•¿åº¦å‡1
     return tmp;
 }
 
-template<typename T>//É¾³ıµ¥Á´±íÄ©Î²µÄ½Úµã£¬²¢·µ»Ø¸Ã½ÚµãµÄÊı¾İ
+template<typename T>//åˆ é™¤å•é“¾è¡¨æœ«å°¾çš„èŠ‚ç‚¹ï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æ•°æ®
 T S_LinkList<T>::pop_back(){
-    node* p = getNode(length-1);//ÏÈÕÒµ½µÚlength-1¸ö½Úµã£¬¼´Ä©Î²½ÚµãµÄÇ°Ò»¸ö½Úµã
-    T tmp = tail->data; // ±£´æµÚi¸ö½ÚµãµÄÊı¾İ
-    //É¾³ıÄ©Î²½Úµã
-    p->next = nullptr; // ½«Ä©Î²½ÚµãµÄÇ°Ò»¸ö½ÚµãµÄÖ¸ÕëÓòÖÃÎª¿Õ
-    delete tail;//ÊÍ·ÅÄ©Î²½ÚµãµÄÄÚ´æ
-    tail = p;//Î²Ö¸ÕëÖ¸ÏòÇ°Ò»¸ö½Úµã
-    length--;//µ¥Á´±í³¤¶È¼õ1
+    node* p = getNode(length-1);//å…ˆæ‰¾åˆ°ç¬¬length-1ä¸ªèŠ‚ç‚¹ï¼Œå³æœ«å°¾èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹
+    T tmp = tail->data; // ä¿å­˜ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®
+    //åˆ é™¤æœ«å°¾èŠ‚ç‚¹
+    p->next = nullptr; // å°†æœ«å°¾èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆåŸŸç½®ä¸ºç©º
+    delete tail;//é‡Šæ”¾æœ«å°¾èŠ‚ç‚¹çš„å†…å­˜
+    tail = p;//å°¾æŒ‡é’ˆæŒ‡å‘å‰ä¸€ä¸ªèŠ‚ç‚¹
+    length--;//å•é“¾è¡¨é•¿åº¦å‡1
     return tmp;
 }
 
 
 
-template<typename T>//Í·²å·¨´´½¨µ¥Á´±í(nÎªÊı×é³¤¶È)
+template<typename T>//å¤´æ’æ³•åˆ›å»ºå•é“¾è¡¨(nä¸ºæ•°ç»„é•¿åº¦)
 void S_LinkList<T>::push_arr_head(T arr[], unsigned int n){
     node *p;
     for(unsigned int i=0; i<n; i++){
-        p = new node;//´´½¨Ò»¸öĞÂ½Úµã
+        p = new node;//åˆ›å»ºä¸€ä¸ªæ–°èŠ‚ç‚¹
         p->data = arr[i];
-        //½«½Úµãp²åÈëµ½Í·½Úµãºó
+        //å°†èŠ‚ç‚¹pæ’å…¥åˆ°å¤´èŠ‚ç‚¹å
         p->next = head->next;
         head->next = p;
-        //Èç¹ûµ¥Á´±íÎª¿Õ(¼´Î²Ö¸ÕëÖ¸ÏòÍ·½Úµã)£¬Ôòp³ÉÎªÎ²½Úµã
+        //å¦‚æœå•é“¾è¡¨ä¸ºç©º(å³å°¾æŒ‡é’ˆæŒ‡å‘å¤´èŠ‚ç‚¹)ï¼Œåˆ™pæˆä¸ºå°¾èŠ‚ç‚¹
         if(head==tail)
             tail = p;
     }
-    length = length+n;//µ¥Á´±í³¤¶È¼ÓÉÏÊı×é³¤¶È
+    length = length+n;//å•é“¾è¡¨é•¿åº¦åŠ ä¸Šæ•°ç»„é•¿åº¦
 }
 
-template<typename T>//Î²²å·¨´´½¨µ¥Á´±í(nÎªÊı×é³¤¶È)
+template<typename T>//å°¾æ’æ³•åˆ›å»ºå•é“¾è¡¨(nä¸ºæ•°ç»„é•¿åº¦)
 void S_LinkList<T>::push_arr_tail(T arr[], unsigned int n){
     node *p;
     for(int i=0; i<n; i++){
-        p = new node;//´´½¨Ò»¸öĞÂ½Úµã
+        p = new node;//åˆ›å»ºä¸€ä¸ªæ–°èŠ‚ç‚¹
         p->data = arr[i];
-        //½«½Úµãp²åÈëµ½µ¥Á´±íÄ©Î²
+        //å°†èŠ‚ç‚¹pæ’å…¥åˆ°å•é“¾è¡¨æœ«å°¾
         p->next = nullptr;
         tail->next = p;
         tail = p;
     }
-    length = length+n;//µ¥Á´±í³¤¶È¼ÓÉÏÊı×é³¤¶È
+    length = length+n;//å•é“¾è¡¨é•¿åº¦åŠ ä¸Šæ•°ç»„é•¿åº¦
 }
 
 
@@ -226,7 +226,7 @@ T S_LinkList<T>::getTailData(){
     return tail->data;
 }
 
-template<typename T>//ÓÃÍ·²å·¨ÄæÖÃµ¥Á´±í
+template<typename T>//ç”¨å¤´æ’æ³•é€†ç½®å•é“¾è¡¨
 void S_LinkList<T>::reserve(){
     
 }

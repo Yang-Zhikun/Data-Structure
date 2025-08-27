@@ -3,18 +3,18 @@
 
 
 /**
- * ¹¹Ôìº¯Êı
- * @param maxLen ¶ÓÁĞµÄ×î´ó³¤¶È
+ * æ„é€ å‡½æ•°
+ * @param maxLen é˜Ÿåˆ—çš„æœ€å¤§é•¿åº¦
  */
 template<typename T>
 seqQueue<T>::seqQueue(unsigned int maxLen){
     this->maxLen = maxLen;
     data = new T[maxLen];
-    front = rear = 0; // ¶ÓÍ·µÄ¶ÓÎ²ÏÂ±êÏàµÈ
+    front = rear = 0; // é˜Ÿå¤´çš„é˜Ÿå°¾ä¸‹æ ‡ç›¸ç­‰
 }
 
 /**
- * ¿½±´¹¹Ôìº¯Êı
+ * æ‹·è´æ„é€ å‡½æ•°
  */
 template<typename T>
 seqQueue<T>::seqQueue(const seqQueue<T> &obj){
@@ -28,11 +28,11 @@ seqQueue<T>::seqQueue(const seqQueue<T> &obj){
 }
 
 /**
- * ¸³ÖµÔËËã·û
+ * èµ‹å€¼è¿ç®—ç¬¦
  */
 template<typename T>
 seqQueue<T>& seqQueue<T>::operator=(const seqQueue& obj){
-    if(*this!=obj){ // ·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){ // é˜²æ­¢è‡ªèµ‹å€¼
         data = new T[obj.maxLen];
         for(int i = 0; i<maxLen; i++){
             data[i] = obj.data[i];
@@ -45,7 +45,7 @@ seqQueue<T>& seqQueue<T>::operator=(const seqQueue& obj){
 }
 
 /**
- * Çå¿Õ¶ÓÁĞ
+ * æ¸…ç©ºé˜Ÿåˆ—
  */
 template<typename T>
 void seqQueue<T>::clear(){
@@ -53,37 +53,37 @@ void seqQueue<T>::clear(){
 }
 
 /**
- * Èë¶Ó
- * @param elem Èë¶ÓÔªËØ
+ * å…¥é˜Ÿ
+ * @param elem å…¥é˜Ÿå…ƒç´ 
  */
 template<typename T>
 void seqQueue<T>::enQueue(T elem){
     if(isFull()){
-        printf("³öÎÊÌâ");
-        throw std::out_of_range("¶ÓÁĞÒÑÂú");
+        printf("å‡ºé—®é¢˜");
+        throw std::out_of_range("é˜Ÿåˆ—å·²æ»¡");
     }
-    data[rear] = elem; // ½«elem²åÈë¶ÓÁĞÄ©Î²
+    data[rear] = elem; // å°†elemæ’å…¥é˜Ÿåˆ—æœ«å°¾
     rear = (rear+1)%maxLen;
 }
 
 /**
- * ³ö¶Ó£¬²¢·µ»Ø¶ÓÍ·ÔªËØ
+ * å‡ºé˜Ÿï¼Œå¹¶è¿”å›é˜Ÿå¤´å…ƒç´ 
  */
 template<typename T>
 T seqQueue<T>::deQueue(){
     if(isEmpty())
-        throw std::out_of_range("¶ÓÁĞÎª¿Õ");
+        throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
     T tmp = data[front];
     front = (front+1)%maxLen;
     return tmp;
 }
 
 /**
- * ·µ»Ø¶ÓÍ·ÔªËØ
+ * è¿”å›é˜Ÿå¤´å…ƒç´ 
  */
 template<typename T>
 T seqQueue<T>::get_front()const{
     if(isEmpty())
-        throw std::out_of_range("¶ÓÁĞÎª¿Õ");
+        throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
     return data[front];
 }

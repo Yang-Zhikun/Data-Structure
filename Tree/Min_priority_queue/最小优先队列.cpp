@@ -5,39 +5,39 @@
 using namespace std;
 
 /**
- * ×îĞ¡¶Ñ
+ * æœ€å°å †
  */
 template<typename T>
 class MinHeap {
 protected:
-    T* HeapArray; // Ö¸Ïò´æ·Å×îĞ¡¶ÑµÄÊı×éµÄÖ¸Õë
-    unsigned int size; // Êı×éÊı¾İ¸öÊı
+    T* HeapArray; // æŒ‡å‘å­˜æ”¾æœ€å°å †çš„æ•°ç»„çš„æŒ‡é’ˆ
+    unsigned int size; // æ•°ç»„æ•°æ®ä¸ªæ•°
 
-    unsigned int getLeftChild(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ×óº¢×ÓµÄÏÂ±ê
-    unsigned int getRightChild(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄÓÒº¢×ÓµÄÏÂ±ê
-    unsigned int getParent(unsigned int i) const; //»ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
+    unsigned int getLeftChild(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å·¦å­©å­çš„ä¸‹æ ‡
+    unsigned int getRightChild(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å³å­©å­çš„ä¸‹æ ‡
+    unsigned int getParent(unsigned int i) const; //è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
 
-    void shiftUp(unsigned int i);   //×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
-    void shiftDown(unsigned int i); //×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
+    void shiftUp(unsigned int i);   //æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
+    void shiftDown(unsigned int i); //æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
 
 public:
-    MinHeap(T array[], unsigned int n = 0);  //¹¹Ôì×îĞ¡¶Ñ
+    MinHeap(T array[], unsigned int n = 0);  //æ„é€ æœ€å°å †
 
-    unsigned int Size() const; //»ñÈ¡Êı¾İ¸öÊı
-    bool isEmpty() const; //ÅĞ¿Õ
-    void push(T elem); //²åÈëĞÂÔªËØ
-    T getMin() const; //»ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
-    T pop(); //É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
+    unsigned int Size() const; //è·å–æ•°æ®ä¸ªæ•°
+    bool isEmpty() const; //åˆ¤ç©º
+    void push(T elem); //æ’å…¥æ–°å…ƒç´ 
+    T getMin() const; //è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
+    T pop(); //åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
 
-    void print()const; //´òÓ¡×îĞ¡¶Ñ
+    void print()const; //æ‰“å°æœ€å°å †
 };
 
 
 /**
- * ¶ÔÓÚÏÂ±êÎªiµÄ½Úµã£º
- * ×óº¢×ÓÏÂ±ê 2 * i + 1           //×óº¢×ÓÔÚiµÄÏÂÒ»²ã+1
- * ÓÒº¢×ÓÏÂ±ê 2 * i + 2           //ÓÒº¢×ÓÊÇ×óº¢×Ó+1
- * ¸¸½ÚµãÏÂ±ê (i - 1) / 2 (È¡Õû)   //ÄæÔËËã
+ * å¯¹äºä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹ï¼š
+ * å·¦å­©å­ä¸‹æ ‡ 2 * i + 1           //å·¦å­©å­åœ¨içš„ä¸‹ä¸€å±‚+1
+ * å³å­©å­ä¸‹æ ‡ 2 * i + 2           //å³å­©å­æ˜¯å·¦å­©å­+1
+ * çˆ¶èŠ‚ç‚¹ä¸‹æ ‡ (i - 1) / 2 (å–æ•´)   //é€†è¿ç®—
  *            0
  *           /  \
  *          1    2
@@ -48,8 +48,8 @@ public:
 
 
 /**
- * »ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ×óº¢×ÓµÄÏÂ±ê
- * @param i µ±Ç°½ÚµãµÄÏÂ±ê
+ * è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å·¦å­©å­çš„ä¸‹æ ‡
+ * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
  */
 template<typename T>
 unsigned int MinHeap<T>::getLeftChild(unsigned int i)const {
@@ -57,8 +57,8 @@ unsigned int MinHeap<T>::getLeftChild(unsigned int i)const {
 }
 
 /**
- * »ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄÓÒº¢×ÓµÄÏÂ±ê
- * @param i µ±Ç°½ÚµãµÄÏÂ±ê
+ * è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„å³å­©å­çš„ä¸‹æ ‡
+ * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
  */
 template<typename T>
 unsigned int MinHeap<T>::getRightChild(unsigned int i)const {
@@ -66,8 +66,8 @@ unsigned int MinHeap<T>::getRightChild(unsigned int i)const {
 }
 
 /**
- * »ñÈ¡ÏÂ±êÎªiµÄ½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
- * @param i µ±Ç°½ÚµãµÄÏÂ±ê
+ * è·å–ä¸‹æ ‡ä¸ºiçš„èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
+ * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
  */
 template<typename T>
 unsigned int MinHeap<T>::getParent(unsigned int i)const {
@@ -76,88 +76,88 @@ unsigned int MinHeap<T>::getParent(unsigned int i)const {
 
 
 /**
- * ×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
- * @param i µ±Ç°½ÚµãµÄÏÂ±ê
+ * æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
+ * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
  */
 template<typename T>
 void MinHeap<T>::shiftUp(unsigned int i) {
     if (i == 0) {
-        return; // ¸ù½Úµã²»ÓÃµ÷Õû
+        return; // æ ¹èŠ‚ç‚¹ä¸ç”¨è°ƒæ•´
     }
-    unsigned int parent = getParent(i); // »ñÈ¡µ±Ç°½ÚµãµÄ¸¸½ÚµãµÄÏÂ±ê
-    T tmp = HeapArray[i]; // ±£´æµ±Ç°½Úµã£¬ÓÃÓÚ×îºó¸³Öµ
+    unsigned int parent = getParent(i); // è·å–å½“å‰èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹çš„ä¸‹æ ‡
+    T tmp = HeapArray[i]; // ä¿å­˜å½“å‰èŠ‚ç‚¹ï¼Œç”¨äºæœ€åèµ‹å€¼
 
-    //Èç¹ûµ±Ç°½ÚµãÓĞ¸¸½ÚµãÇÒ±È¸¸½ÚµãĞ¡£¬Ôò½øĞĞÉÏ¸¡µ÷Õû(¸¸½ÚµãÏÂÒÆµ½µ±Ç°½ÚµãµÄÎ»ÖÃ)
+    //å¦‚æœå½“å‰èŠ‚ç‚¹æœ‰çˆ¶èŠ‚ç‚¹ä¸”æ¯”çˆ¶èŠ‚ç‚¹å°ï¼Œåˆ™è¿›è¡Œä¸Šæµ®è°ƒæ•´(çˆ¶èŠ‚ç‚¹ä¸‹ç§»åˆ°å½“å‰èŠ‚ç‚¹çš„ä½ç½®)
     while (i > 0 && tmp < HeapArray[parent]) {
-        HeapArray[i] = HeapArray[parent]; // ¸¸½ÚµãÏÂÒÆµ½µ±Ç°½Úµã(×Ó½Úµã)µÄÎ»ÖÃ
-        // Á½¸öÏÂ±ê¶¼ÉÏÒÆ£¬¼ÌĞøÑ­»·
+        HeapArray[i] = HeapArray[parent]; // çˆ¶èŠ‚ç‚¹ä¸‹ç§»åˆ°å½“å‰èŠ‚ç‚¹(å­èŠ‚ç‚¹)çš„ä½ç½®
+        // ä¸¤ä¸ªä¸‹æ ‡éƒ½ä¸Šç§»ï¼Œç»§ç»­å¾ªç¯
         i = parent;
         parent = getParent(parent);
     }
-    //×îºó¸³Öµ
+    //æœ€åèµ‹å€¼
     HeapArray[i] = tmp;
 }
 
 /**
- * ×îĞ¡¶ÑµÄÏÂ±êÎªiµÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
- * @param i µ±Ç°½ÚµãµÄÏÂ±ê
+ * æœ€å°å †çš„ä¸‹æ ‡ä¸ºiçš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
+ * @param i å½“å‰èŠ‚ç‚¹çš„ä¸‹æ ‡
  */
 template<typename T>
 void MinHeap<T>::shiftDown(unsigned int i) {
     if (i >= size) {
-        return; // Ô½½ç²»ÓÃµ÷Õû(Ã»ÓĞ×Ó½Úµã)
+        return; // è¶Šç•Œä¸ç”¨è°ƒæ•´(æ²¡æœ‰å­èŠ‚ç‚¹)
     }
     unsigned int leftChild, rightChild, smallest;
     T tmp = HeapArray[i];
-    //Èç¹ûµ±Ç°½ÚµãÓĞ×Ó½ÚµãÇÒ±È×Ó½Úµã´ó£¬Ôò½øĞĞÏÂ³Áµ÷Õû(×Ó½ÚµãÉÏÒÆµ½µ±Ç°½Úµã)
+    //å¦‚æœå½“å‰èŠ‚ç‚¹æœ‰å­èŠ‚ç‚¹ä¸”æ¯”å­èŠ‚ç‚¹å¤§ï¼Œåˆ™è¿›è¡Œä¸‹æ²‰è°ƒæ•´(å­èŠ‚ç‚¹ä¸Šç§»åˆ°å½“å‰èŠ‚ç‚¹)
     while (true) {
         leftChild = getLeftChild(i);
         rightChild = getRightChild(i);
-        smallest = i; // µ±Ç°½ÚµãµÄ×îĞ¡µÄº¢×ÓµÄÏÂ±ê
+        smallest = i; // å½“å‰èŠ‚ç‚¹çš„æœ€å°çš„å­©å­çš„ä¸‹æ ‡
 
-        //²éÕÒµ±Ç°½ÚµãµÄ×îĞ¡µÄº¢×Ó£¬È·±£×îĞ¡µÄÔªËØÔÚÉÏÃæ
-        // Èç¹û×óº¢×Ó±Èµ±Ç°½ÚµãĞ¡£¬¾Í¸üĞÂsmallest
+        //æŸ¥æ‰¾å½“å‰èŠ‚ç‚¹çš„æœ€å°çš„å­©å­ï¼Œç¡®ä¿æœ€å°çš„å…ƒç´ åœ¨ä¸Šé¢
+        // å¦‚æœå·¦å­©å­æ¯”å½“å‰èŠ‚ç‚¹å°ï¼Œå°±æ›´æ–°smallest
         if (leftChild < size && HeapArray[leftChild] < tmp) {
             smallest = leftChild;
         }
-        // Èç¹ûÓÒº¢×Ó±Èµ±Ç°½ÚµãĞ¡£¬ÇÒ±È×óº¢×Ó¸üĞ¡£¬¾Í¸üĞÂsmallest
+        // å¦‚æœå³å­©å­æ¯”å½“å‰èŠ‚ç‚¹å°ï¼Œä¸”æ¯”å·¦å­©å­æ›´å°ï¼Œå°±æ›´æ–°smallest
         if (rightChild < size && HeapArray[rightChild] < tmp && HeapArray[rightChild] < HeapArray[leftChild]) {
             smallest = rightChild;
         }
-        // Èç¹ûÉÏÃæµÄÁ½¸öifÃ»Ö´ĞĞ(smallestÎ´¸ü¸Ä)£¬ËµÃ÷µ±Ç°±ÈÈÎºÎÒ»¸ö½Úµã¶¼Ğ¡£¬¾ÍÖ±½ÓÌø³ö
+        // å¦‚æœä¸Šé¢çš„ä¸¤ä¸ªifæ²¡æ‰§è¡Œ(smallestæœªæ›´æ”¹)ï¼Œè¯´æ˜å½“å‰æ¯”ä»»ä½•ä¸€ä¸ªèŠ‚ç‚¹éƒ½å°ï¼Œå°±ç›´æ¥è·³å‡º
         if (i == smallest) {
             break;
         }
-        //·ñÔò½øĞĞÏÂ³Áµ÷Õû(×îĞ¡µÄº¢×ÓÉÏÒÆµ½µ±Ç°½ÚµãµÄÎ»ÖÃ)
+        //å¦åˆ™è¿›è¡Œä¸‹æ²‰è°ƒæ•´(æœ€å°çš„å­©å­ä¸Šç§»åˆ°å½“å‰èŠ‚ç‚¹çš„ä½ç½®)
         HeapArray[i] = HeapArray[smallest];
-        //ÏÂ±êÏÂÒÆ£¬¼ÌĞøÑ­»·
+        //ä¸‹æ ‡ä¸‹ç§»ï¼Œç»§ç»­å¾ªç¯
         i = smallest;
     }
-    // ×îºó¸³Öµ
+    // æœ€åèµ‹å€¼
     HeapArray[i] = tmp;
 }
 
 
 /**
- * ¹¹Ôì×îĞ¡¶Ñ
- * @param array ´ı¶Ñ»¯µÄÊı×é
- * @param n Êı×éÖĞÊı¾İ¸öÊı(²»ÊÇÊı×éµÄ×î´ó³¤¶È)
+ * æ„é€ æœ€å°å †
+ * @param array å¾…å †åŒ–çš„æ•°ç»„
+ * @param n æ•°ç»„ä¸­æ•°æ®ä¸ªæ•°(ä¸æ˜¯æ•°ç»„çš„æœ€å¤§é•¿åº¦)
  */
 template<typename T>
 MinHeap<T>::MinHeap(T array[], unsigned int n) {
     this->HeapArray = array;
     this->size = n;
-    if (size <= 1) return; // Ö»ÓĞÒ»¸öÔªËØ»òÃ»ÓĞÔªËØ£¬²»ĞèÒª¶Ñ»¯
+    if (size <= 1) return; // åªæœ‰ä¸€ä¸ªå…ƒç´ æˆ–æ²¡æœ‰å…ƒç´ ï¼Œä¸éœ€è¦å †åŒ–
 
-    // ´Ó×îºóÒ»¸ö·ÖÖ§½Úµã(×îºóÒ»¸ö½ÚµãµÄ¸¸½Úµã)¿ªÊ¼£¬´ÓÏÂµ½ÉÏ½øĞĞ¶Ñ»¯(ÏÂ³Áµ÷Õû)
+    // ä»æœ€åä¸€ä¸ªåˆ†æ”¯èŠ‚ç‚¹(æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹)å¼€å§‹ï¼Œä»ä¸‹åˆ°ä¸Šè¿›è¡Œå †åŒ–(ä¸‹æ²‰è°ƒæ•´)
     for (unsigned int i = getParent(size - 1); i >= 0; i--) {
         shiftDown(i);
-        if (i == 0) break; // iµÈÓÚ0Ê±ÒªÌø³ö£¬·ñÔòÖ´ĞĞi--£¬»á³ö´í
+        if (i == 0) break; // iç­‰äº0æ—¶è¦è·³å‡ºï¼Œå¦åˆ™æ‰§è¡Œi--ï¼Œä¼šå‡ºé”™
     }
 }
 
 /**
- * »ñÈ¡×îĞ¡ÓÅÏÈ¶ÓÁĞµÄÊı¾İ¸öÊı
+ * è·å–æœ€å°ä¼˜å…ˆé˜Ÿåˆ—çš„æ•°æ®ä¸ªæ•°
  */
 template<typename T>
 unsigned int MinHeap<T>::Size() const {
@@ -165,7 +165,7 @@ unsigned int MinHeap<T>::Size() const {
 }
 
 /**
- * ×îĞ¡¶ÑÊÇ·ñÎª¿Õ
+ * æœ€å°å †æ˜¯å¦ä¸ºç©º
  */
 template<typename T>
 bool MinHeap<T>::isEmpty()const {
@@ -173,42 +173,42 @@ bool MinHeap<T>::isEmpty()const {
 }
 
 /**
- * ²åÈëĞÂÔªËØ¡£²åÈëĞÂÔªËØÇ°ÇëÈ·±£²»»á³¬¹ıÊı×éµÄ×î´ó³¤¶È
- * @param elem ´ı²åÈëµÄĞÂÔªËØ
+ * æ’å…¥æ–°å…ƒç´ ã€‚æ’å…¥æ–°å…ƒç´ å‰è¯·ç¡®ä¿ä¸ä¼šè¶…è¿‡æ•°ç»„çš„æœ€å¤§é•¿åº¦
+ * @param elem å¾…æ’å…¥çš„æ–°å…ƒç´ 
  */
 template<typename T>
 void MinHeap<T>::push(T elem) {
-    HeapArray[size] = elem; // ÔÚÊı×éÄ©Î²²åÈëĞÂÔªËØ
+    HeapArray[size] = elem; // åœ¨æ•°ç»„æœ«å°¾æ’å…¥æ–°å…ƒç´ 
     size++;
-    shiftUp(size - 1); // ¶ÔĞÂ²åÈëµÄÔªËØ½øĞĞÉÏ¸¡µ÷Õû
+    shiftUp(size - 1); // å¯¹æ–°æ’å…¥çš„å…ƒç´ è¿›è¡Œä¸Šæµ®è°ƒæ•´
 }
 
 /**
- * »ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
+ * è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
  */
 template<typename T>
 T MinHeap<T>::getMin()const {
     if (size == 0)
-        throw std::out_of_range("×îĞ¡¶ÑÎª¿Õ");
+        throw std::out_of_range("æœ€å°å †ä¸ºç©º");
     return HeapArray[0];
 }
 
 /**
- * É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶Ñ¶¥ÔªËØ)
+ * åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (å †é¡¶å…ƒç´ )
  */
 template<typename T>
 T MinHeap<T>::pop() {
     if (size == 0)
-        throw std::out_of_range("×îĞ¡¶ÑÎª¿Õ");
-    T tmp = HeapArray[0]; // ±£´æ¶Ñ¶¥ÔªËØ
-    HeapArray[0] = HeapArray[size - 1]; // ½«Êı×éµÄ×îºóÒ»¸öÔªËØ²¹µ½¶Ñ¶¥
+        throw std::out_of_range("æœ€å°å †ä¸ºç©º");
+    T tmp = HeapArray[0]; // ä¿å­˜å †é¡¶å…ƒç´ 
+    HeapArray[0] = HeapArray[size - 1]; // å°†æ•°ç»„çš„æœ€åä¸€ä¸ªå…ƒç´ è¡¥åˆ°å †é¡¶
     size--;
-    shiftDown(0); // ½«ĞÂ²¹µ½¶Ñ¶¥µÄÔªËØ½øĞĞÏÂ³Áµ÷Õû
+    shiftDown(0); // å°†æ–°è¡¥åˆ°å †é¡¶çš„å…ƒç´ è¿›è¡Œä¸‹æ²‰è°ƒæ•´
     return tmp;
 }
 
 /**
- * ´òÓ¡×îĞ¡¶Ñ
+ * æ‰“å°æœ€å°å †
  */
 template<typename T>
 void MinHeap<T>::print()const {
@@ -223,30 +223,30 @@ void MinHeap<T>::print()const {
 
 
 /**
- * ×îĞ¡ÓÅÏÈ¶ÓÁĞ
+ * æœ€å°ä¼˜å…ˆé˜Ÿåˆ—
  */
 template<typename T>
 class Min_priority_queue {
 protected:
-    T* data;              // ´æ·ÅÊı¾İµÄÊı×é
-    unsigned int maxLen;  // Êı×éµÄ×î´ó³¤¶È
+    T* data;              // å­˜æ”¾æ•°æ®çš„æ•°ç»„
+    unsigned int maxLen;  // æ•°ç»„çš„æœ€å¤§é•¿åº¦
 
-    MinHeap<T>* heap;      //×îĞ¡¶Ñ
+    MinHeap<T>* heap;      //æœ€å°å †
 
-    void resize(); // À©Èİ
+    void resize(); // æ‰©å®¹
 
 public:
-    Min_priority_queue(unsigned int maxLen = 1); // ¹¹Ôìº¯Êı
+    Min_priority_queue(unsigned int maxLen = 1); // æ„é€ å‡½æ•°
     ~Min_priority_queue() {
         delete[] data;
         delete heap;
     }
 
-    unsigned int size()const; //»ñÈ¡×îĞ¡ÓÅÏÈ¶ÓÁĞµÄÊı¾İ¸öÊı
-    bool isEmpty() const; //ÅĞ¿Õ
-    void push(T elem); //²åÈëĞÂÔªËØ
-    T getMin() const; //»ñÈ¡×îĞ¡¶ÑµÄ×îĞ¡ÔªËØ(¶ÓÍ·ÔªËØ)
-    T pop(); //É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶ÓÍ·ÔªËØ)
+    unsigned int size()const; //è·å–æœ€å°ä¼˜å…ˆé˜Ÿåˆ—çš„æ•°æ®ä¸ªæ•°
+    bool isEmpty() const; //åˆ¤ç©º
+    void push(T elem); //æ’å…¥æ–°å…ƒç´ 
+    T getMin() const; //è·å–æœ€å°å †çš„æœ€å°å…ƒç´ (é˜Ÿå¤´å…ƒç´ )
+    T pop(); //åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (é˜Ÿå¤´å…ƒç´ )
 
     void print() {
         heap->print();
@@ -255,17 +255,17 @@ public:
 
 
 /**
- * ¹¹Ôìº¯Êı
+ * æ„é€ å‡½æ•°
 */
 template<typename T>
 Min_priority_queue<T>::Min_priority_queue(unsigned int maxLen) :maxLen(maxLen) {
     if (maxLen == 0) maxLen = 1;
     data = new T[maxLen];
-    heap = new MinHeap<T>(data, 0); // ĞÂ½¨¶Ñ
+    heap = new MinHeap<T>(data, 0); // æ–°å»ºå †
 }
 
 /**
- * »ñÈ¡×îĞ¡ÓÅÏÈ¶ÓÁĞµÄÊı¾İ¸öÊı
+ * è·å–æœ€å°ä¼˜å…ˆé˜Ÿåˆ—çš„æ•°æ®ä¸ªæ•°
  */
 template<typename T>
 unsigned int Min_priority_queue<T>::size() const {
@@ -273,7 +273,7 @@ unsigned int Min_priority_queue<T>::size() const {
 }
 
 /**
- * ÅĞ¿Õ
+ * åˆ¤ç©º
  */
 template<typename T>
 bool Min_priority_queue<T>::isEmpty() const {
@@ -281,8 +281,8 @@ bool Min_priority_queue<T>::isEmpty() const {
 }
 
 /**
- * Èë¶Ó
- * @param elem Èë¶ÓÔªËØ
+ * å…¥é˜Ÿ
+ * @param elem å…¥é˜Ÿå…ƒç´ 
  */
 template<typename T>
 void Min_priority_queue<T>::push(T elem) {
@@ -293,7 +293,7 @@ void Min_priority_queue<T>::push(T elem) {
 }
 
 /**
- * »ñÈ¡×îĞ¡ÔªËØ(¶ÓÍ·ÔªËØ)
+ * è·å–æœ€å°å…ƒç´ (é˜Ÿå¤´å…ƒç´ )
  */
 template<typename T>
 T Min_priority_queue<T>::getMin() const {
@@ -301,7 +301,7 @@ T Min_priority_queue<T>::getMin() const {
 }
 
 /**
- * É¾³ı²¢·µ»Ø×îĞ¡ÔªËØ(¶ÓÍ·ÔªËØ)
+ * åˆ é™¤å¹¶è¿”å›æœ€å°å…ƒç´ (é˜Ÿå¤´å…ƒç´ )
  */
 template<typename T>
 T Min_priority_queue<T>::pop() {
@@ -309,7 +309,7 @@ T Min_priority_queue<T>::pop() {
 }
 
 /**
- * À©Èİ
+ * æ‰©å®¹
  */
 template<typename T>
 void Min_priority_queue<T>::resize() {

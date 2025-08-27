@@ -2,23 +2,23 @@
 #include<stdexcept>
 
 /**
- * ¹¹Ôìº¯Êı
+ * æ„é€ å‡½æ•°
  */
 template<typename T>
 seqStack<T>::seqStack(const  int init_len){
     maxlen = init_len;
     data = new T[maxlen];
-    top = -1;//³õÊ¼Îª¿ÕÕ»
+    top = -1;//åˆå§‹ä¸ºç©ºæ ˆ
 }
 
 /**
- * ¿½±´¹¹Ôìº¯Êı
+ * æ‹·è´æ„é€ å‡½æ•°
  */
 template<typename T>
 seqStack<T>::seqStack(const seqStack & obj){
     maxlen = obj.maxlen;
-    data = new T[maxlen];//ÉêÇëĞÂÄÚ´æ
-    //¸´ÖÆobjµÄÊı¾İ
+    data = new T[maxlen];//ç”³è¯·æ–°å†…å­˜
+    //å¤åˆ¶objçš„æ•°æ®
     for(int i = 0; i < obj.top+1; i++){
         data[i] = obj.data[i];
     }
@@ -26,14 +26,14 @@ seqStack<T>::seqStack(const seqStack & obj){
 }
 
 /**
- * ¸³ÖµÔËËã·û
+ * èµ‹å€¼è¿ç®—ç¬¦
  */
 template<typename T>
 seqStack<T>& seqStack<T>::operator=(const seqStack & obj){
-    if(*this!=obj){//·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){//é˜²æ­¢è‡ªèµ‹å€¼
         maxlen = obj.maxLen;
-        data = new T[maxlen];//ÉêÇëĞÂÄÚ´æ
-        //¸´ÖÆobjµÄÊı¾İ
+        data = new T[maxlen];//ç”³è¯·æ–°å†…å­˜
+        //å¤åˆ¶objçš„æ•°æ®
         for(int i = 0; i<top+1; i++){
             data[i] = obj.data[i];
         }
@@ -43,35 +43,35 @@ seqStack<T>& seqStack<T>::operator=(const seqStack & obj){
 }
 
 /**
- * ÈëÕ»
- * @param elem ÈëÕ»µÄÔªËØ
+ * å…¥æ ˆ
+ * @param elem å…¥æ ˆçš„å…ƒç´ 
  */
 template<typename T>
 void seqStack<T>::push(const T elem){
     if(top+1 == maxlen)
-        throw std::out_of_range("Õ»ÒÑÂú");
+        throw std::out_of_range("æ ˆå·²æ»¡");
     data[top+1] = elem;
     top++;
 }
 
 /**
- * ³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
+ * å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
  */
 template<typename T>
 T seqStack<T>::pop(){
     if(top == -1)
-        throw std::out_of_range("Õ»Îª¿Õ");
-    T tmp = data[top];//±£´æÕ»¶¥ÔªËØ
+        throw std::out_of_range("æ ˆä¸ºç©º");
+    T tmp = data[top];//ä¿å­˜æ ˆé¡¶å…ƒç´ 
     top--;
     return tmp;
 }
 
 /**
- * »ñÈ¡Õ»¶¥ÔªËØ
+ * è·å–æ ˆé¡¶å…ƒç´ 
  */
 template<typename T>
 T seqStack<T>::get_top() const{
     if(top == -1)
-        throw std::out_of_range("Õ»Îª¿Õ");
+        throw std::out_of_range("æ ˆä¸ºç©º");
     return data[top];
 }

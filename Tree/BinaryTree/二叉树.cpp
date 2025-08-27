@@ -1,4 +1,4 @@
-//¶ş²æÁ´±íÊµÏÖµÄ¶ş²æÊ÷
+//äºŒå‰é“¾è¡¨å®ç°çš„äºŒå‰æ ‘
 #include<iostream>
 #include<stdio.h>
 #include<queue>
@@ -8,76 +8,76 @@ using namespace std;
 template<typename T>
 class BinaryTree {
 private:
-    struct Node { // Ò»¸ö¶ş²æÁ´±íµÄ½Úµã
-        T data; // Êı¾İÓò
-        Node* leftChild; // Ö¸Ïò×óº¢×ÓµÄÖ¸Õë
-        Node* rightChild; // Ö¸ÏòÓÒº¢×ÓµÄÖ¸Õë
+    struct Node { // ä¸€ä¸ªäºŒå‰é“¾è¡¨çš„èŠ‚ç‚¹
+        T data; // æ•°æ®åŸŸ
+        Node* leftChild; // æŒ‡å‘å·¦å­©å­çš„æŒ‡é’ˆ
+        Node* rightChild; // æŒ‡å‘å³å­©å­çš„æŒ‡é’ˆ
 
-        Node() : leftChild(nullptr), rightChild(nullptr) {}  // ÎŞ²Î¹¹Ôì
+        Node() : leftChild(nullptr), rightChild(nullptr) {}  // æ— å‚æ„é€ 
         Node(T data, Node* leftChild = nullptr, Node* rightChild = nullptr) : data(data), leftChild(leftChild), rightChild(rightChild) {}
     };
 
-    Node* root;   // ¶ş²æÊ÷µÄ¸ù½ÚµãµÄÖ¸Õë
+    Node* root;   // äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹çš„æŒ‡é’ˆ
 
     T* inputList;
     T nullFlag;
-    unsigned int inputList_index; // ´´½¨¶ş²æÊ÷µÄÊäÈëĞòÁĞµÄÏÂ±ê
+    unsigned int inputList_index; // åˆ›å»ºäºŒå‰æ ‘çš„è¾“å…¥åºåˆ—çš„ä¸‹æ ‡
 
-    //Ë½ÓĞ³ÉÔ±º¯Êı
-    void clear(Node* root);                     //Çå¿Õ
-    unsigned int height(Node* root)const;       //¶ş²æÊ÷µÄ¸ß¶È
-    unsigned int nodeNum(Node* root)const;      //¶ş²æÊ÷µÄ½Úµã×ÜÊı
-    unsigned int leafNum(Node* root)const;      //¶ş²æÊ÷µÄÒ¶×ÓÊı
-    void preOrderTraverse(Node* root)const;     //Ç°Ğò±éÀú
-    void inOrderTraverse(Node* root)const;      //ÖĞĞò±éÀú
-    void postOrderTraverse(Node* root)const;    //ºóĞò±éÀú
-    void preCreatBinaryTree(Node*& root); //Ç°Ğò´´½¨¶ş²æÊ÷
+    //ç§æœ‰æˆå‘˜å‡½æ•°
+    void clear(Node* root);                     //æ¸…ç©º
+    unsigned int height(Node* root)const;       //äºŒå‰æ ‘çš„é«˜åº¦
+    unsigned int nodeNum(Node* root)const;      //äºŒå‰æ ‘çš„èŠ‚ç‚¹æ€»æ•°
+    unsigned int leafNum(Node* root)const;      //äºŒå‰æ ‘çš„å¶å­æ•°
+    void preOrderTraverse(Node* root)const;     //å‰åºéå†
+    void inOrderTraverse(Node* root)const;      //ä¸­åºéå†
+    void postOrderTraverse(Node* root)const;    //ååºéå†
+    void preCreatBinaryTree(Node*& root); //å‰åºåˆ›å»ºäºŒå‰æ ‘
 
 public:
     BinaryTree() {
-        root = nullptr;    //ÎŞ²Î¹¹Ôì
+        root = nullptr;    //æ— å‚æ„é€ 
     }
-    BinaryTree(T inputList[], T nullFlag);  //Ç°Ğò´´½¨¶ş²æÊ÷
+    BinaryTree(T inputList[], T nullFlag);  //å‰åºåˆ›å»ºäºŒå‰æ ‘
     ~BinaryTree() {
-        clear();    //Îö¹¹º¯Êı
+        clear();    //ææ„å‡½æ•°
     }
-    BinaryTree(const BinaryTree& obj);  //¿½±´¹¹Ôìº¯Êı
-    BinaryTree<T>& operator=(const BinaryTree& obj); //¸³ÖµÔËËã·û
+    BinaryTree(const BinaryTree& obj);  //æ‹·è´æ„é€ å‡½æ•°
+    BinaryTree<T>& operator=(const BinaryTree& obj); //èµ‹å€¼è¿ç®—ç¬¦
 
-    //¹²ÓĞ³ÉÔ±º¯Êı
-    void clear();                     //Çå¿Õ
-    bool isEmpty()const;              //ÅĞ¿Õ
-    unsigned int height()const;       //¶ş²æÊ÷µÄ¸ß¶È
-    unsigned int nodeNum()const;         //¶ş²æÊ÷µÄ½Úµã×ÜÊı
-    unsigned int leafNum()const;      //¶ş²æÊ÷µÄÒ¶×ÓÊı
-    void preOrderTraverse()const;     //Ç°Ğò±éÀú
-    void inOrderTraverse()const;      //ÖĞĞò±éÀú
-    void postOrderTraverse()const;    //ºóĞò±éÀú
-    void levelOrderTraverse()const;   //²ãĞò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú)
-    void preOrderTraverseWithStack()const;    //·Çµİ¹é·½Ê½ÊµÏÖÇ°Ğò±éÀú
-    void inOrderTraverseWithStack()const;    //·Çµİ¹é·½Ê½ÊµÏÖÖĞĞò±éÀú
-    void postOrderTraverseWithStack()const;   //·Çµİ¹é·½Ê½ÊµÏÖºóĞò±éÀú
+    //å…±æœ‰æˆå‘˜å‡½æ•°
+    void clear();                     //æ¸…ç©º
+    bool isEmpty()const;              //åˆ¤ç©º
+    unsigned int height()const;       //äºŒå‰æ ‘çš„é«˜åº¦
+    unsigned int nodeNum()const;         //äºŒå‰æ ‘çš„èŠ‚ç‚¹æ€»æ•°
+    unsigned int leafNum()const;      //äºŒå‰æ ‘çš„å¶å­æ•°
+    void preOrderTraverse()const;     //å‰åºéå†
+    void inOrderTraverse()const;      //ä¸­åºéå†
+    void postOrderTraverse()const;    //ååºéå†
+    void levelOrderTraverse()const;   //å±‚åºéå†(å¹¿åº¦ä¼˜å…ˆéå†)
+    void preOrderTraverseWithStack()const;    //éé€’å½’æ–¹å¼å®ç°å‰åºéå†
+    void inOrderTraverseWithStack()const;    //éé€’å½’æ–¹å¼å®ç°ä¸­åºéå†
+    void postOrderTraverseWithStack()const;   //éé€’å½’æ–¹å¼å®ç°ååºéå†
 };
 
 
-///////////////////¹²ÓĞ³ÉÔ±º¯Êı/////////////////////////////////////
+///////////////////å…±æœ‰æˆå‘˜å‡½æ•°/////////////////////////////////////
 
 /**
- * ¸ù¾İÊäÈëĞòÁĞÇ°Ğò´´½¨¶ş²æÊ÷
- * @param inputList ÊäÈëĞòÁĞ£º´æ·Å¶ş²æÊ÷½ÚµãÊı¾İµÄÒ»Î¬Êı×é
- * @param nullFlag ÊäÈëĞòÁĞÖĞ´ú±í½ÚµãÎª¿ÕµÄ±êÖ¾
+ * æ ¹æ®è¾“å…¥åºåˆ—å‰åºåˆ›å»ºäºŒå‰æ ‘
+ * @param inputList è¾“å…¥åºåˆ—ï¼šå­˜æ”¾äºŒå‰æ ‘èŠ‚ç‚¹æ•°æ®çš„ä¸€ç»´æ•°ç»„
+ * @param nullFlag è¾“å…¥åºåˆ—ä¸­ä»£è¡¨èŠ‚ç‚¹ä¸ºç©ºçš„æ ‡å¿—
 */
 template<typename T>
 BinaryTree<T>::BinaryTree(T inputList[], T nullFlag) {
     this->inputList = inputList;
     this->nullFlag = nullFlag;
-    inputList_index = 0; // ´´½¨¶ş²æÊ÷µÄÊäÈëĞòÁĞµÄÏÂ±ê´Ó0¿ªÊ¼
+    inputList_index = 0; // åˆ›å»ºäºŒå‰æ ‘çš„è¾“å…¥åºåˆ—çš„ä¸‹æ ‡ä»0å¼€å§‹
     preCreatBinaryTree(root);
 }
 
 /**
- * ¿½±´¹¹Ôìº¯Êı
- * @param obj ±»¿½±´µÄ¶ş²æÊ÷
+ * æ‹·è´æ„é€ å‡½æ•°
+ * @param obj è¢«æ‹·è´çš„äºŒå‰æ ‘
 */
 template<typename T>
 BinaryTree<T>::BinaryTree(const BinaryTree& obj) {
@@ -88,8 +88,8 @@ BinaryTree<T>::BinaryTree(const BinaryTree& obj) {
 }
 
 /**
- * ¸³ÖµÔËËã·û
- * @param obj ±»¸³ÖµµÄ¶ş²æÊ÷
+ * èµ‹å€¼è¿ç®—ç¬¦
+ * @param obj è¢«èµ‹å€¼çš„äºŒå‰æ ‘
 */
 template<typename T>
 BinaryTree<T>& BinaryTree<T>::operator=(const BinaryTree& obj) {
@@ -103,7 +103,7 @@ BinaryTree<T>& BinaryTree<T>::operator=(const BinaryTree& obj) {
 }
 
 /**
- * Çå¿Õ¶ş²æÊ÷
+ * æ¸…ç©ºäºŒå‰æ ‘
 */
 template<typename T>
 void BinaryTree<T>::clear() {
@@ -112,7 +112,7 @@ void BinaryTree<T>::clear() {
 }
 
 /**
- * ÅĞ¶Ï¶ş²æÊ÷ÊÇ·ñÎª¿Õ
+ * åˆ¤æ–­äºŒå‰æ ‘æ˜¯å¦ä¸ºç©º
 */
 template<typename T>
 bool BinaryTree<T>::isEmpty()const {
@@ -120,7 +120,7 @@ bool BinaryTree<T>::isEmpty()const {
 }
 
 /**
- * »ñÈ¡¶ş²æÊ÷µÄ¸ß¶È
+ * è·å–äºŒå‰æ ‘çš„é«˜åº¦
 */
 template<typename T>
 unsigned int BinaryTree<T>::height()const {
@@ -128,7 +128,7 @@ unsigned int BinaryTree<T>::height()const {
 }
 
 /**
- * »ñÈ¡¶ş²æÊ÷½Úµã×ÜÊı
+ * è·å–äºŒå‰æ ‘èŠ‚ç‚¹æ€»æ•°
 */
 template<typename T>
 unsigned int BinaryTree<T>::nodeNum()const {
@@ -136,7 +136,7 @@ unsigned int BinaryTree<T>::nodeNum()const {
 }
 
 /**
- * »ñÈ¡¶ş²æÊ÷Ò¶×Ó½ÚµãÊı
+ * è·å–äºŒå‰æ ‘å¶å­èŠ‚ç‚¹æ•°
 */
 template<typename T>
 unsigned int BinaryTree<T>::leafNum()const {
@@ -144,7 +144,7 @@ unsigned int BinaryTree<T>::leafNum()const {
 }
 
 /**
- * Ç°Ğò±éÀú
+ * å‰åºéå†
 */
 template<typename T>
 void BinaryTree<T>::preOrderTraverse()const {
@@ -153,7 +153,7 @@ void BinaryTree<T>::preOrderTraverse()const {
 }
 
 /**
- * ÖĞĞò±éÀú
+ * ä¸­åºéå†
 */
 template<typename T>
 void BinaryTree<T>::inOrderTraverse()const {
@@ -162,7 +162,7 @@ void BinaryTree<T>::inOrderTraverse()const {
 }
 
 /**
- * ºóĞò±éÀú
+ * ååºéå†
 */
 template<typename T>
 void BinaryTree<T>::postOrderTraverse()const {
@@ -171,44 +171,44 @@ void BinaryTree<T>::postOrderTraverse()const {
 }
 
 /**
- * ²ãĞò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú)
+ * å±‚åºéå†(å¹¿åº¦ä¼˜å…ˆéå†)
 */
 template<typename T>
 void BinaryTree<T>::levelOrderTraverse()const {
-    if (root == nullptr) return; //¸ù½ÚµãÎª¿Õ£¬ÎŞ·¨±éÀú
-    queue<Node*> que; // ³õÊ¼»¯¶ÓÁĞ£¬´æ·Å½ÚµãµÄÖ¸Õë
-    que.push(root); // ¸ù½ÚµãÈë¶Ó
+    if (root == nullptr) return; //æ ¹èŠ‚ç‚¹ä¸ºç©ºï¼Œæ— æ³•éå†
+    queue<Node*> que; // åˆå§‹åŒ–é˜Ÿåˆ—ï¼Œå­˜æ”¾èŠ‚ç‚¹çš„æŒ‡é’ˆ
+    que.push(root); // æ ¹èŠ‚ç‚¹å…¥é˜Ÿ
     while (!que.empty()) {
-        Node* p = que.front(); //È¡¶ÓÊ×ÔªËØ
-        que.pop();//³ö¶Ó
-        cout << p->data << ' '; //·ÃÎÊµ±Ç°½ÚµãµÄÊı¾İ
+        Node* p = que.front(); //å–é˜Ÿé¦–å…ƒç´ 
+        que.pop();//å‡ºé˜Ÿ
+        cout << p->data << ' '; //è®¿é—®å½“å‰èŠ‚ç‚¹çš„æ•°æ®
         if (p->leftChild != nullptr)
-            que.push(p->leftChild); // Èç¹ûµ±Ç°½ÚµãÓĞ×óº¢×Ó£¬Ôò×ó×ÓÊ÷Èë¶Ó
+            que.push(p->leftChild); // å¦‚æœå½“å‰èŠ‚ç‚¹æœ‰å·¦å­©å­ï¼Œåˆ™å·¦å­æ ‘å…¥é˜Ÿ
         if (p->rightChild != nullptr)
-            que.push(p->rightChild);  // Èç¹ûµ±Ç°½ÚµãÓĞÓÒº¢×Ó£¬ÔòÓÒ×ÓÊ÷Èë¶Ó
+            que.push(p->rightChild);  // å¦‚æœå½“å‰èŠ‚ç‚¹æœ‰å³å­©å­ï¼Œåˆ™å³å­æ ‘å…¥é˜Ÿ
     }
     cout << '\n';
 }
 
 /**
- * ·Çµİ¹é·½Ê½ÊµÏÖÇ°Ğò±éÀú
+ * éé€’å½’æ–¹å¼å®ç°å‰åºéå†
 */
 template<typename T>
-// Ç°Ğò±éÀú·Çµİ¹éÊµÏÖ
+// å‰åºéå†éé€’å½’å®ç°
 void BinaryTree<T>::preOrderTraverseWithStack()const {
-    if (root == nullptr) return; // Èç¹û¸ù½ÚµãÎª¿Õ£¬ÔòÖ±½Ó·µ»Ø
+    if (root == nullptr) return; // å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºï¼Œåˆ™ç›´æ¥è¿”å›
 
-    stack<Node*> stk; // ´´½¨Ò»¸öÕ»À´´æ´¢½Úµã
-    stk.push(root); // ½«¸ù½ÚµãÑ¹ÈëÕ»
+    stack<Node*> stk; // åˆ›å»ºä¸€ä¸ªæ ˆæ¥å­˜å‚¨èŠ‚ç‚¹
+    stk.push(root); // å°†æ ¹èŠ‚ç‚¹å‹å…¥æ ˆ
 
-    while (!stk.empty()) { // µ±Õ»²»Îª¿ÕÊ±Ñ­»·
-        Node* node = stk.top(); // È¡³öÕ»¶¥ÔªËØ
-        stk.pop(); // µ¯³öÕ»¶¥ÔªËØ
+    while (!stk.empty()) { // å½“æ ˆä¸ä¸ºç©ºæ—¶å¾ªç¯
+        Node* node = stk.top(); // å–å‡ºæ ˆé¡¶å…ƒç´ 
+        stk.pop(); // å¼¹å‡ºæ ˆé¡¶å…ƒç´ 
 
-        // ·ÃÎÊ½Úµã
+        // è®¿é—®èŠ‚ç‚¹
         cout << node->data << " ";
 
-        // ×¢ÒâÑ¹Õ»Ë³Ğò£¬ÏÈÓÒºó×ó£¬±£Ö¤×ó×ÓÊ÷ÏÈ±»±éÀú(Õ»ºó½øÏÈ³öµÄÌØĞÔ)
+        // æ³¨æ„å‹æ ˆé¡ºåºï¼Œå…ˆå³åå·¦ï¼Œä¿è¯å·¦å­æ ‘å…ˆè¢«éå†(æ ˆåè¿›å…ˆå‡ºçš„ç‰¹æ€§)
         if (node->rightChild != nullptr) {
             stk.push(node->rightChild);
         }
@@ -220,7 +220,7 @@ void BinaryTree<T>::preOrderTraverseWithStack()const {
 }
 
 /**
- * Ç°Ğò´´½¨¶ş²æÊ÷
+ * å‰åºåˆ›å»ºäºŒå‰æ ‘
  */
 template<typename T>
 void preCreatBinaryTree(T inputList[], T nullFlag){
@@ -231,127 +231,127 @@ void preCreatBinaryTree(T inputList[], T nullFlag){
 }
 
 
-///////////////////Ë½ÓĞ³ÉÔ±º¯Êı/////////////////////////////////////
+///////////////////ç§æœ‰æˆå‘˜å‡½æ•°/////////////////////////////////////
 
 /**
- * Çå¿Õ¶ş²æÊ÷
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * æ¸…ç©ºäºŒå‰æ ‘
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 void BinaryTree<T>::clear(Node* root) {
-    if (root == nullptr) return;  //Èç¹û¸ù½ÚµãÎª¿Õ¾Í½áÊø
+    if (root == nullptr) return;  //å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
     if (root->leftChild != nullptr)
-        clear(root->leftChild); //×ó×ÓÊ÷·Ç¿Õ£¬Çå¿Õ×ó×ÓÊ÷
+        clear(root->leftChild); //å·¦å­æ ‘éç©ºï¼Œæ¸…ç©ºå·¦å­æ ‘
     if (root->rightChild != nullptr)
-        clear(root->rightChild); //ÓÒ×ÓÊ÷·Ç¿Õ£¬Çå¿ÕÓÒ×ÓÊ÷
-    delete root; //É¾³ı¸ù½Úµã
+        clear(root->rightChild); //å³å­æ ‘éç©ºï¼Œæ¸…ç©ºå³å­æ ‘
+    delete root; //åˆ é™¤æ ¹èŠ‚ç‚¹
     printf("delete\n");
     root = nullptr;
 }
 
 /**
- * ¶ş²æÊ÷µÄ¸ß¶È
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * äºŒå‰æ ‘çš„é«˜åº¦
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 unsigned int BinaryTree<T>::height(Node* root)const {
-    if (root == nullptr) return 0; //¸ù½ÚµãÎª¿Õ¾Í½áÊø
-    //·ñÔò·µ»Ø1(µ±Ç°¸ù½Úµã)¼ÓÉÏ×óÓÒ×ÓÊ÷¸ß¶ÈµÄ½Ï´óÕß
+    if (root == nullptr) return 0; //æ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
+    //å¦åˆ™è¿”å›1(å½“å‰æ ¹èŠ‚ç‚¹)åŠ ä¸Šå·¦å³å­æ ‘é«˜åº¦çš„è¾ƒå¤§è€…
     return 1 + max(height(root->leftChild), height(root->rightChild));
 }
 
 /**
- * ¶ş²æÊ÷µÄ½Úµã×ÜÊı
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * äºŒå‰æ ‘çš„èŠ‚ç‚¹æ€»æ•°
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 unsigned int BinaryTree<T>::nodeNum(Node* root)const {
-    if (root == nullptr) return 0; //Èç¹û¸ù½ÚµãÎª¿Õ¾Í½áÊø
-    //·ñÔò·µ»Ø1(µ±Ç°¸ù½Úµã)+×óÓÒ×ÓÊ÷µÄ½Úµã×ÜÊı
+    if (root == nullptr) return 0; //å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
+    //å¦åˆ™è¿”å›1(å½“å‰æ ¹èŠ‚ç‚¹)+å·¦å³å­æ ‘çš„èŠ‚ç‚¹æ€»æ•°
     return 1 + nodeNum(root->leftChild) + nodeNum(root->rightChild);
 }
 
 /**
- * ¶ş²æÊ÷µÄÒ¶×ÓÊı
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * äºŒå‰æ ‘çš„å¶å­æ•°
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 unsigned int BinaryTree<T>::leafNum(Node* root)const {
-    if (root == nullptr) return 0;//Èç¹û¸ù½ÚµãÎª¿Õ¾Í½áÊø
+    if (root == nullptr) return 0;//å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
     if (root->leftChild == nullptr && root->rightChild == nullptr)
-        return 1;  //Èç¹ûµ±Ç°½ÚµãÃ»ÓĞ×óÓÒº¢×ÓÔò¸Ã½ÚµãÊÇÒ¶×Ó½Úµã£¬·µ»Ø1
-    else //Èç¹ûµ±Ç°½Úµã²»ÊÇÖÕ¶Ë½Úµã(Ò¶×Ó)¾Í·µ»Ø×óÓÒ×ÓÊ÷µÄÒ¶×Ó½ÚµãÖ®ºÍ
+        return 1;  //å¦‚æœå½“å‰èŠ‚ç‚¹æ²¡æœ‰å·¦å³å­©å­åˆ™è¯¥èŠ‚ç‚¹æ˜¯å¶å­èŠ‚ç‚¹ï¼Œè¿”å›1
+    else //å¦‚æœå½“å‰èŠ‚ç‚¹ä¸æ˜¯ç»ˆç«¯èŠ‚ç‚¹(å¶å­)å°±è¿”å›å·¦å³å­æ ‘çš„å¶å­èŠ‚ç‚¹ä¹‹å’Œ
         return leafNum(root->leftChild) + leafNum(root->rightChild);
 }
 
 /**
- * Ç°Ğò±éÀú
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * å‰åºéå†
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 void BinaryTree<T>::preOrderTraverse(Node* root)const {
-    if (root == nullptr) return; //Èç¹û¸ù½ÚµãÎª¿Õ¾Í½áÊø
-    cout << root->data << ' '; //·ÃÎÊµ±Ç°½Úµã
-    preOrderTraverse(root->leftChild); // ±éÀú×ó×ÓÊ÷
-    preOrderTraverse(root->rightChild);  // ±éÀúÓÒ×ÓÊ÷
+    if (root == nullptr) return; //å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
+    cout << root->data << ' '; //è®¿é—®å½“å‰èŠ‚ç‚¹
+    preOrderTraverse(root->leftChild); // éå†å·¦å­æ ‘
+    preOrderTraverse(root->rightChild);  // éå†å³å­æ ‘
 }
 
 /**
- * ÖĞĞò±éÀú
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * ä¸­åºéå†
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 void BinaryTree<T>::inOrderTraverse(Node* root)const {
-    if (root == nullptr) return; //Èç¹û¸ù½ÚµãÎª¿Õ¾Í½áÊø
-    inOrderTraverse(root->leftChild); // ±éÀú×ó×ÓÊ÷
-    cout << root->data << ' '; //·ÃÎÊµ±Ç°½Úµã
-    inOrderTraverse(root->rightChild);  // ±éÀúÓÒ×ÓÊ÷
+    if (root == nullptr) return; //å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
+    inOrderTraverse(root->leftChild); // éå†å·¦å­æ ‘
+    cout << root->data << ' '; //è®¿é—®å½“å‰èŠ‚ç‚¹
+    inOrderTraverse(root->rightChild);  // éå†å³å­æ ‘
 }
 
 /**
- * ºóĞò±éÀú
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * ååºéå†
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 void BinaryTree<T>::postOrderTraverse(Node* root)const {
-    if (root == nullptr) return; //Èç¹û¸ù½ÚµãÎª¿Õ¾Í½áÊø
-    postOrderTraverse(root->leftChild); // ±éÀú×ó×ÓÊ÷
-    postOrderTraverse(root->rightChild);  // ±éÀúÓÒ×ÓÊ÷
-    cout << root->data << ' '; //·ÃÎÊµ±Ç°½Úµã
+    if (root == nullptr) return; //å¦‚æœæ ¹èŠ‚ç‚¹ä¸ºç©ºå°±ç»“æŸ
+    postOrderTraverse(root->leftChild); // éå†å·¦å­æ ‘
+    postOrderTraverse(root->rightChild);  // éå†å³å­æ ‘
+    cout << root->data << ' '; //è®¿é—®å½“å‰èŠ‚ç‚¹
 }
 
 /**
- * ¸ù¾İÊäÈëĞòÁĞÇ°Ğò´´½¨¶ş²æÊ÷
- * @param inputList ÊäÈëĞòÁĞ£º´æ·Å¶ş²æÊ÷½ÚµãÊı¾İµÄÒ»Î¬Êı×é
- * @param nullFlag ÊäÈëĞòÁĞÖĞ´ú±í½ÚµãÎª¿ÕµÄ±êÖ¾
- * @param root ¶ş²æÊ÷µÄ¸ù½Úµã
+ * æ ¹æ®è¾“å…¥åºåˆ—å‰åºåˆ›å»ºäºŒå‰æ ‘
+ * @param inputList è¾“å…¥åºåˆ—ï¼šå­˜æ”¾äºŒå‰æ ‘èŠ‚ç‚¹æ•°æ®çš„ä¸€ç»´æ•°ç»„
+ * @param nullFlag è¾“å…¥åºåˆ—ä¸­ä»£è¡¨èŠ‚ç‚¹ä¸ºç©ºçš„æ ‡å¿—
+ * @param root äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹
 */
 template<typename T>
 void BinaryTree<T>::preCreatBinaryTree(Node*& root) {
     T data = inputList[inputList_index];
     inputList_index++;
-    if (data == nullFlag) { //ÊäÈëµÄÊı¾İÎª¿Õ£¬´´½¨¿Õ½Úµã
+    if (data == nullFlag) { //è¾“å…¥çš„æ•°æ®ä¸ºç©ºï¼Œåˆ›å»ºç©ºèŠ‚ç‚¹
         root = nullptr;
         return;
     }
     root = new Node(data);
-    preCreatBinaryTree(root->leftChild); // µİ¹é´´½¨×ó×ÓÊ÷
-    preCreatBinaryTree(root->rightChild); // µİ¹é´´½¨ÓÒ×ÓÊ÷
+    preCreatBinaryTree(root->leftChild); // é€’å½’åˆ›å»ºå·¦å­æ ‘
+    preCreatBinaryTree(root->rightChild); // é€’å½’åˆ›å»ºå³å­æ ‘
 }
 
 /**
- * ·Çµİ¹é·½Ê½ÊµÏÖÖĞĞò±éÀú
+ * éé€’å½’æ–¹å¼å®ç°ä¸­åºéå†
  */
 template<typename T>
 void BinaryTree<T>::inOrderTraverseWithStack() const {
     Node* root = this->root;
     stack<Node*> s;
     while (true) {
-        if (root != nullptr) { //Èç¹ûµ±Ç°½Úµã²»Îª¿Õ£¬Ôò½«µ±Ç°½ÚµãÈëÕ»
+        if (root != nullptr) { //å¦‚æœå½“å‰èŠ‚ç‚¹ä¸ä¸ºç©ºï¼Œåˆ™å°†å½“å‰èŠ‚ç‚¹å…¥æ ˆ
             s.push(root);
             root = root->leftChild;
         }
-        else if (!s.empty()) { //Èç¹ûÕ»²»Îª¿Õ£¬Ôò³öÕ»Ò»¸ö½Úµã
+        else if (!s.empty()) { //å¦‚æœæ ˆä¸ä¸ºç©ºï¼Œåˆ™å‡ºæ ˆä¸€ä¸ªèŠ‚ç‚¹
             root = s.top();
             cout << root->data << ' ';
             s.pop();
@@ -379,39 +379,39 @@ int main() {
        J   K G  L   H   I
     */
     BinaryTree<char> tree(inputList, '*');
-    cout << "Ç°Ğò±éÀú£º";
+    cout << "å‰åºéå†ï¼š";
     tree.preOrderTraverse();
-    cout << "·Çµİ¹éÇ°£º";
+    cout << "éé€’å½’å‰ï¼š";
     tree.preOrderTraverseWithStack();
-    cout << "·Çµİ¹éºó£º";
+    cout << "éé€’å½’åï¼š";
     tree.postOrderTraverseWithStack();
-    cout << "ºóĞò±éÀú£º";
+    cout << "ååºéå†ï¼š";
     tree.postOrderTraverse();
-    cout << "ÖĞĞò±éÀú£º";
+    cout << "ä¸­åºéå†ï¼š";
     tree.inOrderTraverse();
-    cout << "·Çµİ¹éÖĞ£º";
+    cout << "éé€’å½’ä¸­ï¼š";
     tree.inOrderTraverseWithStack();
-    cout << "²ãĞò±éÀú£º";
+    cout << "å±‚åºéå†ï¼š";
     tree.levelOrderTraverse();
     printf("isEmpty: %d\n", tree.isEmpty());
-    printf("¸ß¶È£º%d\n", tree.height());
-    printf("½Úµã×ÜÊı£º%d\n", tree.nodeNum());
-    printf("Ò¶×ÓÊı£º%d\n\n", tree.leafNum());
+    printf("é«˜åº¦ï¼š%d\n", tree.height());
+    printf("èŠ‚ç‚¹æ€»æ•°ï¼š%d\n", tree.nodeNum());
+    printf("å¶å­æ•°ï¼š%d\n\n", tree.leafNum());
 
     BinaryTree<char> tree2 = tree;
     tree.clear();
-    cout << "Ç°Ğò±éÀú£º";
+    cout << "å‰åºéå†ï¼š";
     tree2.preOrderTraverse();
-    cout << "ºóĞò±éÀú£º";
+    cout << "ååºéå†ï¼š";
     tree2.postOrderTraverse();
-    cout << "ÖĞĞò±éÀú£º";
+    cout << "ä¸­åºéå†ï¼š";
     tree2.inOrderTraverse();
-    cout << "²ãĞò±éÀú£º";
+    cout << "å±‚åºéå†ï¼š";
     tree2.levelOrderTraverse();
     printf("isEmpty: %d\n", tree2.isEmpty());
-    printf("¸ß¶È£º%d\n", tree2.height());
-    printf("½Úµã×ÜÊı£º%d\n", tree2.nodeNum());
-    printf("Ò¶×ÓÊı£º%d\n", tree2.leafNum());
+    printf("é«˜åº¦ï¼š%d\n", tree2.height());
+    printf("èŠ‚ç‚¹æ€»æ•°ï¼š%d\n", tree2.nodeNum());
+    printf("å¶å­æ•°ï¼š%d\n", tree2.leafNum());
 
     system("pause");
 }

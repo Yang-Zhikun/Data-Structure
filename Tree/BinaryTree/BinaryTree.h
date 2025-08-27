@@ -1,58 +1,58 @@
 #pragma once
 
 /**
- * ¶ş²æÁ´±í·¨±íÊ¾µÄ¶ş²æÊ÷
+ * äºŒå‰é“¾è¡¨æ³•è¡¨ç¤ºçš„äºŒå‰æ ‘
  */
 template<typename T>
 class BinaryTree {
 private:
-    struct Node { // Ò»¸ö¶ş²æÁ´±íµÄ½Úµã
-        T data; // Êı¾İÓò
-        Node* leftChild; // Ö¸Ïò×óº¢×ÓµÄÖ¸Õë
-        Node* rightChild; // Ö¸ÏòÓÒº¢×ÓµÄÖ¸Õë
+    struct Node { // ä¸€ä¸ªäºŒå‰é“¾è¡¨çš„èŠ‚ç‚¹
+        T data; // æ•°æ®åŸŸ
+        Node* leftChild; // æŒ‡å‘å·¦å­©å­çš„æŒ‡é’ˆ
+        Node* rightChild; // æŒ‡å‘å³å­©å­çš„æŒ‡é’ˆ
 
-        Node(): leftChild(nullptr), rightChild(nullptr) {}  // ÎŞ²Î¹¹Ôì
+        Node(): leftChild(nullptr), rightChild(nullptr) {}  // æ— å‚æ„é€ 
         Node(T data, Node* leftChild=nullptr, Node* rightChild=nullptr): data(data), leftChild(leftChild), rightChild(rightChild) {}
     };
 
-    Node* root;   // ¶ş²æÊ÷µÄ¸ù½ÚµãµÄÖ¸Õë
+    Node* root;   // äºŒå‰æ ‘çš„æ ¹èŠ‚ç‚¹çš„æŒ‡é’ˆ
 
-    T* inputList; // ÊäÈëĞòÁĞ£º´æ·Å¶ş²æÊ÷½ÚµãÊı¾İµÄÒ»Î¬Êı×é
-    T nullFlag; //ÊäÈëĞòÁĞÖĞ´ú±í½ÚµãÎª¿ÕµÄ±êÖ¾
-    unsigned int inputList_index; // ´´½¨¶ş²æÊ÷µÄÊäÈëĞòÁĞµÄÏÂ±ê
+    T* inputList; // è¾“å…¥åºåˆ—ï¼šå­˜æ”¾äºŒå‰æ ‘èŠ‚ç‚¹æ•°æ®çš„ä¸€ç»´æ•°ç»„
+    T nullFlag; //è¾“å…¥åºåˆ—ä¸­ä»£è¡¨èŠ‚ç‚¹ä¸ºç©ºçš„æ ‡å¿—
+    unsigned int inputList_index; // åˆ›å»ºäºŒå‰æ ‘çš„è¾“å…¥åºåˆ—çš„ä¸‹æ ‡
 
-    //Ë½ÓĞ³ÉÔ±º¯Êı
-    void clear(Node* root);                     //Çå¿Õ
-    unsigned int height(Node* root)const;       //¶ş²æÊ÷µÄ¸ß¶È
-    unsigned int nodeNum(Node* root)const;      //¶ş²æÊ÷µÄ½Úµã×ÜÊı
-    unsigned int leafNum(Node* root)const;      //¶ş²æÊ÷µÄÒ¶×ÓÊı
-    void preOrderTraverse(Node* root)const;     //Ç°Ğò±éÀú
-    void inOrderTraverse(Node* root)const;      //ÖĞĞò±éÀú
-    void postOrderTraverse(Node* root)const;    //ºóĞò±éÀú
-    void preCreatBinaryTree(Node* &root); //Ç°Ğò´´½¨¶ş²æÊ÷
+    //ç§æœ‰æˆå‘˜å‡½æ•°
+    void clear(Node* root);                     //æ¸…ç©º
+    unsigned int height(Node* root)const;       //äºŒå‰æ ‘çš„é«˜åº¦
+    unsigned int nodeNum(Node* root)const;      //äºŒå‰æ ‘çš„èŠ‚ç‚¹æ€»æ•°
+    unsigned int leafNum(Node* root)const;      //äºŒå‰æ ‘çš„å¶å­æ•°
+    void preOrderTraverse(Node* root)const;     //å‰åºéå†
+    void inOrderTraverse(Node* root)const;      //ä¸­åºéå†
+    void postOrderTraverse(Node* root)const;    //ååºéå†
+    void preCreatBinaryTree(Node* &root); //å‰åºåˆ›å»ºäºŒå‰æ ‘
 
 public:
     BinaryTree() {
-        root = nullptr;    //ÎŞ²Î¹¹Ôì
+        root = nullptr;    //æ— å‚æ„é€ 
     }
-    BinaryTree(T inputList[], T nullFlag);  //Ç°Ğò´´½¨¶ş²æÊ÷
+    BinaryTree(T inputList[], T nullFlag);  //å‰åºåˆ›å»ºäºŒå‰æ ‘
     ~BinaryTree() {
-        clear();    //Îö¹¹º¯Êı
+        clear();    //ææ„å‡½æ•°
     }
-    BinaryTree(const BinaryTree& obj);  //¿½±´¹¹Ôìº¯Êı
-    BinaryTree<T>& operator=(const BinaryTree& obj); //¸³ÖµÔËËã·û
+    BinaryTree(const BinaryTree& obj);  //æ‹·è´æ„é€ å‡½æ•°
+    BinaryTree<T>& operator=(const BinaryTree& obj); //èµ‹å€¼è¿ç®—ç¬¦
 
-    //¹²ÓĞ³ÉÔ±º¯Êı
-    void clear();                     //Çå¿Õ
-    bool isEmpty()const;              //ÅĞ¿Õ
-    unsigned int height()const;       //¶ş²æÊ÷µÄ¸ß¶È
-    unsigned int nodeNum()const;      //¶ş²æÊ÷µÄ½Úµã×ÜÊı
-    unsigned int leafNum()const;      //¶ş²æÊ÷µÄÒ¶×ÓÊı
-    void preOrderTraverse()const;     //Ç°Ğò±éÀú
-    void inOrderTraverse()const;      //ÖĞĞò±éÀú
-    void postOrderTraverse()const;    //ºóĞò±éÀú
-    void levelOrderTraverse()const;   //²ãĞò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú)
-    void preOrderTraverseWithStack()const;    //·Çµİ¹é·½Ê½ÊµÏÖÇ°Ğò±éÀú
+    //å…±æœ‰æˆå‘˜å‡½æ•°
+    void clear();                     //æ¸…ç©º
+    bool isEmpty()const;              //åˆ¤ç©º
+    unsigned int height()const;       //äºŒå‰æ ‘çš„é«˜åº¦
+    unsigned int nodeNum()const;      //äºŒå‰æ ‘çš„èŠ‚ç‚¹æ€»æ•°
+    unsigned int leafNum()const;      //äºŒå‰æ ‘çš„å¶å­æ•°
+    void preOrderTraverse()const;     //å‰åºéå†
+    void inOrderTraverse()const;      //ä¸­åºéå†
+    void postOrderTraverse()const;    //ååºéå†
+    void levelOrderTraverse()const;   //å±‚åºéå†(å¹¿åº¦ä¼˜å…ˆéå†)
+    void preOrderTraverseWithStack()const;    //éé€’å½’æ–¹å¼å®ç°å‰åºéå†
 };
 
 #include"BinaryTree.cpp"

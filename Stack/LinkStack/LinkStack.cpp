@@ -2,7 +2,7 @@
 #include<stdexcept>
 
 /**
- * ¹¹Ôìº¯Êı
+ * æ„é€ å‡½æ•°
  */
 template<typename T>
 LinkStack<T>::LinkStack(){
@@ -11,7 +11,7 @@ LinkStack<T>::LinkStack(){
 }
 
 /**
- * Îö¹¹º¯Êı
+ * ææ„å‡½æ•°
  */
 template<typename T>
 LinkStack<T>::~LinkStack(){
@@ -19,12 +19,12 @@ LinkStack<T>::~LinkStack(){
 }
 
 /**
- * ¿½±´¹¹Ôìº¯Êı
+ * æ‹·è´æ„é€ å‡½æ•°
  */
 template<typename T>
 LinkStack<T>::LinkStack(const LinkStack & obj){
     top = nullptr;
-    node *tail = top;//Î²Ö¸Õë
+    node *tail = top;//å°¾æŒ‡é’ˆ
     for(node *p = obj.top; p!=nullptr; p = p->next){
         node * newnode = new node;
         newnode->data = p->data;
@@ -35,13 +35,13 @@ LinkStack<T>::LinkStack(const LinkStack & obj){
 }
 
 /**
- * ¸³ÖµÔËËã·û
+ * èµ‹å€¼è¿ç®—ç¬¦
  */
 template<typename T>
 LinkStack<T>& LinkStack<T>::operator=(const LinkStack & obj){
-    if(*this!=obj){ // ·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){ // é˜²æ­¢è‡ªèµ‹å€¼
         top = nullptr;
-        node *tail = top;//Î²Ö¸Õë
+        node *tail = top;//å°¾æŒ‡é’ˆ
         for(node *p = obj.top; p!=nullptr; p = p->next){
             node * newnode = new node;
             newnode->data = p->data;
@@ -53,53 +53,53 @@ LinkStack<T>& LinkStack<T>::operator=(const LinkStack & obj){
 }
 
 /**
- * Çå¿ÕÕ»
+ * æ¸…ç©ºæ ˆ
  */
 template<typename T>
 void LinkStack<T>::clear(){
     node *p;
     while(top!=nullptr){
-        p = top; // pÖ¸Ïòµ±Ç°µÄÕ»¶¥ÔªËØ
-        top = top->next; // topÏòºóÒÆ¶¯
+        p = top; // pæŒ‡å‘å½“å‰çš„æ ˆé¡¶å…ƒç´ 
+        top = top->next; // topå‘åç§»åŠ¨
         delete p;
     }
     length = 0;
 }
 
 /**
- * ÈëÕ»
- * @param elem ÈëÕ»µÄÔªËØ
+ * å…¥æ ˆ
+ * @param elem å…¥æ ˆçš„å…ƒç´ 
  */
 template<typename T>
 void LinkStack<T>::push(const T elem){
     node *newnode = new node;
     newnode->data = elem;
-    newnode->next = top; // newnodeµÄnextÖ¸ÏòÔ­À´µÄÕ»¶¥ÔªËØ
-    top = newnode; // topÍ·Ö¸ÕëÖ¸Ïònewnode, newnode³ÉÎªĞÂµÄÕ»¶¥ÔªËØ
+    newnode->next = top; // newnodeçš„nextæŒ‡å‘åŸæ¥çš„æ ˆé¡¶å…ƒç´ 
+    top = newnode; // topå¤´æŒ‡é’ˆæŒ‡å‘newnode, newnodeæˆä¸ºæ–°çš„æ ˆé¡¶å…ƒç´ 
     length++;
 }
 
 /**
- * ³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
+ * å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
  */
 template<typename T>
 T LinkStack<T>::pop(){
     if(top == nullptr)
-        throw std::out_of_range("Õ»Îª¿Õ");
+        throw std::out_of_range("æ ˆä¸ºç©º");
     T tmp = top->data;
-    node *p = top;//Ôİ´æÕ»¶¥½Úµã
-    top= top->next;//topÖ¸ÏòÕ»¶¥ÔªËØµÄºó¼Ì£¬¼´ÏòºóÒÆ¶¯
+    node *p = top;//æš‚å­˜æ ˆé¡¶èŠ‚ç‚¹
+    top= top->next;//topæŒ‡å‘æ ˆé¡¶å…ƒç´ çš„åç»§ï¼Œå³å‘åç§»åŠ¨
     delete p;
     length--;
     return tmp;
 }
 
 /**
- * ·µ»ØÕ»¶¥ÔªËØ
+ * è¿”å›æ ˆé¡¶å…ƒç´ 
  */
 template<typename T>
 T LinkStack<T>::get_top() const{
     if(top == nullptr)
-        throw std::out_of_range("Õ»Îª¿Õ");
+        throw std::out_of_range("æ ˆä¸ºç©º");
     return top->data;
 }

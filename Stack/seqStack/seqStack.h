@@ -1,27 +1,27 @@
-//Ë³ĞòÕ»£¬Static sequential stack
-//²»ÄÜ×Ô¶¯À©Èİ£¬¶¨Òåºó³¤¶È¹Ì¶¨
+//é¡ºåºæ ˆï¼ŒStatic sequential stack
+//ä¸èƒ½è‡ªåŠ¨æ‰©å®¹ï¼Œå®šä¹‰åé•¿åº¦å›ºå®š
 
 #pragma once
 
 template<typename T>
 class seqStack{
 private:
-    T *data;//´æ·ÅÕ»Êı¾İµÄÊı×é»ùµØÖ·
-    int top; // Õ»¶¥ÔªËØµÄÏÂ±ê£¬== -1Ê±±íÊ¾Õ»¿Õ
-    int maxlen; // Õ»µÄÕ»µÄ×î´ó³¤¶È£¬¼´Êı×éµÄ´óĞ¡
+    T *data;//å­˜æ”¾æ ˆæ•°æ®çš„æ•°ç»„åŸºåœ°å€
+    int top; // æ ˆé¡¶å…ƒç´ çš„ä¸‹æ ‡ï¼Œ== -1æ—¶è¡¨ç¤ºæ ˆç©º
+    int maxlen; // æ ˆçš„æ ˆçš„æœ€å¤§é•¿åº¦ï¼Œå³æ•°ç»„çš„å¤§å°
 
 public:
-    seqStack(const int init_len = 100);//¹¹Ôìº¯Êı£¬init_lenÊÇÕ»µÄ×î´ó³¤¶È(Êı×éµÄ´óĞ¡)
-    ~seqStack() { delete[] data; } //Îö¹¹º¯Êı
-    seqStack(const seqStack& obj);//¿½±´¹¹Ôìº¯Êı
-    seqStack<T>& operator=(const seqStack& obj);//¸³ÖµÔËËã·û
+    seqStack(const int init_len = 100);//æ„é€ å‡½æ•°ï¼Œinit_lenæ˜¯æ ˆçš„æœ€å¤§é•¿åº¦(æ•°ç»„çš„å¤§å°)
+    ~seqStack() { delete[] data; } //ææ„å‡½æ•°
+    seqStack(const seqStack& obj);//æ‹·è´æ„é€ å‡½æ•°
+    seqStack<T>& operator=(const seqStack& obj);//èµ‹å€¼è¿ç®—ç¬¦
 
-    void clear() { top = -1; } //Çå¿ÕÕ»
-    bool isEmpty()const { return top == -1;} //ÅĞ¿Õ
-    int getLength()const { return top+1; } //»ñÈ¡Õ»µÄÊı¾İ¸öÊı
-    void push(const T elem); //ÈëÕ»
-    T pop(); //³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
-    T get_top()const; //»ñÈ¡Õ»¶¥ÔªËØ
+    void clear() { top = -1; } //æ¸…ç©ºæ ˆ
+    bool isEmpty()const { return top == -1;} //åˆ¤ç©º
+    int getLength()const { return top+1; } //è·å–æ ˆçš„æ•°æ®ä¸ªæ•°
+    void push(const T elem); //å…¥æ ˆ
+    T pop(); //å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
+    T get_top()const; //è·å–æ ˆé¡¶å…ƒç´ 
 };
 
 

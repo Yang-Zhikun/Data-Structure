@@ -1,7 +1,7 @@
-// ��
-//ģʽƥ���㷨
-//1.BFģʽƥ���㷨
-//2.KMPģʽƥ���㷨
+// 串
+//模式匹配算法
+//1.BF模式匹配算法
+//2.KMP模式匹配算法
 
 #include<stdio.h>
 #include<string.h>
@@ -14,88 +14,88 @@ void getNext(const char *T, unsigned int next[]);
 
 
 /**
- * BFģʽƥ���㷨�������ִ�T������S��һ�γ��ֵ��±�(-1��ʾƥ��ʧ��)
- * @param S ����
- * @param T �ִ�(ģʽ��)
+ * BF模式匹配算法，返回字串T在主串S第一次出现的下标(-1表示匹配失败)
+ * @param S 主串
+ * @param T 字串(模式串)
  */
 int BF_match(const char *S, const char *T){
-    unsigned int S_len = strlen(S); // ��ȡ���ַ���S�ĳ���  
-    unsigned int T_len = strlen(T); // ��ȡ���ַ���T�ĳ���  
-    // ���TΪ�ջ���T�ĳ��ȴ���S�ĳ��ȣ����޷��ҵ�ƥ�䣬����-1  
+    unsigned int S_len = strlen(S); // 获取主字符串S的长度  
+    unsigned int T_len = strlen(T); // 获取子字符串T的长度  
+    // 如果T为空或者T的长度大于S的长度，则无法找到匹配，返回-1  
     if(T_len == 0 || T_len > S_len){
         return -1;
     }
-    unsigned int i = 0, j = 0; // ��ʼ������ָ�룬iָ��S�ĵ�ǰ�ַ���jָ��T�ĵ�ǰ�ַ�  
-    // ��iû�г���S�ĳ�����jû�г���T�ĳ���ʱ������ѭ��  
+    unsigned int i = 0, j = 0; // 初始化两个指针，i指向S的当前字符，j指向T的当前字符  
+    // 当i没有超出S的长度且j没有超出T的长度时，继续循环  
     while(i < S_len && j < T_len){
-        if(S[i] == T[j]){ // �����ǰ�ַ�ƥ��  
-            i++; // �ƶ�S��ָ��  
-            j++; // �ƶ�T��ָ��  
+        if(S[i] == T[j]){ // 如果当前字符匹配  
+            i++; // 移动S的指针  
+            j++; // 移动T的指针  
         }
-        else{ // �����ǰ�ַ���ƥ��  
-            i = i - j + 1; // i�˻ص���ƥ���ַ�֮ǰ��λ�õ���һ���ַ�����׼������ƥ��  
-            j = 0; // T��ָ������Ϊ��ʼλ��  
+        else{ // 如果当前字符不匹配  
+            i = i - j + 1; // i退回到不匹配字符之前的位置的下一个字符，并准备重新匹配  
+            j = 0; // T的指针重置为起始位置  
         }
     }
-    // ���j����T�ĳ��ȣ�˵���ҵ���ƥ�䣬����ƥ����ʼλ�õ�����  
+    // 如果j等于T的长度，说明找到了匹配，返回匹配起始位置的索引  
     if(j == T_len){
-        return i - T_len; // ����ƥ���Ӵ��������е���ʼ����  
+        return i - T_len; // 返回匹配子串在主串中的起始索引  
     }
-    // ���û���ҵ�ƥ�䣬����-1  
+    // 如果没有找到匹配，返回-1  
     return -1;
 }
 
 
 
 /**
- * KMPģʽƥ���㷨�������ִ�T������S��һ�γ��ֵ��±�(-1��ʾƥ��ʧ��)
- * @param S ����
- * @param T �ִ�(ģʽ��)
+ * KMP模式匹配算法，返回字串T在主串S第一次出现的下标(-1表示匹配失败)
+ * @param S 主串
+ * @param T 字串(模式串)
  */
 int KMP_match(const char *S, const char *T){
-    unsigned int S_len = strlen(S); // ��ȡ����S�ĳ���  
-    unsigned int T_len = strlen(T); // ��ȡģʽ��T�ĳ���  
-    if(T_len == 0 || T_len > S_len){ // ���ģʽ��Ϊ�ջ򳤶ȴ���������ֱ�ӷ���-1  
+    unsigned int S_len = strlen(S); // 获取主串S的长度  
+    unsigned int T_len = strlen(T); // 获取模式串T的长度  
+    if(T_len == 0 || T_len > S_len){ // 如果模式串为空或长度大于主串，直接返回-1  
         return -1;
     }
-    unsigned int *next = new unsigned int[T_len+1]; // ��̬����next���飬����ΪT_len+1  
-    getNext(T, next); // ����getNext��������next����  
-    unsigned int i = 0, j = 0; // ��ʼ������ָ�룬iָ������S��jָ��ģʽ��T  
-    for(i = 0; i < S_len; i++){ // ��������S  
-        while(j > 0 && S[i] != T[j]){ // ��j��Ϊ0�ҵ�ǰ�ַ���ƥ��ʱ������next�������j  
+    unsigned int *next = new unsigned int[T_len+1]; // 动态分配next数组，长度为T_len+1  
+    getNext(T, next); // 调用getNext函数计算next数组  
+    unsigned int i = 0, j = 0; // 初始化两个指针，i指向主串S，j指向模式串T  
+    for(i = 0; i < S_len; i++){ // 遍历主串S  
+        while(j > 0 && S[i] != T[j]){ // 当j不为0且当前字符不匹配时，利用next数组回退j  
             j = next[j];
         }
-        if(S[i] == T[j]){ // �����ǰ�ַ�ƥ�䣬��������ƥ��  
+        if(S[i] == T[j]){ // 如果当前字符匹配，则继续向后匹配  
             j++;
         }
-        if(j == T_len){ // ���j����T_len��˵���ҵ���������ƥ��  
-            delete[] next; // �ͷ�next����ռ�õ��ڴ�  
-            return i - j + 1; // ����ƥ�俪ʼ��λ�ã�ע�����������  
+        if(j == T_len){ // 如果j等于T_len，说明找到了完整的匹配  
+            delete[] next; // 释放next数组占用的内存  
+            return i - j + 1; // 返回匹配开始的位置（注意调整索引）  
         }
     }
-    delete[] next; // ���û���ҵ�ƥ�䣬�ͷ�next����ռ�õ��ڴ�  
-    return -1; // ����-1��ʾƥ��ʧ��  
+    delete[] next; // 如果没有找到匹配，释放next数组占用的内存  
+    return -1; // 返回-1表示匹配失败  
 }
 
 /**
- * KMPģʽƥ���㷨�����next����
- * @param T �ִ�(ģʽ��)
- * @param next next�����ָ�룬����ΪT_len+1
- * next�������ڴ洢ģʽ��T��ÿ��λ��֮ǰ������ǰ��׺�ĳ���+1
+ * KMP模式匹配算法：求解next数组
+ * @param T 字串(模式串)
+ * @param next next数组的指针，长度为T_len+1
+ * next数组用于存储模式串T中每个位置之前的最长相等前后缀的长度+1
  */
 void getNext(const char *T, unsigned int next[]){
-    unsigned int T_len = strlen(T); // ��ȡģʽ��T�ĳ���  
-    next[0] = 0; // next[0]����0����Ϊǰ׺Ϊ��  
-    if(T_len > 1) next[1] = 0; // ���ģʽ�����ȴ���1��next[1]ҲΪ0����Ϊֻ��һ���ַ�û��ǰ��׺  
-    unsigned int i = 2, j = 0; // ��ʼ������ָ�룬i���ڱ���ģʽ��T��j���ڼ�¼����ǰ��׺�ĳ���  
-    for(i = 2; i <= T_len; i++){ // ע������i��2��ʼ����Ϊnext[0]��next[1]�Ѿ���ʼ��  
-        while(j > 0 && T[i-1]!=T[j]){ // ��j��Ϊ0�ҵ�ǰ�ַ���ƥ��ʱ������next�������j  
+    unsigned int T_len = strlen(T); // 获取模式串T的长度  
+    next[0] = 0; // next[0]总是0，因为前缀为空  
+    if(T_len > 1) next[1] = 0; // 如果模式串长度大于1，next[1]也为0，因为只有一个字符没有前后缀  
+    unsigned int i = 2, j = 0; // 初始化两个指针，i用于遍历模式串T，j用于记录最长相等前后缀的长度  
+    for(i = 2; i <= T_len; i++){ // 注意这里i从2开始，因为next[0]和next[1]已经初始化  
+        while(j > 0 && T[i-1]!=T[j]){ // 当j不为0且当前字符不匹配时，利用next数组回退j  
             j = next[j];
         }
-        if(T[i-1] == T[j]){ // �����ǰ�ַ�ƥ�䣬������ǰ��׺����+1  
+        if(T[i-1] == T[j]){ // 如果当前字符匹配，则最长相等前后缀长度+1  
             j++;
         }
-        next[i] = j; // ����next[i]  
+        next[i] = j; // 更新next[i]  
     }
 }
 

@@ -11,42 +11,42 @@ private:
         node *next;
     };
 
-    node *top; // Õ»¶¥Ö¸Õë£¬Ò²ÊÇÍ·Ö¸Õë
-    unsigned int length; // Á´Õ»ÖĞÊı¾İ¸öÊı
+    node *top; // æ ˆé¡¶æŒ‡é’ˆï¼Œä¹Ÿæ˜¯å¤´æŒ‡é’ˆ
+    unsigned int length; // é“¾æ ˆä¸­æ•°æ®ä¸ªæ•°
 
 public:
-    LinkStack(); // ¹¹Ôìº¯Êı
-    ~LinkStack(); // Îö¹¹º¯Êı
-    LinkStack(const LinkStack& obj); // ¿½±´¹¹Ôìº¯Êı
-    LinkStack<T>& operator=(const LinkStack& obj); // ¸³ÖµÔËËã·û
+    LinkStack(); // æ„é€ å‡½æ•°
+    ~LinkStack(); // ææ„å‡½æ•°
+    LinkStack(const LinkStack& obj); // æ‹·è´æ„é€ å‡½æ•°
+    LinkStack<T>& operator=(const LinkStack& obj); // èµ‹å€¼è¿ç®—ç¬¦
 
-    void clear(); // Çå¿ÕÕ»
-    bool isEmpty() const{ return top==nullptr; } // ÅĞ¿Õ
-    int getLength() const{ return length; } // »ñÈ¡Á´Õ»Êı¾İ¸öÊı
-    void push(const T elem); // ÈëÕ»
-    T pop(); // ³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
-    T get_top() const; // ·µ»ØÕ»¶¥ÔªËØ
+    void clear(); // æ¸…ç©ºæ ˆ
+    bool isEmpty() const{ return top==nullptr; } // åˆ¤ç©º
+    int getLength() const{ return length; } // è·å–é“¾æ ˆæ•°æ®ä¸ªæ•°
+    void push(const T elem); // å…¥æ ˆ
+    T pop(); // å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
+    T get_top() const; // è¿”å›æ ˆé¡¶å…ƒç´ 
 };
 
 
 
 
 
-template<typename T>//¹¹Ôìº¯Êı
+template<typename T>//æ„é€ å‡½æ•°
 LinkStack<T>::LinkStack(){
     top = nullptr;
     length = 0;
 }
 
-template<typename T>//Îö¹¹º¯Êı
+template<typename T>//ææ„å‡½æ•°
 LinkStack<T>::~LinkStack(){
     clear();
 }
 
-template<typename T>//¿½±´¹¹Ôìº¯Êı
+template<typename T>//æ‹·è´æ„é€ å‡½æ•°
 LinkStack<T>::LinkStack(const LinkStack & obj){
     top = nullptr;
-    node *tail = top;//Î²Ö¸Õë
+    node *tail = top;//å°¾æŒ‡é’ˆ
     for(node *p = obj.top; p!=nullptr; p = p->next){
         node * newnode = new node;
         newnode->data = p->data;
@@ -56,11 +56,11 @@ LinkStack<T>::LinkStack(const LinkStack & obj){
     }
 }
 
-template<typename T>//¸³ÖµÔËËã·û
+template<typename T>//èµ‹å€¼è¿ç®—ç¬¦
 LinkStack<T>& LinkStack<T>::operator=(const LinkStack & obj){
-    if(*this!=obj){ // ·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){ // é˜²æ­¢è‡ªèµ‹å€¼
         top = nullptr;
-        node *tail = top;//Î²Ö¸Õë
+        node *tail = top;//å°¾æŒ‡é’ˆ
         for(node *p = obj.top; p!=nullptr; p = p->next){
             node * newnode = new node;
             newnode->data = p->data;
@@ -71,42 +71,42 @@ LinkStack<T>& LinkStack<T>::operator=(const LinkStack & obj){
     }
 }
 
-template<typename T>//Çå¿ÕÕ»
+template<typename T>//æ¸…ç©ºæ ˆ
 void LinkStack<T>::clear(){
     node *p;
     while(top!=nullptr){
-        p = top; // pÖ¸Ïòµ±Ç°µÄÕ»¶¥ÔªËØ
-        top = top->next; // topÏòºóÒÆ¶¯
+        p = top; // pæŒ‡å‘å½“å‰çš„æ ˆé¡¶å…ƒç´ 
+        top = top->next; // topå‘åç§»åŠ¨
         delete p;
     }
     length = 0;
 }
 
-template<typename T>//ÈëÕ»
+template<typename T>//å…¥æ ˆ
 void LinkStack<T>::push(const T elem){
     node *newnode = new node;
     newnode->data = elem;
-    newnode->next = top; // newnodeµÄnextÖ¸ÏòÔ­À´µÄÕ»¶¥ÔªËØ
-    top = newnode; // topÍ·Ö¸ÕëÖ¸Ïònewnode, newnode³ÉÎªĞÂµÄÕ»¶¥ÔªËØ
+    newnode->next = top; // newnodeçš„nextæŒ‡å‘åŸæ¥çš„æ ˆé¡¶å…ƒç´ 
+    top = newnode; // topå¤´æŒ‡é’ˆæŒ‡å‘newnode, newnodeæˆä¸ºæ–°çš„æ ˆé¡¶å…ƒç´ 
     length++;
 }
 
-template<typename T>// ³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
+template<typename T>// å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
 T LinkStack<T>::pop(){
     if(top == nullptr)
-        throw std::out_of_range("Õ»Îª¿Õ");
+        throw std::out_of_range("æ ˆä¸ºç©º");
     T tmp = top->data;
-    node *p = top;//Ôİ´æÕ»¶¥½Úµã
-    top= top->next;//topÖ¸ÏòÕ»¶¥ÔªËØµÄºó¼Ì£¬¼´ÏòºóÒÆ¶¯
+    node *p = top;//æš‚å­˜æ ˆé¡¶èŠ‚ç‚¹
+    top= top->next;//topæŒ‡å‘æ ˆé¡¶å…ƒç´ çš„åç»§ï¼Œå³å‘åç§»åŠ¨
     delete p;
     length--;
     return tmp;
 }
 
-template<typename T>// ·µ»ØÕ»¶¥ÔªËØ
+template<typename T>// è¿”å›æ ˆé¡¶å…ƒç´ 
 T LinkStack<T>::get_top() const{
     if(top == nullptr)
-        throw std::out_of_range("Õ»Îª¿Õ");
+        throw std::out_of_range("æ ˆä¸ºç©º");
     return top->data;
 }
 

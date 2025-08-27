@@ -1,34 +1,34 @@
-//¾²Ì¬Ë³Ğò±í, Static sequential list
-//²»ÄÜ×Ô¶¯À©Èİ£¬¶¨Òåºó±í³¤¹Ì¶¨
+//é™æ€é¡ºåºè¡¨, Static sequential list
+//ä¸èƒ½è‡ªåŠ¨æ‰©å®¹ï¼Œå®šä¹‰åè¡¨é•¿å›ºå®š
 
 #pragma once
 
-const int MAXLEN = 100;    //¾²Ì¬Ë³Ğò±íµÄ×î´ó±í³¤
+const int MAXLEN = 100;    //é™æ€é¡ºåºè¡¨çš„æœ€å¤§è¡¨é•¿
 
 template<typename T>
 class S_seqList{
 private:
-    T data[MAXLEN];//´æ·ÅÊı¾İµÄÊ×µØÖ·
-    unsigned int length;//µ±Ç°Ë³Ğò±íÖĞÊı¾İ¸öÊı
+    T data[MAXLEN];//å­˜æ”¾æ•°æ®çš„é¦–åœ°å€
+    unsigned int length;//å½“å‰é¡ºåºè¡¨ä¸­æ•°æ®ä¸ªæ•°
 
 public:
-    S_seqList();//¹¹Ôìº¯Êı
-    S_seqList(const S_seqList& obj);//¿½±´¹¹Ôìº¯Êı
-    S_seqList<T>& operator=(const S_seqList& obj);//¸³ÖµÔËËã·û
+    S_seqList();//æ„é€ å‡½æ•°
+    S_seqList(const S_seqList& obj);//æ‹·è´æ„é€ å‡½æ•°
+    S_seqList<T>& operator=(const S_seqList& obj);//èµ‹å€¼è¿ç®—ç¬¦
 
-    unsigned int getLength()const{ return length; }//»ñÈ¡±í³¤length
-    void clear(){ length = 0; };//Çå¿ÕË³Ğò±í
-    bool isEmpty()const{ return length==0; }//ÅĞ¶ÏË³Ğò±íÊÇ·ñÎª¿Õ
-    void traverse()const;//±éÀúË³Ğò±í
-    T operator[] (const unsigned int i)const;//ÔËËã·û[]£º»ñÈ¡Ë³Ğò±íÎ»ĞòiµÄÊı¾İ(0<=i<length)
-    T& operator[] (const unsigned int i);//ÔËËã·û[]£º·µ»ØË³Ğò±íÎ»ĞòiµÄÊı¾İµÄÒıÓÃ(0<=i<length)
-    void set(const unsigned int i, const T elem){ this->operator[](i) = elem; }//½«Ë³Ğò±íÎ»ĞòÎªiµÄÔªËØµÄÖµ¸ÄÎªelem(0<=i<length)
-    T get(const unsigned int i)const{ return operator[](i); }//»ñÈ¡Ë³Ğò±íÎ»ĞòiµÄÊı¾İ(0<=i<length)
-    void insert(const unsigned int i, const T elem);//ÔÚË³Ğò±íÎ»Ğòi´¦²åÈëÒ»¸öÊı¾İ(0<=i<=length)
-    void push_back(const T elem){ insert(length, elem); }//ÔÚË³Ğò±íÄ©Î²²åÈëÒ»¸öÊı¾İ
-    void remove(const unsigned int i);//É¾³ıË³Ğò±íÎ»ĞòiÉÏÊı¾İ(0<=i<length)
-    void pop_back(){ remove(length-1); }//É¾³ıË³Ğò±íÄ©Î²µÄÒ»¸öÊı¾İ
-    void reserve();//ÄæÖÃË³Ğò±í
+    unsigned int getLength()const{ return length; }//è·å–è¡¨é•¿length
+    void clear(){ length = 0; };//æ¸…ç©ºé¡ºåºè¡¨
+    bool isEmpty()const{ return length==0; }//åˆ¤æ–­é¡ºåºè¡¨æ˜¯å¦ä¸ºç©º
+    void traverse()const;//éå†é¡ºåºè¡¨
+    T operator[] (const unsigned int i)const;//è¿ç®—ç¬¦[]ï¼šè·å–é¡ºåºè¡¨ä½åºiçš„æ•°æ®(0<=i<length)
+    T& operator[] (const unsigned int i);//è¿ç®—ç¬¦[]ï¼šè¿”å›é¡ºåºè¡¨ä½åºiçš„æ•°æ®çš„å¼•ç”¨(0<=i<length)
+    void set(const unsigned int i, const T elem){ this->operator[](i) = elem; }//å°†é¡ºåºè¡¨ä½åºä¸ºiçš„å…ƒç´ çš„å€¼æ”¹ä¸ºelem(0<=i<length)
+    T get(const unsigned int i)const{ return operator[](i); }//è·å–é¡ºåºè¡¨ä½åºiçš„æ•°æ®(0<=i<length)
+    void insert(const unsigned int i, const T elem);//åœ¨é¡ºåºè¡¨ä½åºiå¤„æ’å…¥ä¸€ä¸ªæ•°æ®(0<=i<=length)
+    void push_back(const T elem){ insert(length, elem); }//åœ¨é¡ºåºè¡¨æœ«å°¾æ’å…¥ä¸€ä¸ªæ•°æ®
+    void remove(const unsigned int i);//åˆ é™¤é¡ºåºè¡¨ä½åºiä¸Šæ•°æ®(0<=i<length)
+    void pop_back(){ remove(length-1); }//åˆ é™¤é¡ºåºè¡¨æœ«å°¾çš„ä¸€ä¸ªæ•°æ®
+    void reserve();//é€†ç½®é¡ºåºè¡¨
 };
 
 

@@ -1,56 +1,56 @@
 #include"D_seqList.h"
 #include<iostream>
-#include <stdexcept> // °üº¬std::out_of_rangeºÍstd::invalid_argument  
+#include <stdexcept> // åŒ…å«std::out_of_rangeå’Œstd::invalid_argument  
 using namespace std;
 
-template<typename T>//¹¹Ôìº¯Êı
+template<typename T>//æ„é€ å‡½æ•°
 D_seqList<T>::D_seqList(){
     data = new T[2];
-    if(!data){//ÄÚ´æ·ÖÅäÊ§°Ü
+    if(!data){//å†…å­˜åˆ†é…å¤±è´¥
         throw std::bad_alloc();
         return;
     }
     length = 0;
-    maxLen = 2;//³õÊ¼Ê±×î´ó±í³¤Îª2
+    maxLen = 2;//åˆå§‹æ—¶æœ€å¤§è¡¨é•¿ä¸º2
 }
 
 
-template<typename T>//¿½±´¹¹Ôìº¯Êı
+template<typename T>//æ‹·è´æ„é€ å‡½æ•°
 D_seqList<T>::D_seqList(const D_seqList<T> &sl): maxLen(sl.maxLen), length(sl.length){
-    // ¶¯Ì¬·ÖÅäÄÚ´æ  
+    // åŠ¨æ€åˆ†é…å†…å­˜  
     data = new T[maxLen];
-    // ¼ì²éÄÚ´æ·ÖÅäÊÇ·ñÊ§°Ü  
+    // æ£€æŸ¥å†…å­˜åˆ†é…æ˜¯å¦å¤±è´¥  
     if(!data){
-        // Å×³öÒì³££¬Ê¹ÓÃ±ê×¼Òì³£ÀàĞÍ  
+        // æŠ›å‡ºå¼‚å¸¸ï¼Œä½¿ç”¨æ ‡å‡†å¼‚å¸¸ç±»å‹  
         throw std::bad_alloc();
     }
-    // ½«slµÄÊı¾İ¸´ÖÆµ½ĞÂ¶ÔÏó  
+    // å°†slçš„æ•°æ®å¤åˆ¶åˆ°æ–°å¯¹è±¡  
     for(int i = 0; i < length; i++){
         data[i] = sl.data[i];
     }
 }
 
 
-template<typename T>//¸³ÖµÔËËã·û
+template<typename T>//èµ‹å€¼è¿ç®—ç¬¦
 D_seqList<T>& D_seqList<T>::operator=(const D_seqList<T> &sl){
 /*
-ÔÚµÄ¸³ÖµÔËËã·ûÊµÏÖÖĞ£¬ÊÔÍ¼Í¨¹ıµ÷ÓÃ¿½±´¹¹Ôìº¯ÊıÀ´¸³Öµ£¬µ«ÕâÊÇ²»ÕıÈ·µÄ¡£²»ÄÜÓÃ *this = D_seqList(sl);
-Õâ»áµ¼ÖÂÎŞÏŞµİ¹é£¬ÒòÎª¸³ÖµÔËËã·û±¾ÉíÔÚ¸³Öµ¹ı³ÌÖĞ±»µ÷ÓÃ£¬¶øÓÖÔÚÆäÖĞµ÷ÓÃÁË¿½±´¹¹Ôìº¯Êı£¬
-    ¸Ã¹¹Ôìº¯Êı×îÖÕ»á³¢ÊÔµ÷ÓÃ¸³ÖµÔËËã·û£¨Èç¹ûËüÓĞÈÎºÎ×ÊÔ´ĞèÒª¹ÜÀí£©¡£
-Ó¦¸ÃÖ±½ÓÔÚ¸³ÖµÔËËã·ûÄÚ²¿½øĞĞÉî¿½±´£¬¶ø²»ÊÇ´´½¨ÁÙÊ±¶ÔÏó¡£    */
+åœ¨çš„èµ‹å€¼è¿ç®—ç¬¦å®ç°ä¸­ï¼Œè¯•å›¾é€šè¿‡è°ƒç”¨æ‹·è´æ„é€ å‡½æ•°æ¥èµ‹å€¼ï¼Œä½†è¿™æ˜¯ä¸æ­£ç¡®çš„ã€‚ä¸èƒ½ç”¨ *this = D_seqList(sl);
+è¿™ä¼šå¯¼è‡´æ— é™é€’å½’ï¼Œå› ä¸ºèµ‹å€¼è¿ç®—ç¬¦æœ¬èº«åœ¨èµ‹å€¼è¿‡ç¨‹ä¸­è¢«è°ƒç”¨ï¼Œè€Œåˆåœ¨å…¶ä¸­è°ƒç”¨äº†æ‹·è´æ„é€ å‡½æ•°ï¼Œ
+    è¯¥æ„é€ å‡½æ•°æœ€ç»ˆä¼šå°è¯•è°ƒç”¨èµ‹å€¼è¿ç®—ç¬¦ï¼ˆå¦‚æœå®ƒæœ‰ä»»ä½•èµ„æºéœ€è¦ç®¡ç†ï¼‰ã€‚
+åº”è¯¥ç›´æ¥åœ¨èµ‹å€¼è¿ç®—ç¬¦å†…éƒ¨è¿›è¡Œæ·±æ‹·è´ï¼Œè€Œä¸æ˜¯åˆ›å»ºä¸´æ—¶å¯¹è±¡ã€‚    */
 
-    if(this != &sl){ // ·ÀÖ¹×Ô¸³Öµ  
+    if(this != &sl){ // é˜²æ­¢è‡ªèµ‹å€¼  
         T* newData = new T[sl.maxLen];
         if(!newData){
             throw std::bad_alloc();
         }
-        // ¸´ÖÆÊı¾İ  
+        // å¤åˆ¶æ•°æ®  
         for(int i = 0; i < sl.length; i++){
             newData[i] = sl.data[i];
         }
-        // ÊÍ·Å¾ÉÄÚ´æ  
+        // é‡Šæ”¾æ—§å†…å­˜  
         delete[] data;
-        // ¸üĞÂ³ÉÔ±±äÁ¿  
+        // æ›´æ–°æˆå‘˜å˜é‡  
         data = newData;
         length = sl.length;
         maxLen = sl.maxLen;
@@ -60,19 +60,19 @@ D_seqList<T>& D_seqList<T>::operator=(const D_seqList<T> &sl){
 
 
 
-template<typename T>//Ë³Ğò±íÂúÊ±À©Èİ
+template<typename T>//é¡ºåºè¡¨æ»¡æ—¶æ‰©å®¹
 void D_seqList<T>::resize(){
     T* newData = new T[maxLen * 2];
     if(!newData){
         throw std::bad_alloc();
     }
-    // ¸´ÖÆÊı¾İ  
+    // å¤åˆ¶æ•°æ®  
     for(int i = 0; i < length; i++){
         newData[i] = data[i];
     }
-    // ÊÍ·Å¾ÉÄÚ´æ  
+    // é‡Šæ”¾æ—§å†…å­˜  
     delete[] data;
-    // ¸üĞÂ³ÉÔ±±äÁ¿  
+    // æ›´æ–°æˆå‘˜å˜é‡  
     data = newData;
     maxLen *= 2;
 }
@@ -80,7 +80,7 @@ void D_seqList<T>::resize(){
 
 
 
-template<typename T>//±éÀúË³Ğò±í
+template<typename T>//éå†é¡ºåºè¡¨
 void D_seqList<T>::traverse()const{
     for(int i=0; i<length; i++){
         cout<<data[i]<<" ";
@@ -90,73 +90,73 @@ void D_seqList<T>::traverse()const{
 
 
 
-template<typename T>//ÔËËã·û[]£º»ñÈ¡Ë³Ğò±íÎ»ĞòiµÄÊı¾İ(0<=i<length)
+template<typename T>//è¿ç®—ç¬¦[]ï¼šè·å–é¡ºåºè¡¨ä½åºiçš„æ•°æ®(0<=i<length)
 T D_seqList<T>::operator[] (const unsigned int i)const{
     if(i>=length || i<0){
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
     }
     else{
         return data[i];
     }
 }
 
-template<typename T>//ÔËËã·û[]£º·µ»ØË³Ğò±íÎ»ĞòiµÄÊı¾İµÄÒıÓÃ(0<=i<length)
+template<typename T>//è¿ç®—ç¬¦[]ï¼šè¿”å›é¡ºåºè¡¨ä½åºiçš„æ•°æ®çš„å¼•ç”¨(0<=i<length)
 T& D_seqList<T>::operator[](const unsigned int i){
     if(i>=length || i<0){
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
     }
     else{
         return data[i];
     }
 }
 
-template<typename T>//ÔÚË³Ğò±íÎ»Ğòi´¦²åÈëÒ»¸öÊı¾İ(0<=i<=length)
+template<typename T>//åœ¨é¡ºåºè¡¨ä½åºiå¤„æ’å…¥ä¸€ä¸ªæ•°æ®(0<=i<=length)
 void D_seqList<T>::insert(const unsigned int i, const T elem){
-    if(i>length ||i<0){//²åÈëµÄÎ»ÖÃ²»ºÏ·¨
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
+    if(i>length ||i<0){//æ’å…¥çš„ä½ç½®ä¸åˆæ³•
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
     }
-    if(i==length){//i==length±íÊ¾²åÈëµ½Ë³Ğò±íµÄÄ©Î²
+    if(i==length){//i==lengthè¡¨ç¤ºæ’å…¥åˆ°é¡ºåºè¡¨çš„æœ«å°¾
         try{
-            resize();//±íÂúÀ©Èİ
+            resize();//è¡¨æ»¡æ‰©å®¹
         }
         catch(std::bad_alloc()){
-            throw "²åÈëÊı¾İÊ§°Ü£¡";
+            throw "æ’å…¥æ•°æ®å¤±è´¥ï¼";
         }
     }
-    //½«Î»ĞòiºóµÄÊı¾İ¶¼ºóÒÆÒ»¸öÎ»ÖÃ
+    //å°†ä½åºiåçš„æ•°æ®éƒ½åç§»ä¸€ä¸ªä½ç½®
     for(int j=length; j>i; j--){
         data[j] = data[j-1];
     }
-    data[i] = elem;//²åÈëÊı¾İ
-    length++;//Ë³Ğò±í³¤¶È¼Ó1
+    data[i] = elem;//æ’å…¥æ•°æ®
+    length++;//é¡ºåºè¡¨é•¿åº¦åŠ 1
 }
 
 
-template<typename T>//É¾³ıË³Ğò±íÎ»ĞòiÉÏÊı¾İ(0<=i<length)
+template<typename T>//åˆ é™¤é¡ºåºè¡¨ä½åºiä¸Šæ•°æ®(0<=i<length)
 void D_seqList<T>::remove(const unsigned int i){
     if(i>=length || i<0){
-        throw std::out_of_range("´«ÈëµÄÎ»Ğòi²»ÕıÈ·");
+        throw std::out_of_range("ä¼ å…¥çš„ä½åºiä¸æ­£ç¡®");
     }
-    //½«ÒªÉ¾³ıµÄÊı¾İºóÃæµÄÊı¾İÈ«²¿Ç°ÒÆÒ»¸öÎ»ÖÃ£¬¸²¸ÇÒªÉ¾³ıµÄÊı¾İ
+    //å°†è¦åˆ é™¤çš„æ•°æ®åé¢çš„æ•°æ®å…¨éƒ¨å‰ç§»ä¸€ä¸ªä½ç½®ï¼Œè¦†ç›–è¦åˆ é™¤çš„æ•°æ®
     for(int j=i; j<length-1; j++){
         data[j] = data[j+1];
     }
-    length--;//Ë³Ğò±í³¤¶È¼õ1
+    length--;//é¡ºåºè¡¨é•¿åº¦å‡1
 }
 
-template<typename T>//ÄæÖÃË³Ğò±í
+template<typename T>//é€†ç½®é¡ºåºè¡¨
 void D_seqList<T>::reserve(){
     if(length == 0)
         return;
-    //´ÓÁ½¶ËÏòÖĞ¼ä½øĞĞÈı½Ç½»»»
+    //ä»ä¸¤ç«¯å‘ä¸­é—´è¿›è¡Œä¸‰è§’äº¤æ¢
     T tmp;
-    int i=0, j=length-1;//Í·¡¢Î²Á½¸ö¹¤×÷Ö¸Õë
+    int i=0, j=length-1;//å¤´ã€å°¾ä¸¤ä¸ªå·¥ä½œæŒ‡é’ˆ
     while(i<j){
-        //½»»»i,jËùÖ¸µÄÊı
+        //äº¤æ¢i,jæ‰€æŒ‡çš„æ•°
         tmp = data[i];
         data[i] = data[j];
         data[j] = tmp;
-        //Á½¸ö¹¤×÷Ö¸ÕëÏòÖĞ¼äÒÆ¶¯
+        //ä¸¤ä¸ªå·¥ä½œæŒ‡é’ˆå‘ä¸­é—´ç§»åŠ¨
         i++;
         j--;
     }

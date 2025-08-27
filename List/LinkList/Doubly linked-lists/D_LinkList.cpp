@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-template<typename T>//¹¹Ôìº¯Êı
+template<typename T>//æ„é€ å‡½æ•°
 D_LinkList<T>::D_LinkList(){
     head = new node;
     head->data = 0;
@@ -12,13 +12,13 @@ D_LinkList<T>::D_LinkList(){
     length = 0;
 }
 
-template<typename T>//Îö¹¹º¯Êı
+template<typename T>//ææ„å‡½æ•°
 D_LinkList<T>::~D_LinkList(){
     clear();
     delete head;
 }
 
-template<typename T>//¿½±´¹¹Ôìº¯Êı
+template<typename T>//æ‹·è´æ„é€ å‡½æ•°
 D_LinkList<T>::D_LinkList(const D_LinkList & obj){
     head = new node;
     head->data = 0;
@@ -37,7 +37,7 @@ D_LinkList<T>::D_LinkList(const D_LinkList & obj){
 
 template<typename T>
 D_LinkList<T>& D_LinkList<T>::operator=(const D_LinkList & obj){
-    if(*this!=obj){//·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){//é˜²æ­¢è‡ªèµ‹å€¼
         head = new node;
         head->data = 0;
         head->prev = nullptr;

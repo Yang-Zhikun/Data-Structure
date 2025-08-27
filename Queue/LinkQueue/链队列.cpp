@@ -2,19 +2,19 @@
 #include<stdexcept>
 using namespace std;
 
-//Á´¶ÓÁĞ
+//é“¾é˜Ÿåˆ—
 
 template<typename T>
 class LinkQueue{
 private:
-    struct node{ //Á´¶ÓÁĞ½Úµã
+    struct node{ //é“¾é˜Ÿåˆ—èŠ‚ç‚¹
         T data;
         node *next;
     };
     
-    node *front; //Á´¶ÓÁĞµÄ¶ÓÍ·Ö¸Õë
-    node *rear;  //Á´¶ÓÁĞµÄ¶ÓÎ²Ö¸Õë
-    unsigned int length; // Á´¶ÓÁĞµÄ³¤¶È
+    node *front; //é“¾é˜Ÿåˆ—çš„é˜Ÿå¤´æŒ‡é’ˆ
+    node *rear;  //é“¾é˜Ÿåˆ—çš„é˜Ÿå°¾æŒ‡é’ˆ
+    unsigned int length; // é“¾é˜Ÿåˆ—çš„é•¿åº¦
     
 public:
     LinkQueue() { front = rear = nullptr; length = 0; }
@@ -23,22 +23,22 @@ public:
     LinkQueue<T>& operator=(const LinkQueue &obj);
     
     void clear();
-    unsigned int getLength()const { return length; }  // »ñÈ¡Á´¶ÓÁĞµÄ³¤¶È
-    bool empty()const { return length == 0; }  //ÅĞ¿Õ
-    void enQueue(const T elem); //Èë¶Ó£¬ÔÚ¶ÓÎ²²åÈëÒ»¸öÔªËØ
-    T deQueue(); // ³ö¶Ó£¬²¢·µ»Ø³ö¶ÓµÄÊı¾İ
-    T get_front()const; //»ñÈ¡¶ÓÍ·Êı¾İ
+    unsigned int getLength()const { return length; }  // è·å–é“¾é˜Ÿåˆ—çš„é•¿åº¦
+    bool empty()const { return length == 0; }  //åˆ¤ç©º
+    void enQueue(const T elem); //å…¥é˜Ÿï¼Œåœ¨é˜Ÿå°¾æ’å…¥ä¸€ä¸ªå…ƒç´ 
+    T deQueue(); // å‡ºé˜Ÿï¼Œå¹¶è¿”å›å‡ºé˜Ÿçš„æ•°æ®
+    T get_front()const; //è·å–é˜Ÿå¤´æ•°æ®
 };
 
 
 
-template<typename T>//¿½±´¹¹Ôìº¯Êı
+template<typename T>//æ‹·è´æ„é€ å‡½æ•°
 LinkQueue<T>::LinkQueue(const LinkQueue &obj){
-    node *newnode = new node;//ĞÂ½¨Ò»¸ö½Úµã×÷ÎªÊ×Ôª½Úµã
+    node *newnode = new node;//æ–°å»ºä¸€ä¸ªèŠ‚ç‚¹ä½œä¸ºé¦–å…ƒèŠ‚ç‚¹
     newnode->data = obj.front->data;
     newnode->next = nullptr;
-    front = newnode;//¶ÓÍ·Ö¸ÕëÖ¸ÏòĞÂ½Úµã
-    rear = front;//¶ÓÎ²Ö¸ÕëÖ¸ÏòĞÂ½Úµã
+    front = newnode;//é˜Ÿå¤´æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
+    rear = front;//é˜Ÿå°¾æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
     for(node *p = obj.front->next; p!=nullptr; p = p->next){
         node *newnode;
         newnode->data = p->data;
@@ -49,14 +49,14 @@ LinkQueue<T>::LinkQueue(const LinkQueue &obj){
     length = obj.length;
 }
 
-template<typename T>//¸³ÖµÔËËã·û
+template<typename T>//èµ‹å€¼è¿ç®—ç¬¦
 LinkQueue<T>& LinkQueue<T>::operator=(const LinkQueue &obj){
     if(*this!=obj){
-        node *newnode = new node;//ĞÂ½¨Ò»¸ö½Úµã×÷ÎªÊ×Ôª½Úµã
+        node *newnode = new node;//æ–°å»ºä¸€ä¸ªèŠ‚ç‚¹ä½œä¸ºé¦–å…ƒèŠ‚ç‚¹
         newnode->data = obj.front->data;
         newnode->next = nullptr;
-        front = newnode;//¶ÓÍ·Ö¸ÕëÖ¸ÏòĞÂ½Úµã
-        rear = front;//¶ÓÎ²Ö¸ÕëÖ¸ÏòĞÂ½Úµã
+        front = newnode;//é˜Ÿå¤´æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
+        rear = front;//é˜Ÿå°¾æŒ‡é’ˆæŒ‡å‘æ–°èŠ‚ç‚¹
         for(node *p = obj.front->next; p!=nullptr; p = p->next){
             node *newnode;
             newnode->data = p->data;
@@ -69,7 +69,7 @@ LinkQueue<T>& LinkQueue<T>::operator=(const LinkQueue &obj){
     return *this;
 }
 
-template<typename T>//Çå¿ÕÁ´¶ÓÁĞ
+template<typename T>//æ¸…ç©ºé“¾é˜Ÿåˆ—
 void LinkQueue<T>::clear(){
     node *p, *tmp;
     p = front;
@@ -82,17 +82,17 @@ void LinkQueue<T>::clear(){
     length = 0;
 }
 
-template<typename T>//Èë¶Ó£¬ÔÚ¶ÓÎ²²åÈëÒ»¸öÔªËØ
+template<typename T>//å…¥é˜Ÿï¼Œåœ¨é˜Ÿå°¾æ’å…¥ä¸€ä¸ªå…ƒç´ 
 void LinkQueue<T>::enQueue(const T elem){
     node *newnode = new node;
     newnode->data = elem;
     newnode->next = nullptr;
-    //Èç¹ûÁ´¶ÓÁĞÎª¿Õ£¬Èë¶ÓÔªËØ¼ÈÊÇ¶ÓÍ·Ò²ÊÇ¶ÓÎ²
+    //å¦‚æœé“¾é˜Ÿåˆ—ä¸ºç©ºï¼Œå…¥é˜Ÿå…ƒç´ æ—¢æ˜¯é˜Ÿå¤´ä¹Ÿæ˜¯é˜Ÿå°¾
     if(empty()){
         front = rear = newnode;
         length++;
     }
-    //Á´¶ÓÁĞ²»Îª¿Õ
+    //é“¾é˜Ÿåˆ—ä¸ä¸ºç©º
     else{
         rear->next = newnode;
         rear = newnode;
@@ -100,23 +100,23 @@ void LinkQueue<T>::enQueue(const T elem){
     }
 }
 
-template<typename T>//³ö¶Ó£¬²¢·µ»Ø¶ÓÍ·ÔªËØ
+template<typename T>//å‡ºé˜Ÿï¼Œå¹¶è¿”å›é˜Ÿå¤´å…ƒç´ 
 T LinkQueue<T>::deQueue(){
-    if(empty()) throw std::out_of_range("¶ÓÁĞÎª¿Õ");
-    //É¾³ı¶ÓÍ·ÔªËØ
+    if(empty()) throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
+    //åˆ é™¤é˜Ÿå¤´å…ƒç´ 
     node *p = front;
     T data = front->data;
     front = front->next;
     delete p;
-    //Èç¹û³ö¶Óºó¶ÓÁĞÎª¿Õ£¬¾ÍĞŞ¸ÄrearÎªnullptr
+    //å¦‚æœå‡ºé˜Ÿåé˜Ÿåˆ—ä¸ºç©ºï¼Œå°±ä¿®æ”¹rearä¸ºnullptr
     if(front == nullptr) rear = nullptr;
     length--;
     return data;
 }
 
-template<typename T>//»ñÈ¡¶ÓÍ·ÔªËØ
+template<typename T>//è·å–é˜Ÿå¤´å…ƒç´ 
 T LinkQueue<T>::get_front()const{
-    if(empty()) throw std::out_of_range("¶ÓÁĞÎª¿Õ");
+    if(empty()) throw std::out_of_range("é˜Ÿåˆ—ä¸ºç©º");
     return front->data;
 }
 

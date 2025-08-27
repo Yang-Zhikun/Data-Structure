@@ -1,4 +1,4 @@
-//µ¥Á´±í(´øÍ·½áµã)
+//å•é“¾è¡¨(å¸¦å¤´ç»“ç‚¹)
 //Single-linked lists
 
 #pragma once
@@ -7,43 +7,42 @@ using namespace std;
 template<typename T>
 class S_LinkList{
 private:
-    struct node{//Ò»¸öµ¥Á´±í½Úµã
-        T data;//Êı¾İÓò£¬´æ·ÅÊı¾İ
-        node *next;//Ö¸ÕëÓò£¬´æ·ÅÏÂÒ»¸ö½ÚµãµÄµØÖ·
+    struct node{//ä¸€ä¸ªå•é“¾è¡¨èŠ‚ç‚¹
+        T data;//æ•°æ®åŸŸï¼Œå­˜æ”¾æ•°æ®
+        node *next;//æŒ‡é’ˆåŸŸï¼Œå­˜æ”¾ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„åœ°å€
     };
 
-    node *head;//µ¥Á´±íµÄÍ·Ö¸Õë
-    node *tail;//µ¥Á´±íµÄÎ²Ö¸Õë
-    unsigned int length;//µ¥Á´±íµÄµ±Ç°³¤¶È
+    node *head;//å•é“¾è¡¨çš„å¤´æŒ‡é’ˆ
+    node *tail;//å•é“¾è¡¨çš„å°¾æŒ‡é’ˆ
+    unsigned int length;//å•é“¾è¡¨çš„å½“å‰é•¿åº¦
 
-    node* getNode(unsigned int i)const;//»ñÈ¡µ¥Á´±íµÚi¸ö½ÚµãµÄÖ¸Õë(i´Ó1¿ªÊ¼£¬i=0Ê±·µ»ØÍ·Ö¸Õë)
+    node* getNode(unsigned int i)const;//è·å–å•é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ(iä»1å¼€å§‹ï¼Œi=0æ—¶è¿”å›å¤´æŒ‡é’ˆ)
 
 public:
-    S_LinkList();//¹¹Ôìº¯Êı
-    ~S_LinkList();//Îö¹¹º¯Êı
-    S_LinkList(const S_LinkList& obj);//¿½±´¹¹Ôìº¯Êı
-    S_LinkList<T>& operator=(const S_LinkList &obj);//¸³ÖµÔËËã·û
+    S_LinkList();//æ„é€ å‡½æ•°
+    ~S_LinkList();//ææ„å‡½æ•°
+    S_LinkList(const S_LinkList& obj);//æ‹·è´æ„é€ å‡½æ•°
+    S_LinkList<T>& operator=(const S_LinkList &obj);//èµ‹å€¼è¿ç®—ç¬¦
    
-    void clear();//Çå¿Õµ¥Á´±í
-    bool isEmpty()const{ return length==0; } //ÅĞ¶Ïµ¥Á´±íÊÇ·ñÎª¿Õ
-    unsigned int getLength()const{ return length; }//»ñÈ¡µ¥Á´±íµÄ³¤¶È
-    void traverse()const;//±éÀúµ¥Á´±í
-    T get(unsigned int i)const;//»ñÈ¡µ¥Á´±íµÚi¸ö½ÚµãµÄÊı¾İ(i´Ó1¿ªÊ¼)
-    void set(unsigned int i, T elem);//½«µÚi¸ö½ÚµãµÄÊı¾İÉèÖÃÎªelem(1<=i<=length)
-    unsigned int find(T elem)const;//ÔÚÁ´±íÖĞ²éÕÒelem, ·µ»ØµÚÒ»¸öelem³öÏÖµÄÎ»ÖÃ(·µ»Ø-1±íÊ¾·µ»Ø-1±íÊ¾elem²»´æÔÚ)
-    void insert(unsigned int i, T elem);//ÔÚµÚi¸ö½Úµã´¦²åÈëÊı¾İelem(1 <= i <= length+1)
-    void push_back(T elem){ insert(length+1, elem); }//ÔÚµ¥Á´±íÄ©Î²²åÈëÊı¾İelem
-    T remove(unsigned int i);//É¾³ıµ¥Á´±íµÚi¸ö½Úµã(i´Ó1¿ªÊ¼)£¬²¢·µ»Ø¸Ã½ÚµãµÄÊı¾İ
-    T pop_back();//É¾³ıµ¥Á´±íÄ©Î²µÄ½Úµã£¬²¢·µ»Ø¸Ã½ÚµãµÄÊı¾İ
+    void clear();//æ¸…ç©ºå•é“¾è¡¨
+    bool isEmpty()const{ return length==0; } //åˆ¤æ–­å•é“¾è¡¨æ˜¯å¦ä¸ºç©º
+    unsigned int getLength()const{ return length; }//è·å–å•é“¾è¡¨çš„é•¿åº¦
+    void traverse()const;//éå†å•é“¾è¡¨
+    T get(unsigned int i)const;//è·å–å•é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®(iä»1å¼€å§‹)
+    void set(unsigned int i, T elem);//å°†ç¬¬iä¸ªèŠ‚ç‚¹çš„æ•°æ®è®¾ç½®ä¸ºelem(1<=i<=length)
+    unsigned int find(T elem)const;//åœ¨é“¾è¡¨ä¸­æŸ¥æ‰¾elem, è¿”å›ç¬¬ä¸€ä¸ªelemå‡ºç°çš„ä½ç½®(è¿”å›-1è¡¨ç¤ºè¿”å›-1è¡¨ç¤ºelemä¸å­˜åœ¨)
+    void insert(unsigned int i, T elem);//åœ¨ç¬¬iä¸ªèŠ‚ç‚¹å¤„æ’å…¥æ•°æ®elem(1 <= i <= length+1)
+    void push_back(T elem){ insert(length+1, elem); }//åœ¨å•é“¾è¡¨æœ«å°¾æ’å…¥æ•°æ®elem
+    T remove(unsigned int i);//åˆ é™¤å•é“¾è¡¨ç¬¬iä¸ªèŠ‚ç‚¹(iä»1å¼€å§‹)ï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æ•°æ®
+    T pop_back();//åˆ é™¤å•é“¾è¡¨æœ«å°¾çš„èŠ‚ç‚¹ï¼Œå¹¶è¿”å›è¯¥èŠ‚ç‚¹çš„æ•°æ®
 
-    void push_arr_head(T arr[], unsigned int n);//Í·²å·¨´´½¨µ¥Á´±í(nÎªÊı×é³¤¶È)
-    void push_arr_tail(T arr[], unsigned int n);//Î²²å·¨´´½¨µ¥Á´±í(nÎªÊı×é³¤¶È)
+    void push_arr_head(T arr[], unsigned int n);//å¤´æ’æ³•åˆ›å»ºå•é“¾è¡¨(nä¸ºæ•°ç»„é•¿åº¦)
+    void push_arr_tail(T arr[], unsigned int n);//å°¾æ’æ³•åˆ›å»ºå•é“¾è¡¨(nä¸ºæ•°ç»„é•¿åº¦)
 
     T getTailData();
 
-    void reserve();//ÓÃÍ·²å·¨ÄæÖÃµ¥Á´±í
+    void reserve();//ç”¨å¤´æ’æ³•é€†ç½®å•é“¾è¡¨
 
 };
 
-
-#include"S_LinkList.cpp"
+#include "S_LinkList.cpp"

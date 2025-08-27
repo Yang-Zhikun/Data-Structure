@@ -1,5 +1,5 @@
-//Ë³ĞòÕ»£¬sequential stack
-//²»ÄÜ×Ô¶¯À©Èİ£¬¶¨Òåºó³¤¶È¹Ì¶¨
+//é¡ºåºæ ˆï¼Œsequential stack
+//ä¸èƒ½è‡ªåŠ¨æ‰©å®¹ï¼Œå®šä¹‰åé•¿åº¦å›ºå®š
 
 #include<iostream>
 #include<stdexcept>
@@ -9,51 +9,51 @@ using namespace std;
 template<typename T>
 class seqStack{
 private:
-    T *data;//´æ·ÅÕ»Êı¾İµÄÊı×é»ùµØÖ·
-    int top; // Õ»¶¥ÔªËØµÄÏÂ±ê£¬== -1Ê±±íÊ¾Õ»¿Õ
-    int maxlen; // Õ»µÄÕ»µÄ×î´ó³¤¶È£¬¼´Êı×éµÄ´óĞ¡
+    T *data;//å­˜æ”¾æ ˆæ•°æ®çš„æ•°ç»„åŸºåœ°å€
+    int top; // æ ˆé¡¶å…ƒç´ çš„ä¸‹æ ‡ï¼Œ== -1æ—¶è¡¨ç¤ºæ ˆç©º
+    int maxlen; // æ ˆçš„æ ˆçš„æœ€å¤§é•¿åº¦ï¼Œå³æ•°ç»„çš„å¤§å°
 
 public:
-    seqStack(const int init_len = 100);//¹¹Ôìº¯Êı£¬init_lenÊÇÕ»µÄ×î´ó³¤¶È(Êı×éµÄ´óĞ¡)
-    ~seqStack(){ delete[] data; } //Îö¹¹º¯Êı
-    seqStack(const seqStack& obj);//¿½±´¹¹Ôìº¯Êı
-    seqStack<T>& operator=(const seqStack& obj);//¸³ÖµÔËËã·û
+    seqStack(const int init_len = 100);//æ„é€ å‡½æ•°ï¼Œinit_lenæ˜¯æ ˆçš„æœ€å¤§é•¿åº¦(æ•°ç»„çš„å¤§å°)
+    ~seqStack(){ delete[] data; } //ææ„å‡½æ•°
+    seqStack(const seqStack& obj);//æ‹·è´æ„é€ å‡½æ•°
+    seqStack<T>& operator=(const seqStack& obj);//èµ‹å€¼è¿ç®—ç¬¦
 
-    void clear(){ top = -1; } //Çå¿ÕÕ»
-    bool isEmpty()const{ return top == -1; } //ÅĞ¿Õ
-    int getLength()const{ return top+1; } //»ñÈ¡Õ»µÄÊı¾İ¸öÊı
-    void push(const T elem); //ÈëÕ»
-    T pop(); //³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
-    T get_top()const; //»ñÈ¡Õ»¶¥ÔªËØ
+    void clear(){ top = -1; } //æ¸…ç©ºæ ˆ
+    bool isEmpty()const{ return top == -1; } //åˆ¤ç©º
+    int getLength()const{ return top+1; } //è·å–æ ˆçš„æ•°æ®ä¸ªæ•°
+    void push(const T elem); //å…¥æ ˆ
+    T pop(); //å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
+    T get_top()const; //è·å–æ ˆé¡¶å…ƒç´ 
 };
 
 
 
 
-template<typename T>//¹¹Ôìº¯Êı
+template<typename T>//æ„é€ å‡½æ•°
 seqStack<T>::seqStack(const  int init_len){
     maxlen = init_len;
     data = new T[maxlen];
-    top = -1;//³õÊ¼Îª¿ÕÕ»
+    top = -1;//åˆå§‹ä¸ºç©ºæ ˆ
 }
 
-template<typename T>//¿½±´¹¹Ôìº¯Êı
+template<typename T>//æ‹·è´æ„é€ å‡½æ•°
 seqStack<T>::seqStack(const seqStack & obj){
     maxlen = obj.maxlen;
-    data = new T[maxlen];//ÉêÇëĞÂÄÚ´æ
-    //¸´ÖÆobjµÄÊı¾İ
+    data = new T[maxlen];//ç”³è¯·æ–°å†…å­˜
+    //å¤åˆ¶objçš„æ•°æ®
     for(int i = 0; i < obj.top+1; i++){
         data[i] = obj.data[i];
     }
     top = obj.top;
 }
 
-template<typename T>//¸³ÖµÔËËã·û
+template<typename T>//èµ‹å€¼è¿ç®—ç¬¦
 seqStack<T>& seqStack<T>::operator=(const seqStack & obj){
-    if(*this!=obj){//·ÀÖ¹×Ô¸³Öµ
+    if(*this!=obj){//é˜²æ­¢è‡ªèµ‹å€¼
         maxlen = obj.maxLen;
-        data = new T[maxlen];//ÉêÇëĞÂÄÚ´æ
-        //¸´ÖÆobjµÄÊı¾İ
+        data = new T[maxlen];//ç”³è¯·æ–°å†…å­˜
+        //å¤åˆ¶objçš„æ•°æ®
         for(int i = 0; i<top+1; i++){
             data[i] = obj.data[i];
         }
@@ -62,27 +62,27 @@ seqStack<T>& seqStack<T>::operator=(const seqStack & obj){
     return *this;
 }
 
-template<typename T>//ÈëÕ»
+template<typename T>//å…¥æ ˆ
 void seqStack<T>::push(const T elem){
     if(top+1 == maxlen)
-        throw std::out_of_range("Õ»ÒÑÂú");
+        throw std::out_of_range("æ ˆå·²æ»¡");
     data[top+1] = elem;
     top++;
 }
 
-template<typename T>//³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
+template<typename T>//å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
 T seqStack<T>::pop(){
     if(top == -1)
-        throw std::out_of_range("Õ»Îª¿Õ");
-    T tmp = data[top];//±£´æÕ»¶¥ÔªËØ
+        throw std::out_of_range("æ ˆä¸ºç©º");
+    T tmp = data[top];//ä¿å­˜æ ˆé¡¶å…ƒç´ 
     top--;
     return tmp;
 }
 
-template<typename T>//»ñÈ¡Õ»¶¥ÔªËØ
+template<typename T>//è·å–æ ˆé¡¶å…ƒç´ 
 T seqStack<T>::get_top() const{
     if(top == -1)
-        throw std::out_of_range("Õ»Îª¿Õ");
+        throw std::out_of_range("æ ˆä¸ºç©º");
     return data[top];
 }
 

@@ -1,17 +1,17 @@
-//Á´¶ÓÁĞ
+//é“¾é˜Ÿåˆ—
 #pragma once
 
 template<typename T>
 class LinkQueue{
 private:
-    struct node{ //Á´¶ÓÁĞ½Úµã
+    struct node{ //é“¾é˜Ÿåˆ—èŠ‚ç‚¹
         T data;
         node *next;
     };
 
-    node *front; //Á´¶ÓÁĞµÄ¶ÓÍ·Ö¸Õë
-    node *rear;  //Á´¶ÓÁĞµÄ¶ÓÎ²Ö¸Õë
-    unsigned int length; // Á´¶ÓÁĞµÄ³¤¶È
+    node *front; //é“¾é˜Ÿåˆ—çš„é˜Ÿå¤´æŒ‡é’ˆ
+    node *rear;  //é“¾é˜Ÿåˆ—çš„é˜Ÿå°¾æŒ‡é’ˆ
+    unsigned int length; // é“¾é˜Ÿåˆ—çš„é•¿åº¦
 
 public:
     LinkQueue(){ front = rear = nullptr; length = 0; }
@@ -20,11 +20,11 @@ public:
     LinkQueue<T>& operator=(const LinkQueue &obj);
 
     void clear();
-    unsigned int getLength()const{ return length; }  // »ñÈ¡Á´¶ÓÁĞµÄ³¤¶È
-    bool isEmpty()const{ return length == 0; }  //ÅĞ¿Õ
-    void enQueue(const T elem); //Èë¶Ó£¬ÔÚ¶ÓÎ²²åÈëÒ»¸öÔªËØ
-    T deQueue(); // ³ö¶Ó£¬²¢·µ»Ø³ö¶ÓµÄÊı¾İ
-    T get_front()const; //»ñÈ¡¶ÓÍ·Êı¾İ
+    unsigned int getLength()const{ return length; }  // è·å–é“¾é˜Ÿåˆ—çš„é•¿åº¦
+    bool isEmpty()const{ return length == 0; }  //åˆ¤ç©º
+    void enQueue(const T elem); //å…¥é˜Ÿï¼Œåœ¨é˜Ÿå°¾æ’å…¥ä¸€ä¸ªå…ƒç´ 
+    T deQueue(); // å‡ºé˜Ÿï¼Œå¹¶è¿”å›å‡ºé˜Ÿçš„æ•°æ®
+    T get_front()const; //è·å–é˜Ÿå¤´æ•°æ®
 };
 
 #include"LinkQueue.cpp"

@@ -1,5 +1,5 @@
-//Á´Õ»£¬Linked stack
-//²»´øÍ·½Úµã
+//é“¾æ ˆï¼ŒLinked stack
+//ä¸å¸¦å¤´èŠ‚ç‚¹
 
 #pragma once
 
@@ -11,21 +11,21 @@ private:
         node *next;
     };
 
-    node *top; // Õ»¶¥Ö¸Õë£¬Ò²ÊÇÍ·Ö¸Õë
-    unsigned int length; // Á´Õ»ÖĞÊı¾İ¸öÊı
+    node *top; // æ ˆé¡¶æŒ‡é’ˆï¼Œä¹Ÿæ˜¯å¤´æŒ‡é’ˆ
+    unsigned int length; // é“¾æ ˆä¸­æ•°æ®ä¸ªæ•°
     
 public:
-    LinkStack(); // ¹¹Ôìº¯Êı
-    ~LinkStack(); // Îö¹¹º¯Êı
-    LinkStack(const LinkStack& obj); // ¿½±´¹¹Ôìº¯Êı
-    LinkStack<T>& operator=(const LinkStack& obj); // ¸³ÖµÔËËã·û
+    LinkStack(); // æ„é€ å‡½æ•°
+    ~LinkStack(); // ææ„å‡½æ•°
+    LinkStack(const LinkStack& obj); // æ‹·è´æ„é€ å‡½æ•°
+    LinkStack<T>& operator=(const LinkStack& obj); // èµ‹å€¼è¿ç®—ç¬¦
 
-    void clear(); // Çå¿ÕÕ»
-    bool isEmpty() const { return top==nullptr; } // ÅĞ¿Õ
-    int getLength() const { return length; } // »ñÈ¡Á´Õ»Êı¾İ¸öÊı
-    void push(const T elem); // ÈëÕ»
-    T pop(); // ³öÕ»£¬²¢·µ»Ø³öÕ»ÔªËØ
-    T get_top() const; // ·µ»ØÕ»¶¥ÔªËØ
+    void clear(); // æ¸…ç©ºæ ˆ
+    bool isEmpty() const { return top==nullptr; } // åˆ¤ç©º
+    int getLength() const { return length; } // è·å–é“¾æ ˆæ•°æ®ä¸ªæ•°
+    void push(const T elem); // å…¥æ ˆ
+    T pop(); // å‡ºæ ˆï¼Œå¹¶è¿”å›å‡ºæ ˆå…ƒç´ 
+    T get_top() const; // è¿”å›æ ˆé¡¶å…ƒç´ 
 };
 
 
