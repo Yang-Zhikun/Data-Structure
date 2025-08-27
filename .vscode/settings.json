@@ -32,7 +32,8 @@
         "ratio": "cpp",
         "array": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "random": "cpp"
     },
     //C/C++格式化代码的设置
     /*"editor.formatOnPaste": true,
